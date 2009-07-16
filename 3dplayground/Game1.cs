@@ -11,18 +11,23 @@ using Microsoft.Xna.Framework.Media;
 using Microsoft.Xna.Framework.Net;
 using Microsoft.Xna.Framework.Storage;
 
+
+
 namespace _3dplayground
 {
+    
+
     /// <summary>
     /// This is the main type for your game
     /// </summary>
     public class Game1 : Microsoft.Xna.Framework.Game
     {
+        public double G = 6.673E-11;
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
 
-        Sphere mSphere = new Sphere();
-        List<Sphere > theSphereList = new List<Sphere >();   
+        phys_planet mSphere = new phys_planet(1000000, Vector3.Zero);
+        List<phys_planet> theSphereList = new List<phys_planet>();   
 
         private Camera mCamera = new Camera();
        // private Matrix gameWorldRotation = 0.0f;
@@ -67,11 +72,12 @@ namespace _3dplayground
 
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
-
-            mSphere.LoadContent(Content, "sphere");
+            
+           mSphere.LoadContent(Content, "sphere");
             theSphereList.Add(mSphere);
 
-            mSphere = new Sphere();
+            mSphere = new phys_planet(12334467,Vector3.Zero);
+         
             mSphere.Position = new Vector3(30, 30, -10);
             mSphere.LoadContent(Content, "sphere");
             theSphereList.Add(mSphere);
@@ -125,12 +131,68 @@ namespace _3dplayground
 
             // TODO: Add your drawing code here
 
-            foreach (Sphere s in theSphereList)
+            foreach (phys_planet s in theSphereList)
             {
                 s.Draw(mCamera);
             }
 
             base.Draw(gameTime);
+        }
+
+        public  Vector3 gravity_force(List<phys_planet> some_grav_obj_list, phys_planet theplanet, Vector3 pos)
+        { //pass the planet so it can skip it by comparison
+            Vector3 sumforce = Vector3.Zero;
+            double  tmpR = 0;
+            foreach (phys_planet i in some_grav_obj_list)
+            {
+
+                if (i == theplanet)
+                {
+                    //do nothing its the planet in question
+                }
+                else
+                {
+                    tmpR = Math.Pow((i.Position.X - pos.X), 2) + Math.Pow((i.Position.Y - pos.Y), 2) + Math.Pow((i.Position.Z - pos.Z), 2);
+                   tmpR = i.mass*G/Math.Pow(tmpR, 1.5);
+
+                   sumforce.X = sumforce.X + (i.Position.X - pos.X) * (float)tmpR; //sigh vector3 uses floats - teh suq
+                   sumforce.Y = sumforce.Y+(i.Position.Y - pos.Y) * (float)tmpR;
+                   sumforce.Z = sumforce.Z+(i.Position.Z - pos.Z) * (float)tmpR;
+
+                }
+            }
+            return sumforce;
+        }
+
+        public void RK4(List<phys_planet> some_obj_list,FUNC_PTR diff_func, double step)
+        {
+            double hstep = step / 2;
+            foreach (phys_planet i in some_obj_list) //k1 stage
+            {
+                i.K1pos = i.speed;
+                i.K1vel = gravity_force(some_obj_list, i, i.Position);
+            }
+            foreach (phys_planet i in some_obj_list) //k2 stage
+            {
+                i.K2pos = i.K1vel * (float)hstep + i.speed;
+                i.K2vel = gravity_force(some_obj_list, i, i.Position + i.K1pos*(float)hstep);
+            }
+
+            foreach (phys_planet i in some_obj_list) //k3 stage
+            {
+                i.K3pos = i.K2vel * (float)hstep + i.speed;
+                i.K3vel = gravity_force(some_obj_list, i, i.Position + i.K2pos * (float)hstep);
+            }
+            foreach (phys_planet i in some_obj_list) //k4 stage
+            {
+                i.k4pos = i.K3vel * (float)step + i.speed;
+                i.k4vel = gravity_force(some_obj_list, i, i.Position + i.K3pos * (float)step);
+            }
+            foreach (phys_planet i in some_obj_list) //k4 stage
+            {
+                i.Position = i.Position + (float)(step / 6) * (i.K1pos + i.K2pos / 2 + i.K3pos / 2 + i.k4pos);
+                i.speed = i.speed + (float)(step / 6) * (i.K1vel + i.K2vel / 2 + i.K3vel / 2 + i.k4vel);
+            }
         }
 
 
