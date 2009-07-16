@@ -7,7 +7,7 @@ using Microsoft.Xna.Framework.Content;
 
 namespace _3dplayground
 {
-    class Camera
+   public  class Camera
     {
 
 

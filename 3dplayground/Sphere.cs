@@ -53,26 +53,23 @@ namespace _3dplayground
 
 
     public class phys_planet : Sphere// damn multiple inhertiance being locked out! c++ is ftw c# for the suq
+                                    //lol
     {
         string name;
         void set_name(string new_name) { name = new_name; }
 
         bool inhabited = false; //i dunno maybe some other stuff - could move in a circle etc instead of phys 
-        public phys_planet(double new_mass, Vector3 new_speed) { mass = new_mass; speed = new_speed; } //maybe this is in the wrong place
 
+                                //John 16/7: yeah have been considering making planets simpler ... there are larger scale/precision issues as you mentioned that i have kept out of mind so far.
+                                // am producing a doc, its a mess right now ... but i will try to keep it up to date with thoughts etc. 
+                                // failing that some kind of database but sharing that will be a chore ... besides that sounds like hard work (well no, its easy an will be useful later on for bugs)
+        public phys_planet(double new_mass, Vector3 new_speed) { mass = new_mass; speed = new_speed; } //maybe this is in the wrong place
+                                                                                                       // I tend to force constructino like this  alot - add certainty. depends if you want to force setting a mass and speed.  
+
+        //I wouldn;t make these public though. I'd write properties. You will thank me if you ever need some valiation code
         public double mass;
         public Vector3 speed;
-        public Vector3 old_position = Vector3.Zero;
 
-        public Vector3 K1pos = Vector3.Zero;
-        public Vector3 K2pos = Vector3.Zero;
-        public Vector3 K3pos = Vector3.Zero;
-        public Vector3 k4pos = Vector3.Zero;
-
-        public Vector3 K1vel = Vector3.Zero;
-        public Vector3 K2vel = Vector3.Zero;
-        public Vector3 K3vel = Vector3.Zero;
-        public Vector3 k4vel = Vector3.Zero;
     }
 
 
