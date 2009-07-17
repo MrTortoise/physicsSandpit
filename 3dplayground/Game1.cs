@@ -163,7 +163,7 @@ namespace _3dplayground
             }
             return sumforce;
         }
-
+    /*
         public void RK4(List<phys_planet> some_obj_list,FUNC_PTR diff_func, double step)
         {
             double hstep = step / 2;
@@ -195,7 +195,7 @@ namespace _3dplayground
             }
         }
 
-
+      */
 
 
     }

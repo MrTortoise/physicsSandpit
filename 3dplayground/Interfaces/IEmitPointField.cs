@@ -10,16 +10,7 @@ namespace _3dplayground
     /// Implement this for the bare minimum required to Emit a Field
     /// </summary>
     interface IEmitPointField : IAmInSpace 
-    {
-
-        /// <summary>
-        /// The scalar property that effects the mFieldPhysics ... i am thinking mass / charge or whatever ... not sure about type issues yet ...           
-        /// </summary>
-        int ScalarValue
-        {
-            get;
-            set;
-        }
+    { 
 
         /// <summary>
         /// Given a position and a magnitude of the scalar the force operates on will output whatever is useful -?rick what

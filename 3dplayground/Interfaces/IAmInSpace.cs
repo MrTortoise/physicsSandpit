@@ -17,7 +17,7 @@ namespace _3dplayground
         Vector3 Velocity
         { get; }
 
-        Vector3 Rotation
+        Quaternion  Rotation
         { get; } 
 
         string Name
