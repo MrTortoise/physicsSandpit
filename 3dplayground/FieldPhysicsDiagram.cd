@@ -1,17 +1,24 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ClassDiagram MajorVersion="1" MinorVersion="1">
   <Class Name="_3dplayground.Planet">
-    <Position X="7.25" Y="2.75" Width="1.5" />
+    <Position X="7.5" Y="3.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAQAAQAAAAAAAoAgAAAAAAQAAAAAAAAIAAAAAAEMAAA=</HashCode>
+      <HashCode>AAQAAAAAAAAAIgAAAAAAAAAAAAAAAAAAAAAAAAAIAAA=</HashCode>
       <FileName>Planet.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" />
   </Class>
   <Class Name="_3dplayground.Moon">
-    <Position X="4.25" Y="2.75" Width="1.5" />
+    <Position X="4.5" Y="3.25" Width="1.5" />
+    <InheritanceLine Type="_3dplayground.PhysicalBody" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="10.5" Y="1.875" />
+        <Point X="5.625" Y="1.875" />
+        <Point X="5.625" Y="3.25" />
+      </Path>
+    </InheritanceLine>
     <TypeIdentifier>
-      <HashCode>AAQAAAgAAAAAIgAAAAEAAAAAAAAAAAAIAAAAAAAAAAA=</HashCode>
+      <HashCode>AAQAAAgAAAAAIgAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Moon.cs</FileName>
     </TypeIdentifier>
     <ShowAsAssociation>
@@ -24,6 +31,14 @@
     <TypeIdentifier>
       <HashCode>AAAAAEgAAAAAAAgAAAAEAAAEIBBACAAAAAAAABAAAAA=</HashCode>
       <FileName>FieldPhysicsComponent.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="_3dplayground.PhysicalBody">
+    <Position X="10.5" Y="0.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAABAAAAoAgAAEAAAQAAAAAAAAIAAgAAAWEAgA=</HashCode>
+      <FileName>PhysicalBody.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" />
   </Class>

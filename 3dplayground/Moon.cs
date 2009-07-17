@@ -15,8 +15,7 @@ namespace _3dplayground
 
         protected IModel mModel;
 
-        protected bool mIsDrawActive = true ;
-        protected bool mIsUpdateActive = true;
+
         
 
         public Moon(IModel theModel, IFieldPhysics theFPC,string theName,int theMass, Vector3 thePosition, Vector3 theVelocity, Quaternion  theRotation)
@@ -29,8 +28,8 @@ namespace _3dplayground
         public override void Update(GameTime timeInterval)
         {           
 
-            timeInterval.ElapsedGameTime;
-            // This is where you hook up to the field physics component. Pass your data in and get your data out to update this object.
+          
+            //ToDo: This is where you hook up to the field physics component. Pass your data in and get your data out to update this object.
         }
 
         public override void Draw(Camera theCamera)

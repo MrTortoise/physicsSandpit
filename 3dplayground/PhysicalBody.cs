@@ -10,13 +10,16 @@ namespace _3dplayground
     /// abstract implementation of a pysical body.
     /// Update and draw are intended to be overriden.
     /// </summary>
-    public abstract  class  PhysicalBody : IGameObject, IHasMass 
+    public abstract  class  PhysicalBody : IPhysicsObject 
     {
         protected  string mName;
         protected Vector3 mPosition;
         protected Vector3 mVelocity;
         protected Quaternion mRotation;
         protected int mMass;
+
+        protected bool mIsDrawActive = true;
+        protected bool mIsUpdateActive = true;
 
         #region Constructor
 

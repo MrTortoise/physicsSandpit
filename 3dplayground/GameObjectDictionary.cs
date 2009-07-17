@@ -39,7 +39,7 @@ namespace _3dplayground
         /// <returns></returns>
         public static  GameObjectDictionary GetInstance()
         {
-            if (mInstance = null)
+            if (mInstance == null)
             {
                 mInstance = new GameObjectDictionary();
             }
@@ -51,7 +51,7 @@ namespace _3dplayground
 
 
         public IAmInSpace GetGameObject(string name)
-        { return mGameObjects(name); }
+        { return mGameObjects[name]; }
 
         /// <summary>
         /// Adds the object to he collection and any other relevant lists.
