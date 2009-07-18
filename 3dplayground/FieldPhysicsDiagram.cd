@@ -46,11 +46,11 @@
       <FileName>GameObjectDictionary.cs</FileName>
     </TypeIdentifier>
     <ShowAsCollectionAssociation>
-      <Field Name="mDrawableObjects" />
-      <Field Name="mFieldObjects" />
       <Field Name="mIAmInSpace" />
+      <Field Name="mFieldObjects" />
       <Field Name="mPointFieldEmitters" />
       <Field Name="mUpdateableObjects" />
+      <Field Name="mDrawableObjects" />
     </ShowAsCollectionAssociation>
   </Class>
   <Interface Name="_3dplayground.IFieldPhysics" Collapsed="true">
@@ -76,17 +76,11 @@
   </Interface>
   <Interface Name="_3dplayground.IGetEffectedByField" Collapsed="true">
     <Position X="16.75" Y="2.25" Width="1.5" />
-    <InheritanceLine Type="_3dplayground.IAmInSpace" ManuallyRouted="true" FixedFromPoint="true" FixedToPoint="true">
+    <InheritanceLine Type="_3dplayground.IAmInSpace" FixedToPoint="true">
       <Path>
-        <Point X="19.812" Y="3.941" />
-        <Point X="19.812" Y="4.311" />
-        <Point X="18.25" Y="4.311" />
-      </Path>
-    </InheritanceLine>
-    <InheritanceLine Type="_3dplayground.IUpdateable" FixedFromPoint="true" FixedToPoint="true">
-      <Path>
-        <Point X="17.125" Y="4" />
-        <Point X="17.125" Y="3.07" />
+        <Point X="20.25" Y="3.25" />
+        <Point X="20.25" Y="2.625" />
+        <Point X="18.25" Y="2.625" />
       </Path>
     </InheritanceLine>
     <TypeIdentifier>
