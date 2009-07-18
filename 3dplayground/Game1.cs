@@ -41,10 +41,12 @@ namespace _3dplayground
 
             graphics.PreferredBackBufferWidth = 1280;
             graphics.PreferredBackBufferHeight = 800;
+            graphics.SynchronizeWithVerticalRetrace = false;
+            
 
             mObjects = GameObjectDictionary.GetInstance();
 
-
+            Components.Add(new CommonObjects.Components.FPS(this));
         }
 
         /// <summary>
@@ -90,6 +92,18 @@ namespace _3dplayground
             Moon mMoon2;
             mMoon2 = new Moon(theSphere, mFPC, "Moon2", 100000000, new Vector3(0, 10, 0), new Vector3(-0.25f, 0,0 ), Quaternion.Identity);
             mObjects.AddGameObject(mMoon2);
+
+            Moon mMoon3;
+            mMoon3 = new Moon(theSphere, mFPC, "Moon23", 100000000, new Vector3(0, 0, 10), new Vector3(0, -0.25f, 0), Quaternion.Identity);
+            mObjects.AddGameObject(mMoon3);
+
+            Moon mMoon4;
+            mMoon4 = new Moon(theSphere, mFPC, "Moon24", 100000000, new Vector3(10, 10, 0), new Vector3(-0.25f, -0.25f, 0), Quaternion.Identity);
+            mObjects.AddGameObject(mMoon4);
+
+            Moon mMoon5;
+            mMoon5 = new Moon(theSphere, mFPC, "Moon5", 100000000, new Vector3(0, 10, 10), new Vector3(-0.25f, 0, -0.25f), Quaternion.Identity);
+            mObjects.AddGameObject(mMoon5);
                 
 
             mCamera.AspectRatio=graphics.GraphicsDevice.Viewport.Width / (float)graphics.GraphicsDevice.Viewport.Height;

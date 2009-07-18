@@ -86,6 +86,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Camera.cs" />
+    <Compile Include="Components\FPS.cs" />
     <Compile Include="Constants.cs" />
     <Compile Include="DisplacementStructure.cs" />
     <Compile Include="FieldPhysicsComponent.cs" />
