@@ -11,12 +11,7 @@ namespace _3dplayground
     {             
 
         protected  IFieldPhysics mFieldPhysics;
-
-
-        protected IModel mModel;
-
-
-        
+        protected IModel mModel;                       
 
         public Moon(IModel theModel, IFieldPhysics theFPC,string theName,int theMass, Vector3 thePosition, Vector3 theVelocity, Quaternion  theRotation)
             :base(theName,theMass,thePosition,theVelocity,theRotation)
@@ -26,7 +21,13 @@ namespace _3dplayground
         }
 
         public override void Update(GameTime timeInterval)
-        {           
+        {
+            New_pos_and_vel vals;
+            vals = mFieldPhysics.dothe_phys((float)timeInterval.ElapsedGameTime.Milliseconds, this);
+
+            mPosition = mPosition+ vals.position;
+            mVelocity =mVelocity+ vals.velocity;
+            
 
           
             //ToDo: This is where you hook up to the field physics component. Pass your data in and get your data out to update this object.

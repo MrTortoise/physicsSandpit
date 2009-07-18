@@ -34,6 +34,8 @@ namespace _3dplayground
                 
             double tmpR = 0;
 
+
+
                    // tmpR = Math.Pow((i.Position.X - pos.X), 2) + Math.Pow((i.Position.Y - pos.Y), 2) + Math.Pow((i.Position.Z - pos.Z), 2);
                    // tmpR = mMass  * Constants.G  / Math.Pow(tmpR, 1.5);
 
@@ -49,9 +51,7 @@ namespace _3dplayground
                     sumforce = displacementVector * (float)tmpR;
             
             return sumforce;
-        }       
-
-
+        }          
 
         #region  Overridden methods
 

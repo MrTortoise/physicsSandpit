@@ -84,7 +84,7 @@ namespace _3dplayground
             mFPC=new FieldPhysicsComponent();
 
             Moon mMoon;
-            mMoon = new Moon(theSphere, mFPC, "Moon1", 100000,new Vector3(100,100,100), Vector3.Zero, Quaternion.Identity);
+            mMoon = new Moon(theSphere, mFPC, "Moon1", 100000,new Vector3(100,100,100), new Vector3(100,0,0), Quaternion.Identity);
 
             mObjects.AddGameObject(mMoon);
                 

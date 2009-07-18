@@ -66,6 +66,11 @@ namespace _3dplayground
             get { return mIsDrawActive; }
         }
 
+        public bool IsUpdateActive
+        {
+            get { return mIsUpdateActive; }
+        }
+
         #endregion 
 
         #region Public Methods
@@ -75,10 +80,7 @@ namespace _3dplayground
         public abstract void Update(GameTime timeInterval);
 
 
-        public bool IsUpdateActive
-        {
-            get { return mIsUpdateActive; }
-        }
+   
 
         #endregion  
     

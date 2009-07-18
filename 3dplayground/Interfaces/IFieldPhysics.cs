@@ -11,7 +11,7 @@ namespace _3dplayground
     /// </summary>
     interface IFieldPhysics
     {
-        Vector3 NewPosition(Vector3 inputargs, GameTime here);
+        New_pos_and_vel dothe_phys(float step, IGetEffectedByField i);
         //ToDo: Rick: i have no idea what imput parameters you need or the return type. 
         //If you need to return an args object so be it - although output params maybe ...
         // anyway ... returning a some kind of a vector would be nice.

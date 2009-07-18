@@ -36,10 +36,11 @@ namespace _3dplayground
 
         
 
-        public New_pos_and_vel dothe_phys(float step,IEmitPointField i)
+        public New_pos_and_vel dothe_phys(float step,IGetEffectedByField  i)
         {
-            float hstep = step / 2;
-            Vector3 force = Vector3.Zero;
+            float hstep = step / 2000f;
+            step = step / 1000;
+            Vector3 force = Vector3.Zero;            
 
             GameObjectDictionary instance = GameObjectDictionary.GetInstance();
 
@@ -83,8 +84,8 @@ namespace _3dplayground
 
 
              New_pos_and_vel meow;
-            meow.position = i.Position + (float)(step / 6) * (K1pos + K2pos / 2 + K3pos / 2 + k4pos);
-            meow.velocity = i.Velocity + (float)(step / 6) * (K1vel + K2vel / 2 + K3vel / 2 + k4vel);
+            meow.position = (step / 6f) * (K1pos + K2pos / 2f + K3pos / 2f + k4pos);
+            meow.velocity =  (step / 6f) * (K1vel + K2vel / 2f + K3vel / 2f + k4vel);
             return (meow);
         }
 

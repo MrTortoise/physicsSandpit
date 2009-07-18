@@ -87,8 +87,10 @@
   <ItemGroup>
     <Compile Include="Camera.cs" />
     <Compile Include="Constants.cs" />
+    <Compile Include="DisplacementStructure.cs" />
     <Compile Include="FieldPhysicsComponent.cs" />
     <Compile Include="GameObjectDictionary.cs" />
+    <Compile Include="Interfaces\ICanMove.cs" />
     <Compile Include="Interfaces\IDrawable.cs" />
     <Compile Include="Interfaces\IEmitPointField.cs" />
     <Compile Include="Interfaces\IFieldPhysics.cs" />
