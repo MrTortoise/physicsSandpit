@@ -24,12 +24,12 @@ namespace _3dplayground
     {
         
         GraphicsDeviceManager graphics;
-        SpriteBatch spriteBatch;
+       // SpriteBatch spriteBatch;
 
         GameObjectDictionary mObjects;
 
-        phys_planet mSphere = new phys_planet(1000000, Vector3.Zero);
-        List<phys_planet> theSphereList = new List<phys_planet>();   
+        //phys_planet mSphere = new phys_planet(1000000, Vector3.Zero);
+       // List<phys_planet> theSphereList = new List<phys_planet>();   
 
         private Camera mCamera = new Camera();
        // private Matrix gameWorldRotation = 0.0f;
@@ -55,13 +55,9 @@ namespace _3dplayground
         /// </summary>
         protected override void Initialize()
         {
-            // TODO: Add your initialization logic here
+            // TODO: Add your initialization logic here           
 
-            
-
-            base.Initialize();
-
-           
+            base.Initialize();         
 
 
         }
@@ -73,7 +69,7 @@ namespace _3dplayground
         protected override void LoadContent()
         {
             // Create a new SpriteBatch, which can be used to draw 2D textures.
-            spriteBatch = new SpriteBatch(GraphicsDevice);
+           // spriteBatch = new SpriteBatch(GraphicsDevice);
 
             IModel theSphere;
             theSphere = new Sphere();
@@ -111,7 +107,10 @@ namespace _3dplayground
         /// </summary>
         protected override void UnloadContent()
         {
-            // TODO: Unload any non ContentManager content here
+            // dont need to unload anything from game1.cs atm - in full game this will be very importnat.
+            // But i need to of written the IDispose interface for the game ... we probably need a reference counter etc
+            // in order to aggressivley garbage collect to compensate for .net expensive collections.
+            // the problem is that .net uses an entire thread for this stuff.
         }
 
         /// <summary>
@@ -139,9 +138,7 @@ namespace _3dplayground
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(Color.Black );
-
-            
+            GraphicsDevice.Clear(Color.Black );             
 
             foreach ( IDrawable d in mObjects.DrawableObjects.Values )
             {
@@ -160,6 +157,11 @@ namespace _3dplayground
             // I elected not to do this as it would have to traverse the whole list every time - better to do this once.
 
         }
+
+        // I really don't get how your thing works
+        // If the way i have exposed things isn't what you need 
+
+        // you can do all of this in 1 for each loop i think
   
     /*
         public void RK4(List<phys_planet> some_obj_list,FUNC_PTR diff_func, double step)
