@@ -21,7 +21,8 @@ namespace _3dplayground
 
         // 5. Repeat in a new class, but for a suboid model.
 
-        Model mModel; 
+        Model mModel;
+        BoundingBox mBoundingBox;
 
         public void LoadContent(ContentManager contentManager, string contentName)
         {

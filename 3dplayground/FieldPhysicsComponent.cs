@@ -38,8 +38,8 @@ namespace _3dplayground
 
         public New_pos_and_vel dothe_phys(float step,IGetEffectedByField  i)
         {
-            float hstep = step / 200f;
-            step = step / 100;
+            float hstep = step / 20f;
+            step = step / 10;
             Vector3 force = Vector3.Zero;            
 
             GameObjectDictionary instance = GameObjectDictionary.GetInstance();
