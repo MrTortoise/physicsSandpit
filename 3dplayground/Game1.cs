@@ -78,7 +78,7 @@ namespace _3dplayground
             theSphere.LoadContent(Content, "sphere");
 
             Planet mPlanet;
-            mPlanet = new Planet(theSphere, "planet1", 1000000000, Vector3.Zero, Vector3.Zero, Quaternion.Identity);
+            mPlanet = new Planet(theSphere, "planet1", 10000, Vector3.Zero, Vector3.Zero, Quaternion.Identity);
 
             mObjects.AddGameObject(mPlanet);
 
@@ -86,7 +86,8 @@ namespace _3dplayground
             mFPC=new FieldPhysicsComponent();
 
             Moon mMoon;
-            mMoon = new Moon(theSphere, mFPC, "Moon1", 100000000,new Vector3(10,0,0), new Vector3(0,(float)Math.Sqrt(Constants.G*100000000),0), Quaternion.Identity);
+           
+            mMoon = new Moon(theSphere, mFPC, "Moon1", 100000000,new Vector3(20,0,0), new Vector3(0,(float)Math.Sqrt(Constants.G*500),0), Quaternion.Identity);
             mObjects.AddGameObject(mMoon);
            /*
             Moon mMoon2;

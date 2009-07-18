@@ -84,8 +84,8 @@ namespace _3dplayground
 
 
              New_pos_and_vel meow;
-            meow.position = (step / 6f) * (K1pos + K2pos / 2f + K3pos / 2f + k4pos);
-            meow.velocity =  (step / 6f) * (K1vel + K2vel / 2f + K3vel / 2f + k4vel);
+            meow.position = (step / 6f) * (K1pos + K2pos * 2f + K3pos * 2f + k4pos);
+            meow.velocity =  (step / 6f) * (K1vel + K2vel * 2f + K3vel * 2f + k4vel);
             return (meow);
         }
 
