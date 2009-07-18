@@ -164,36 +164,7 @@ namespace _3dplayground
         // you can do all of this in 1 for each loop i think
   
     /*
-        public void RK4(List<phys_planet> some_obj_list,FUNC_PTR diff_func, double step)
-        {
-            double hstep = step / 2;
-            foreach (phys_planet i in some_obj_list) //k1 stage
-            {
-                i.K1pos = i.speed;
-                i.K1vel = gravity_force(some_obj_list, i, i.Position);
-            }
-            foreach (phys_planet i in some_obj_list) //k2 stage
-            {
-                i.K2pos = i.K1vel * (float)hstep + i.speed;
-                i.K2vel = gravity_force(some_obj_list, i, i.Position + i.K1pos*(float)hstep);
-            }
 
-            foreach (phys_planet i in some_obj_list) //k3 stage
-            {
-                i.K3pos = i.K2vel * (float)hstep + i.speed;
-                i.K3vel = gravity_force(some_obj_list, i, i.Position + i.K2pos * (float)hstep);
-            }
-            foreach (phys_planet i in some_obj_list) //k4 stage
-            {
-                i.k4pos = i.K3vel * (float)step + i.speed;
-                i.k4vel = gravity_force(some_obj_list, i, i.Position + i.K3pos * (float)step);
-            }
-            foreach (phys_planet i in some_obj_list) //k4 stage
-            {
-                i.Position = i.Position + (float)(step / 6) * (i.K1pos + i.K2pos / 2 + i.K3pos / 2 + i.k4pos);
-                i.speed = i.speed + (float)(step / 6) * (i.K1vel + i.K2vel / 2 + i.K3vel / 2 + i.k4vel);
-            }
-        }
 
       */
 
