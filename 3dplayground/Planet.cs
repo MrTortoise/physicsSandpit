@@ -29,7 +29,7 @@ namespace _3dplayground
         {
             Vector3 sumforce = Vector3.Zero;
             Vector3 displacementVector;
-            displacementVector = Vector3.Subtract(thePosition, mPosition);
+            displacementVector = Vector3.Subtract(mPosition , thePosition );
             float distance = displacementVector.Length();
                 
             double tmpR = 0;

@@ -38,7 +38,7 @@ namespace _3dplayground
 
         public New_pos_and_vel dothe_phys(float step,IGetEffectedByField  i)
         {
-            float hstep = step / 2000f;
+            float hstep = step / 200f;
             step = step / 1000;
             Vector3 force = Vector3.Zero;            
 

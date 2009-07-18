@@ -26,7 +26,7 @@ namespace _3dplayground
             vals = mFieldPhysics.dothe_phys((float)timeInterval.ElapsedGameTime.Milliseconds, this);
 
             mPosition = mPosition+ vals.position;
-            mVelocity =mVelocity+ vals.velocity;
+            mVelocity = mVelocity+ vals.velocity;
             
 
           
