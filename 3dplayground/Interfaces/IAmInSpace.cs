@@ -14,11 +14,13 @@ namespace _3dplayground
         Vector3 Position
         { get; }
 
+
         Vector3 Velocity
         { get; }
 
+
         Quaternion  Rotation
-        { get; } 
+        { get; }
 
 
 
