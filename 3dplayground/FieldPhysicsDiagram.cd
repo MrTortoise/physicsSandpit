@@ -1,28 +1,25 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ClassDiagram MajorVersion="1" MinorVersion="1">
   <Class Name="_3dplayground.Planet">
-    <Position X="7.5" Y="3.5" Width="1.5" />
+    <Position X="7.5" Y="4" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAQAAAAAAAAAIgAAAAAAAAAAAAAAAAAAAAAAAAAIAAA=</HashCode>
       <FileName>Planet.cs</FileName>
     </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="mModel" />
+    </ShowAsAssociation>
     <Lollipop Position="0.2" />
   </Class>
   <Class Name="_3dplayground.Moon">
     <Position X="4.5" Y="3.25" Width="1.5" />
-    <InheritanceLine Type="_3dplayground.PhysicalBody" FixedFromPoint="true" FixedToPoint="true">
-      <Path>
-        <Point X="10.5" Y="1.875" />
-        <Point X="5.625" Y="1.875" />
-        <Point X="5.625" Y="3.25" />
-      </Path>
-    </InheritanceLine>
     <TypeIdentifier>
       <HashCode>AAQAAAgAAAAAIgAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Moon.cs</FileName>
     </TypeIdentifier>
     <ShowAsAssociation>
       <Field Name="mFieldPhysics" />
+      <Field Name="mModel" />
     </ShowAsAssociation>
     <Lollipop Position="0.2" />
   </Class>
@@ -42,11 +39,87 @@
     </TypeIdentifier>
     <Lollipop Position="0.2" />
   </Class>
+  <Class Name="_3dplayground.GameObjectDictionary">
+    <Position X="13" Y="1.25" Width="2" />
+    <TypeIdentifier>
+      <HashCode>MABAAIgAAAAAAAQIAAAAAAAABAAQAAAAAAgABAAgAAQ=</HashCode>
+      <FileName>GameObjectDictionary.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsCollectionAssociation>
+      <Field Name="mDrawableObjects" />
+      <Field Name="mFieldObjects" />
+      <Field Name="mIAmInSpace" />
+      <Field Name="mPointFieldEmitters" />
+      <Field Name="mUpdateableObjects" />
+    </ShowAsCollectionAssociation>
+  </Class>
   <Interface Name="_3dplayground.IFieldPhysics" Collapsed="true">
     <Position X="1.75" Y="1" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Interfaces\IFieldPhysics.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="_3dplayground.IModel" Collapsed="true">
+    <Position X="6" Y="6.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Interfaces\IModel.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="_3dplayground.IDrawable" Collapsed="true">
+    <Position X="16.75" Y="1.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAEAAAA=</HashCode>
+      <FileName>Interfaces\IDrawable.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="_3dplayground.IGetEffectedByField" Collapsed="true">
+    <Position X="16.75" Y="2.25" Width="1.5" />
+    <InheritanceLine Type="_3dplayground.IAmInSpace" ManuallyRouted="true" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="19.812" Y="3.941" />
+        <Point X="19.812" Y="4.311" />
+        <Point X="18.25" Y="4.311" />
+      </Path>
+    </InheritanceLine>
+    <InheritanceLine Type="_3dplayground.IUpdateable" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="17.125" Y="4" />
+        <Point X="17.125" Y="3.07" />
+      </Path>
+    </InheritanceLine>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Interfaces\IGetEffectedByField.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="_3dplayground.IAmInSpace" Collapsed="true">
+    <Position X="19.5" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAIAgAAAAAAAAAAAAAAAAAAAAAAAEAAA=</HashCode>
+      <FileName>Interfaces\IAmInSpace.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="_3dplayground.IEmitPointField" Collapsed="true">
+    <Position X="16.75" Y="5.25" Width="1.5" />
+    <InheritanceLine Type="_3dplayground.IAmInSpace" FixedToPoint="true">
+      <Path>
+        <Point X="20.25" Y="3.941" />
+        <Point X="20.25" Y="5.562" />
+        <Point X="18.25" Y="5.562" />
+      </Path>
+    </InheritanceLine>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIAAA=</HashCode>
+      <FileName>Interfaces\IEmitPointField.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="_3dplayground.IUpdateable" Collapsed="true">
+    <Position X="16.75" Y="4" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAA=</HashCode>
+      <FileName>Interfaces\IUpdateable.cs</FileName>
     </TypeIdentifier>
   </Interface>
   <Font Name="Segoe UI" Size="9" />
