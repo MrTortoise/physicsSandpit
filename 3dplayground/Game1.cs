@@ -84,9 +84,12 @@ namespace _3dplayground
             mFPC=new FieldPhysicsComponent();
 
             Moon mMoon;
-            mMoon = new Moon(theSphere, mFPC, "Moon1", 100000000,new Vector3(10,0,0), new Vector3(0,0,0.1f), Quaternion.Identity);
-
+            mMoon = new Moon(theSphere, mFPC, "Moon1", 100000000,new Vector3(10,0,0), new Vector3(0,0,0.25f), Quaternion.Identity);
             mObjects.AddGameObject(mMoon);
+
+            Moon mMoon2;
+            mMoon2 = new Moon(theSphere, mFPC, "Moon2", 100000000, new Vector3(0, 10, 0), new Vector3(-0.25f, 0,0 ), Quaternion.Identity);
+            mObjects.AddGameObject(mMoon2);
                 
 
             mCamera.AspectRatio=graphics.GraphicsDevice.Viewport.Width / (float)graphics.GraphicsDevice.Viewport.Height;
