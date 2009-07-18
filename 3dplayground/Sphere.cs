@@ -8,8 +8,19 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace _3dplayground
 {
+    /// <summary>
+    /// This class forms the basis for all models that will use a spherical bounding box.
+    /// </summary>
     public class Sphere : IModel  
-    {        
+    {   
+        // This class needs several things.
+        // 1. A bounding box - collisions etc
+        // 2. From this calculation of the models size
+        // 3. Write a scaling algorithm so we can specify the render size of the model.
+        // 4. Implement the rotation stuff.
+
+        // 5. Repeat in a new class, but for a suboid model.
+
         Model mModel; 
 
         public void LoadContent(ContentManager contentManager, string contentName)

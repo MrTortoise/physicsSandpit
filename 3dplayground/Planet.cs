@@ -66,6 +66,10 @@ namespace _3dplayground
         {
             //ToDp: Implement some movement algorithm here maybe
             
+            //Will do this by writing an orbiter component (through  an IRobiter interface) that given timestep, distance and initial offset will
+            //calculate orbit position. We can then use the interface to implement different kinds of orbiter.  
+            // The object with the orbiter component wil have to have a reference to its center of orbit object.
+            
         }
 
 
