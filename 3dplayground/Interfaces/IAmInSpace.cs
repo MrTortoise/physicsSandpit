@@ -9,7 +9,7 @@ namespace _3dplayground
     /// <summary>
     /// General Interface to define an object in 3d space and retrieval of its basic properties.
     /// </summary>
-    public interface IAmInSpace 
+    public interface IAmInSpace : IHasName 
     {
         Vector3 Position
         { get; }
@@ -20,8 +20,7 @@ namespace _3dplayground
         Quaternion  Rotation
         { get; } 
 
-        string Name
-        { get; }
+
 
 
     }

@@ -5,7 +5,7 @@ using System.Text;
 
 namespace _3dplayground
 {
-    interface IDrawable
+    interface IDrawable : IHasName 
     {
         void Draw(Camera theCamera);
 

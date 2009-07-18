@@ -22,9 +22,11 @@ namespace _3dplayground
     /// </summary>
     public class Game1 : Microsoft.Xna.Framework.Game
     {
-        public double G = 6.673E-11;
+        
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
+
+        GameObjectDictionary mObjects;
 
         phys_planet mSphere = new phys_planet(1000000, Vector3.Zero);
         List<phys_planet> theSphereList = new List<phys_planet>();   
@@ -40,7 +42,8 @@ namespace _3dplayground
             graphics.PreferredBackBufferWidth = 1280;
             graphics.PreferredBackBufferHeight = 800;
 
-          
+            mObjects = GameObjectDictionary.GetInstance();
+
 
         }
 
@@ -69,31 +72,37 @@ namespace _3dplayground
         /// </summary>
         protected override void LoadContent()
         {
-
-            // Create a new SpriteBatch, which can be used to draw textures.
+            // Create a new SpriteBatch, which can be used to draw 2D textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
-            
-           mSphere.LoadContent(Content, "sphere");
-            theSphereList.Add(mSphere);
 
-            mSphere = new phys_planet(12334467,Vector3.Zero);
-         
-            mSphere.Position = new Vector3(30, 30, -10);
-            mSphere.LoadContent(Content, "sphere");
-            theSphereList.Add(mSphere);
+            IModel theSphere;
+            theSphere = new Sphere();
+            theSphere.LoadContent(Content, "sphere");
+
+            Planet mPlanet;
+            mPlanet = new Planet(theSphere, "planet1", 10000000, Vector3.Zero, Vector3.Zero, Quaternion.Identity);
+
+            mObjects.AddGameObject(mPlanet);
+
+            IFieldPhysics  mFPC;
+            mFPC=new FieldPhysicsComponent();
+
+            Moon mMoon;
+            mMoon = new Moon(theSphere, mFPC, "Moon1", 100000,new Vector3(100,100,100), Vector3.Zero, Quaternion.Identity);
+
+            mObjects.AddGameObject(mMoon);
+                
 
             mCamera.AspectRatio=graphics.GraphicsDevice.Viewport.Width / (float)graphics.GraphicsDevice.Viewport.Height;
             mCamera.FarClippingPlane=10000.0f;
             mCamera.FieldOfView=MathHelper.ToRadians(45f);
             mCamera.NearClippingPlane = 1.0f;
-            mCamera.Position = new Vector3(50, 50, 0);
+            mCamera.Position = new Vector3(600, 600, 0);
             mCamera.Target = Vector3.Zero;
-            mCamera.UpVector = Vector3.UnitZ;       
+            mCamera.UpVector = Vector3.UnitZ;     
 
-
-
-            
-            // TODO: use this.Content to load your game content here
+                     
+        
         }
 
         /// <summary>
@@ -116,7 +125,10 @@ namespace _3dplayground
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed)
                 this.Exit();
 
-            // TODO: Add your update logic here
+            foreach (IUpdateable u in mObjects.UpdateableObjects.Values )
+            {
+                u.Update(gameTime);
+            }
 
             base.Update(gameTime);
         }
@@ -129,16 +141,16 @@ namespace _3dplayground
         {
             GraphicsDevice.Clear(Color.Black );
 
-            // TODO: Add your drawing code here
+            
 
-            foreach (phys_planet s in theSphereList)
+            foreach ( IDrawable d in mObjects.DrawableObjects.Values )
             {
-                s.Draw(mCamera);
-            }
+                d.Draw(mCamera);
+            }  
 
             base.Draw(gameTime);
         }
-
+       /*
         public  Vector3 gravity_force(List<phys_planet> some_grav_obj_list, phys_planet theplanet, Vector3 pos)
         { //pass the planet so it can skip it by comparison
             Vector3 sumforce = Vector3.Zero;
@@ -163,6 +175,7 @@ namespace _3dplayground
             }
             return sumforce;
         }
+        * */
     /*
         public void RK4(List<phys_planet> some_obj_list,FUNC_PTR diff_func, double step)
         {

@@ -18,9 +18,8 @@ namespace _3dplayground
         protected Dictionary<string, IAmInSpace> mGameObjects;
         protected Dictionary<string, IGetEffectedByField> mFieldObjects;
         protected Dictionary<string, IEmitPointField> mPointFieldEmitters;
-
-
-
+        protected Dictionary<string, IUpdateable> mUpdateableObjects;
+        protected Dictionary<string, IDrawable> mDrawableObjects;
 
 
         /// <summary>
@@ -31,6 +30,8 @@ namespace _3dplayground
             mGameObjects = new Dictionary<string, IAmInSpace>();
             mFieldObjects = new Dictionary<string, IGetEffectedByField>();
             mPointFieldEmitters = new Dictionary<string, IEmitPointField>();
+            mUpdateableObjects = new Dictionary<string, IUpdateable>();
+            mDrawableObjects = new Dictionary<string, IDrawable>();
         }
 
         /// <summary>
@@ -48,6 +49,12 @@ namespace _3dplayground
 
         public Dictionary<string, IEmitPointField> PointFieldEmitters
         { get { return mPointFieldEmitters; } }
+
+        public Dictionary<string, IUpdateable> UpdateableObjects
+        { get { return mUpdateableObjects; } }
+
+        public Dictionary<string, IDrawable> DrawableObjects
+        { get { return mDrawableObjects; } }
 
 
         public IAmInSpace GetGameObject(string name)
@@ -81,6 +88,26 @@ namespace _3dplayground
 
                     }
                 }
+
+                IUpdateable updateable = theGameObject as IUpdateable;
+                if (updateable != null)
+                {
+                    if (!mUpdateableObjects.ContainsKey(updateable.Name))
+                    {
+                        mUpdateableObjects.Add(updateable.Name, updateable);
+                    }
+                }
+
+                IDrawable drawable = theGameObject as IDrawable;
+                if (drawable != null)
+                {
+                    if (!mDrawableObjects.ContainsKey(drawable.Name))
+                    {
+                        mDrawableObjects.Add(drawable.Name, drawable);
+                    }
+                }
+
+                
             }
         }
 
