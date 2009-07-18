@@ -149,33 +149,18 @@ namespace _3dplayground
             }  
 
             base.Draw(gameTime);
+
+            //I could of used this code here - Just to demonstrate interfaces
+            //foreach (IDrawable d in mObjects.InSpaceObjects.Values)
+            //{
+            //    d.Draw(mCamera);
+            //}  
+            // Even though objects have been added to a list of interfaces that has nothing to do with the IDrawable Interface
+            // I can still pull the objects that implement IDrawable out of the list.
+            // I elected not to do this as it would have to traverse the whole list every time - better to do this once.
+
         }
-       /*
-        public  Vector3 gravity_force(List<phys_planet> some_grav_obj_list, phys_planet theplanet, Vector3 pos)
-        { //pass the planet so it can skip it by comparison
-            Vector3 sumforce = Vector3.Zero;
-            double  tmpR = 0;
-            foreach (phys_planet i in some_grav_obj_list)
-            {
-
-                if (i == theplanet)
-                {
-                    //do nothing its the planet in question
-                }
-                else
-                {
-                    tmpR = Math.Pow((i.Position.X - pos.X), 2) + Math.Pow((i.Position.Y - pos.Y), 2) + Math.Pow((i.Position.Z - pos.Z), 2);
-                   tmpR = i.mass*G/Math.Pow(tmpR, 1.5);
-
-                   sumforce.X = sumforce.X + (i.Position.X - pos.X) * (float)tmpR; //sigh vector3 uses floats - teh suq
-                   sumforce.Y = sumforce.Y+(i.Position.Y - pos.Y) * (float)tmpR;
-                   sumforce.Z = sumforce.Z+(i.Position.Z - pos.Z) * (float)tmpR;
-
-                }
-            }
-            return sumforce;
-        }
-        * */
+  
     /*
         public void RK4(List<phys_planet> some_obj_list,FUNC_PTR diff_func, double step)
         {

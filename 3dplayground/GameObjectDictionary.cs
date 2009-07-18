@@ -15,7 +15,7 @@ namespace _3dplayground
     {
         protected static GameObjectDictionary mInstance;
 
-        protected Dictionary<string, IAmInSpace> mGameObjects;
+        protected Dictionary<string, IAmInSpace> mIAmInSpace;
         protected Dictionary<string, IGetEffectedByField> mFieldObjects;
         protected Dictionary<string, IEmitPointField> mPointFieldEmitters;
         protected Dictionary<string, IUpdateable> mUpdateableObjects;
@@ -27,7 +27,7 @@ namespace _3dplayground
         /// </summary>
         protected GameObjectDictionary()
         {
-            mGameObjects = new Dictionary<string, IAmInSpace>();
+            mIAmInSpace = new Dictionary<string, IAmInSpace>();
             mFieldObjects = new Dictionary<string, IGetEffectedByField>();
             mPointFieldEmitters = new Dictionary<string, IEmitPointField>();
             mUpdateableObjects = new Dictionary<string, IUpdateable>();
@@ -47,6 +47,9 @@ namespace _3dplayground
             return mInstance;
         }
 
+        public Dictionary<string, IAmInSpace> InSpaceObjects
+        { get { return mIAmInSpace; } }
+
         public Dictionary<string, IEmitPointField> PointFieldEmitters
         { get { return mPointFieldEmitters; } }
 
@@ -58,7 +61,7 @@ namespace _3dplayground
 
 
         public IAmInSpace GetGameObject(string name)
-        { return mGameObjects[name]; }
+        { return mIAmInSpace[name]; }
 
         /// <summary>
         /// Adds the object to he collection and any other relevant lists.
@@ -66,9 +69,9 @@ namespace _3dplayground
         /// <param name="theGameObject"></param>
         public void AddGameObject(IAmInSpace theGameObject)
         {
-            if (!mGameObjects.ContainsKey(theGameObject.Name))
+            if (!mIAmInSpace.ContainsKey(theGameObject.Name))
             {
-                mGameObjects.Add(theGameObject.Name, theGameObject);
+                mIAmInSpace.Add(theGameObject.Name, theGameObject);
                 // This casts the object, but sets it to null if the cast fails rather than throwing an exception
                 IGetEffectedByField effect = theGameObject as IGetEffectedByField;
                 if (effect != null)

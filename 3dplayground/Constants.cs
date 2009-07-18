@@ -8,7 +8,7 @@ namespace _3dplayground
 {
    static  class Constants
     {
-       public const double mG = 6.673E-11;
+       public const double G = 6.673E-11;
 
 
 
