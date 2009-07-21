@@ -38,7 +38,7 @@ namespace _3dplayground.Graphics.D3
 
         #region ILoadable Members
 
-        public void LoadContent(ContentManager theContentManager, string ContentName)
+        public virtual  void LoadContent(ContentManager theContentManager, string ContentName)
         {
             mModel = theContentManager.Load<Model>(ContentName);
         }

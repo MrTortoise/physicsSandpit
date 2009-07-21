@@ -15,16 +15,14 @@ namespace _3dplayground.Graphics.D3
     {   
         // This class needs several things. 
         // 2. From this calculation of the models size
-        // 3. Write a scaling algorithm so we can specify the render size of the model.
+        // 3. Write a scaling algorithm so we can specify the render size of the model.  - this might be a bad idea.
         // 4. Implement the rotation stuff.
 
-        // 5. Repeat in a new class, but for a suboid model.
+        // 5. Repeat in a new class, but for a suboid model. 
 
-        Model mModel;
-        BoundingSphere mBoundingSphere;
-        Matrix mScalingMatrix;
+        BoundingSphere mBoundingSphere;        
 
-        public void LoadContent(ContentManager contentManager, string contentName)
+        public override  void LoadContent(ContentManager contentManager, string contentName)
         {
             base.LoadContent(contentManager, contentName);
             
@@ -32,16 +30,8 @@ namespace _3dplayground.Graphics.D3
             foreach (ModelMesh m in mModel.Meshes)
             {
                 mBoundingSphere = BoundingSphere.CreateMerged(mBoundingSphere, m.BoundingSphere);
-            }
-
-            
-        }
-
-        #region IModel Members
-
-
-
-        #endregion
+            }              
+        } 
 
         #region IHasBoundingSphere Members
 
@@ -54,6 +44,9 @@ namespace _3dplayground.Graphics.D3
         {
             get { return mBoundingSphere.Radius; }
         }
+
+        public Vector3 Center
+        { get { return mBoundingSphere.Center; } }
 
         #endregion
     }

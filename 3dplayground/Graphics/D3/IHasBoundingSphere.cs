@@ -14,5 +14,8 @@ namespace _3dplayground.Graphics.D3
 
         float Radius
         { get; }
+
+        Vector3 Center
+        { get; }
     }
 }

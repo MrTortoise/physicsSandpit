@@ -57,7 +57,29 @@ namespace _3dplayground.Graphics.D3
             }
 
             mBoundingBox = new BoundingBox(Min, Max);
+
+            
         }
+
+        #endregion
+
+        #region IHasBoundedBox Members
+
+        public BoundingBox boundingBox
+        {
+            get { return mBoundingBox; }
+        } 
+
+        public Vector3 Volume
+        {
+            get { return Vector3.Subtract(mBoundingBox.Max, mBoundingBox.Min); }
+        }
+
+        public Vector3 Max
+        { get { return mBoundingBox.Max; } }
+
+        public Vector3 Min
+        { get { return mBoundingBox.Min; } }
 
         #endregion
     }
