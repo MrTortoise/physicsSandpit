@@ -10,25 +10,8 @@ namespace _3dplayground.Physics
     /// The class that will implement the methods of the mFieldPhysics physics.
     /// </summary>      
     class FieldPhysicsComponent : IFieldPhysics 
-    {
-
-        protected  Vector3 old_position = Vector3.Zero;
-
-        protected Vector3 K1pos = Vector3.Zero;
-        protected Vector3 K2pos = Vector3.Zero;
-        protected Vector3 K3pos = Vector3.Zero;
-        protected Vector3 k4pos = Vector3.Zero;
-
-        protected Vector3 K1vel = Vector3.Zero;
-        protected Vector3 K2vel = Vector3.Zero;
-        protected Vector3 K3vel = Vector3.Zero;
-        protected Vector3 k4vel = Vector3.Zero;
-
-
-        #region IFieldPhysics Members
-
-
-        
+    {  
+        #region IFieldPhysics Members        
 
         public New_pos_and_vel dothe_phys(float step,IGetEffectedByGravity  i)
         {
