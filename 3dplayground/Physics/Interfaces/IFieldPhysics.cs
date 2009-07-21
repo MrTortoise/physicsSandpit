@@ -5,7 +5,7 @@ using System.Text;
 using Microsoft.Xna.Framework;
 using _3dplayground.Physics;
 
-namespace _3dplayground
+namespace _3dplayground.Physics
 {
     /// <summary>
     /// This is the interface that a component will implement if it is to provide an implementation of mFieldPhysics physics.    /// 

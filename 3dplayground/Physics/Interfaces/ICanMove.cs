@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using Microsoft.Xna.Framework;
 
-namespace _3dplayground
+namespace _3dplayground.Physics
 {
     /// <summary>
     /// If an object wants to be moved around then it needs to implement this interface.

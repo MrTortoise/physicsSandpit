@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using Microsoft.Xna.Framework;
 
-namespace _3dplayground
+namespace _3dplayground.Physics
 {
     /// <summary>
     /// Implement this for the bare minimum required to Emit a Field

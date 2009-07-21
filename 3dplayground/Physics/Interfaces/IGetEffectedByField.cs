@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using Microsoft.Xna.Framework;
 
-namespace _3dplayground
+namespace _3dplayground.Physics
 {
     /// <summary>
     /// Implement this interface to be added to the list of objects that can be effected by fields.

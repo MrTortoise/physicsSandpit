@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using Microsoft.Xna.Framework;
 
-namespace _3dplayground
+namespace _3dplayground.Physics
 {
     /// <summary>
     /// General Interface to define an object in 3d space and retrieval of its basic properties.

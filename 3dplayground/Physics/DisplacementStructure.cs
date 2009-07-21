@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Microsoft.Xna.Framework;
+using _3dplayground.Physics;
 
-namespace _3dplayground
+namespace _3dplayground.Physics
 {
     /// <summary>
     /// This structure contains the Displacement vectors - NOT THE ABSOLUTE VECTORS

@@ -3,10 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace _3dplayground
+namespace _3dplayground.Physics
 {
-    interface IMoveablePhysicsObject : IPhysicsObject, ICanMove 
+    interface IPhysicsObject : IGameObject, IHasMass
     {
-
     }
 }
