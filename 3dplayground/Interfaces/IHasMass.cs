@@ -6,10 +6,11 @@ using System.Text;
 namespace _3dplayground
 {
 
-    interface IHasMass
+   public  interface IHasMass : ICanMove 
     {
         int Mass
         { get; }
 
+       // The logic is that mass is only importnat if movement is involved.
     }
 }

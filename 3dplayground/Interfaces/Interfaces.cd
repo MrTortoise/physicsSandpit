@@ -9,14 +9,6 @@
   </Interface>
   <Interface Name="_3dplayground.IAmInSpace" Collapsed="true">
     <Position X="7" Y="3.5" Width="1.5" />
-    <InheritanceLine Type="_3dplayground.IHasName" FixedFromPoint="true">
-      <Path>
-        <Point X="9.312" Y="2.312" />
-        <Point X="9.312" Y="3.125" />
-        <Point X="7.75" Y="3.125" />
-        <Point X="7.75" Y="3.5" />
-      </Path>
-    </InheritanceLine>
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAIAgAAAAAAAAAAAAAAAAAAAAAAAEAAA=</HashCode>
       <FileName>Interfaces\IAmInSpace.cs</FileName>
@@ -24,14 +16,6 @@
   </Interface>
   <Interface Name="_3dplayground.IDrawable" Collapsed="true">
     <Position X="12.25" Y="3.5" Width="1.5" />
-    <InheritanceLine Type="_3dplayground.IHasName" FixedFromPoint="true">
-      <Path>
-        <Point X="10.25" Y="2.312" />
-        <Point X="10.25" Y="3.125" />
-        <Point X="13" Y="3.125" />
-        <Point X="13" Y="3.5" />
-      </Path>
-    </InheritanceLine>
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAEAAAA=</HashCode>
       <FileName>Interfaces\IDrawable.cs</FileName>
@@ -41,7 +25,9 @@
     <Position X="6.5" Y="6.75" Width="1.5" />
     <InheritanceLine Type="_3dplayground.IAmInSpace" FixedFromPoint="true">
       <Path>
-        <Point X="7.25" Y="4.191" />
+        <Point X="7.375" Y="4.191" />
+        <Point X="7.375" Y="6.375" />
+        <Point X="7.25" Y="6.375" />
         <Point X="7.25" Y="6.75" />
       </Path>
     </InheritanceLine>
@@ -50,10 +36,10 @@
       <FileName>Interfaces\IEmitPointField.cs</FileName>
     </TypeIdentifier>
   </Interface>
-  <Interface Name="_3dplayground.IFieldPhysics" Collapsed="true">
-    <Position X="14.75" Y="6.75" Width="1.5" />
+  <Interface Name="_3dplayground.IFieldPhysics">
+    <Position X="12" Y="8" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Interfaces\IFieldPhysics.cs</FileName>
     </TypeIdentifier>
   </Interface>
@@ -62,17 +48,21 @@
     <InheritanceLine Type="_3dplayground.IAmInSpace" ManuallyRouted="true">
       <Path>
         <Point X="7.75" Y="4.191" />
-        <Point X="7.75" Y="5.427" />
-        <Point X="9.5" Y="5.427" />
+        <Point X="7.75" Y="5.562" />
+        <Point X="9.5" Y="5.562" />
         <Point X="9.5" Y="6.5" />
       </Path>
     </InheritanceLine>
-    <InheritanceLine Type="_3dplayground.IDrawable" ManuallyRouted="true" FixedFromPoint="true" FixedToPoint="true">
+    <InheritanceLine Type="_3dplayground.IDrawable" FixedFromPoint="true" FixedToPoint="true">
       <Path>
-        <Point X="12.75" Y="4.191" />
-        <Point X="12.75" Y="5.427" />
-        <Point X="10" Y="5.427" />
-        <Point X="10" Y="6.5" />
+        <Point X="13.562" Y="4.191" />
+        <Point X="13.562" Y="5.875" />
+        <Point X="13.458" Y="5.875" Type="JumpStart" />
+        <Point X="13.292" Y="5.875" Type="JumpEnd" />
+        <Point X="13.208" Y="5.875" Type="JumpStart" />
+        <Point X="13.042" Y="5.875" Type="JumpEnd" />
+        <Point X="9.938" Y="5.875" />
+        <Point X="9.938" Y="6.5" />
       </Path>
     </InheritanceLine>
     <InheritanceLine Type="_3dplayground.IUpdateable" FixedToPoint="true">
@@ -88,26 +78,22 @@
   </Interface>
   <Interface Name="_3dplayground.IGetEffectedByField" Collapsed="true">
     <Position X="12" Y="6.75" Width="2.25" />
-    <InheritanceLine Type="_3dplayground.IAmInSpace" ManuallyRouted="true" FixedFromPoint="true" FixedToPoint="true">
+    <InheritanceLine Type="_3dplayground.IAmInSpace" ManuallyRouted="true" FixedFromPoint="true">
       <Path>
-        <Point X="8.188" Y="4.191" />
-        <Point X="8.188" Y="5.108" />
-        <Point X="9.667" Y="5.108" Type="JumpStart" />
-        <Point X="9.833" Y="5.108" Type="JumpEnd" />
-        <Point X="12.667" Y="5.108" Type="JumpStart" />
-        <Point X="12.833" Y="5.108" Type="JumpEnd" />
-        <Point X="13" Y="5.108" />
-        <Point X="13" Y="6.75" />
+        <Point X="8.312" Y="4.191" />
+        <Point X="8.312" Y="5.097" />
+        <Point X="9.667" Y="5.097" Type="JumpStart" />
+        <Point X="9.833" Y="5.097" Type="JumpEnd" />
+        <Point X="13.125" Y="5.097" />
+        <Point X="13.125" Y="6.75" />
       </Path>
     </InheritanceLine>
     <InheritanceLine Type="_3dplayground.IUpdateable" FixedFromPoint="true" FixedToPoint="true">
       <Path>
-        <Point X="10.188" Y="4.191" />
-        <Point X="10.188" Y="4.566" />
-        <Point X="12.667" Y="4.566" Type="JumpStart" />
-        <Point X="12.833" Y="4.566" Type="JumpEnd" />
-        <Point X="13.625" Y="4.566" />
-        <Point X="13.625" Y="6.75" />
+        <Point X="10.062" Y="4.191" />
+        <Point X="10.062" Y="4.566" />
+        <Point X="13.375" Y="4.566" />
+        <Point X="13.375" Y="6.75" />
       </Path>
     </InheritanceLine>
     <TypeIdentifier>
@@ -148,6 +134,20 @@
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Interfaces\IPhysicsObject.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="_3dplayground.ICanMove" Collapsed="true">
+    <Position X="6.25" Y="9.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAA=</HashCode>
+      <FileName>Interfaces\ICanMove.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="_3dplayground.IMoveablePhysicsObject" Collapsed="true">
+    <Position X="8.75" Y="9.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Interfaces\IMoveablePhysicsObject.cs</FileName>
     </TypeIdentifier>
   </Interface>
   <Font Name="Segoe UI" Size="9" />

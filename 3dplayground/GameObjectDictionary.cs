@@ -16,7 +16,7 @@ namespace _3dplayground
         protected static GameObjectDictionary mInstance;
 
         protected Dictionary<string, IAmInSpace> mIAmInSpace;
-        protected Dictionary<string, IGetEffectedByField> mFieldObjects;
+        protected Dictionary<string, IGetEffectedByGravity> mFieldObjects;
         protected Dictionary<string, IEmitPointField> mPointFieldEmitters;
         protected Dictionary<string, IUpdateable> mUpdateableObjects;
         protected Dictionary<string, IDrawable> mDrawableObjects;
@@ -28,7 +28,7 @@ namespace _3dplayground
         protected GameObjectDictionary()
         {
             mIAmInSpace = new Dictionary<string, IAmInSpace>();
-            mFieldObjects = new Dictionary<string, IGetEffectedByField>();
+            mFieldObjects = new Dictionary<string, IGetEffectedByGravity>();
             mPointFieldEmitters = new Dictionary<string, IEmitPointField>();
             mUpdateableObjects = new Dictionary<string, IUpdateable>();
             mDrawableObjects = new Dictionary<string, IDrawable>();
@@ -73,7 +73,7 @@ namespace _3dplayground
             {
                 mIAmInSpace.Add(theGameObject.Name, theGameObject);
                 // This casts the object, but sets it to null if the cast fails rather than throwing an exception
-                IGetEffectedByField effect = theGameObject as IGetEffectedByField;
+                IGetEffectedByGravity effect = theGameObject as IGetEffectedByGravity;
                 if (effect != null)
                 {
                     if (!mFieldObjects.ContainsKey(effect.Name))

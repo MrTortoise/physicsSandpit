@@ -18,6 +18,6 @@ namespace _3dplayground
         /// <param name="thePosition">The position of the object in space</param>
         /// <param name="magnitude">The magnitude of whatever scalar the component needs to calculate its force</param>
         /// <returns></returns>
-        Vector3 Force(Vector3 thePosition, int magnitude); 
+        Vector3 Acceleration(Vector3 thePosition, int magnitude); 
     }
 }

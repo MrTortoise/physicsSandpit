@@ -2,12 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using Microsoft.Xna.Framework;
 
-namespace _3dplayground
+namespace _3dplayground.Graphics.D3
 {
-    interface IGameObject : IAmInSpace, IDrawable
+    interface IHasBoundedBox
     {
+
 
     }
 }

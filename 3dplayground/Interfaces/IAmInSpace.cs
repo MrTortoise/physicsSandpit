@@ -12,12 +12,7 @@ namespace _3dplayground
     public interface IAmInSpace : IHasName 
     {
         Vector3 Position
-        { get; }
-
-
-        Vector3 Velocity
-        { get; }
-
+        { get; } 
 
         Quaternion  Rotation
         { get; }
