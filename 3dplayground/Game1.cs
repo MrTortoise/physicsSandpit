@@ -11,6 +11,9 @@ using Microsoft.Xna.Framework.Media;
 using Microsoft.Xna.Framework.Net;
 using Microsoft.Xna.Framework.Storage;
 
+using _3dplayground.Graphics.D3;
+using _3dplayground.Physics;
+
 
 
 namespace _3dplayground
@@ -73,12 +76,12 @@ namespace _3dplayground
             // Create a new SpriteBatch, which can be used to draw 2D textures.
            // spriteBatch = new SpriteBatch(GraphicsDevice);
 
-            IModel theSphere;
-            theSphere = new Sphere();
+            BasicModel  theSphere;
+            theSphere = new BasicModel();
             theSphere.LoadContent(Content, "sphere");
 
             Planet mPlanet;
-            mPlanet = new Planet(theSphere, "planet1", 1000000000, Vector3.Zero, Vector3.Zero, Quaternion.Identity);
+            mPlanet = new Planet(theSphere, "planet1", 1000000000, Vector3.Zero, Vector3.Zero, Quaternion.Identity,Quaternion.Identity );
 
             mObjects.AddGameObject(mPlanet);
 
@@ -86,7 +89,7 @@ namespace _3dplayground
             mFPC=new FieldPhysicsComponent();
 
             Moon mMoon;
-            mMoon = new Moon(theSphere, mFPC, "Moon1", 100000,new Vector3(100,0,0), new Vector3(0,1,0), Quaternion.Identity);
+            mMoon = new Moon(theSphere, mFPC, "Moon1", 100000,new Vector3(100,0,0), new Vector3(0,1,0), Quaternion.Identity,Quaternion.Identity );
             mObjects.AddGameObject(mMoon);
            /*
             Moon mMoon2;
