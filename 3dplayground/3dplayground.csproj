@@ -109,7 +109,6 @@
     <Compile Include="Interfaces\IHasName.cs" />
     <Compile Include="Interfaces\ILoadable.cs" />
     <Compile Include="Graphics\D3\IModel.cs" />
-    <Compile Include="Physics\Interfaces\IMoveablePhysicsObject.cs" />
     <Compile Include="Physics\Interfaces\IPhysicsObject.cs" />
     <Compile Include="Interfaces\IUpdateable.cs" />
     <Compile Include="Moon.cs" />

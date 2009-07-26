@@ -28,27 +28,29 @@ namespace _3dplayground
         public Vector3 Force(Vector3 thePosition, int magnitude)
         {
             Vector3 sumforce = Vector3.Zero;
-           // Vector3 displacementVector;
-           // displacementVector = Vector3.Subtract(mPosition , thePosition );
-          //  float distance = displacementVector.Length();
+            Vector3 displacementVector;
+            displacementVector = Vector3.Subtract(mPosition , thePosition );
+            float distance = displacementVector.Length();
                 
             double tmpR = 0;
 
 
 
-            tmpR = Math.Pow((mPosition.X - thePosition.X), 2) + Math.Pow((mPosition.Y - thePosition.Y), 2) + Math.Pow((mPosition.Z - thePosition.Z), 2);
-                    tmpR = mMass  * Constants.G  / Math.Pow(tmpR, 1.5);
+                   // tmpR = Math.Pow((i.Position.X - pos.X), 2) + Math.Pow((i.Position.Y - pos.Y), 2) + Math.Pow((i.Position.Z - pos.Z), 2);
+                   // tmpR = mMass  * Constants.G  / Math.Pow(tmpR, 1.5);
 
             // I have no ideas which will work out faster - math.pow for x^2 is half as fast - but god knows how vector3.Length() will work.
             // http://mindstudies.psy.soton.ac.uk/dmitri/blog/index.php/archives/175
 
-           // tmpR= mMass  * Constants.G  /( distance*distance );
+            tmpR= mMass  * Constants.G  /( distance*distance );
 
-                    sumforce.X = sumforce.X + (mPosition.X - thePosition.X) * (float)tmpR; //sigh vector3 uses floats - teh suq
-                    sumforce.Y = sumforce.Y + (mPosition.Y - thePosition.Y) * (float)tmpR;
-                    sumforce.Z = sumforce.Z + (mPosition.Z - thePosition.Z) * (float)tmpR;
+              //      sumforce.X = sumforce.X + (i.Position.X - pos.X) * (float)tmpR; //sigh vector3 uses floats - teh suq
+               //     sumforce.Y = sumforce.Y + (i.Position.Y - pos.Y) * (float)tmpR;
+              //      sumforce.Z = sumforce.Z + (i.Position.Z - pos.Z) * (float)tmpR;
 
-                 //   sumforce = displacementVector * (float)tmpR;
+                    sumforce.X  =  displacementVector.X  * (float)tmpR;
+                    sumforce.Y = displacementVector.Y * (float)tmpR;
+                    sumforce.Z = displacementVector.Z * (float)tmpR;
             
             return sumforce;
         }          
