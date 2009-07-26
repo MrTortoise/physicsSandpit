@@ -78,7 +78,7 @@ namespace _3dplayground
             theSphere.LoadContent(Content, "sphere");
 
             Planet mPlanet;
-            mPlanet = new Planet(theSphere, "planet1", 10000, Vector3.Zero, Vector3.Zero, Quaternion.Identity);
+            mPlanet = new Planet(theSphere, "planet1", 1000000000, Vector3.Zero, Vector3.Zero, Quaternion.Identity);
 
             mObjects.AddGameObject(mPlanet);
 
@@ -86,8 +86,7 @@ namespace _3dplayground
             mFPC=new FieldPhysicsComponent();
 
             Moon mMoon;
-           
-            mMoon = new Moon(theSphere, mFPC, "Moon1", 100000000,new Vector3(20,0,0), new Vector3(0,(float)Math.Sqrt(Constants.G*500),0), Quaternion.Identity);
+            mMoon = new Moon(theSphere, mFPC, "Moon1", 100000,new Vector3(100,0,0), new Vector3(0,1,0), Quaternion.Identity);
             mObjects.AddGameObject(mMoon);
            /*
             Moon mMoon2;
@@ -111,9 +110,9 @@ namespace _3dplayground
             mCamera.FarClippingPlane=10000.0f;
             mCamera.FieldOfView=MathHelper.ToRadians(30f);
             mCamera.NearClippingPlane = 1.0f;
-            mCamera.Position = new Vector3(50, 50, 100);
+            mCamera.Position = new Vector3(0, 0, 400);
             mCamera.Target = Vector3.Zero;
-            mCamera.UpVector = Vector3.UnitZ;     
+            mCamera.UpVector = Vector3.UnitY ;     
 
                      
         
