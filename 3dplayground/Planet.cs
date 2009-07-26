@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Microsoft.Xna.Framework;
+using _3dplayground.Physics;
+using _3dplayground.Graphics.D3;
 
 namespace _3dplayground
 {
@@ -11,8 +13,8 @@ namespace _3dplayground
 
         protected IModel mModel;
 
-        public Planet(IModel theModel, string theName, int theMass,Vector3 thePosition, Vector3 theVelocity, Quaternion theRotation )
-            :base(theName,theMass,thePosition,theVelocity,theRotation)
+        public Planet(IModel theModel, string theName, int theMass,Vector3 thePosition, Vector3 theVelocity, Quaternion theRotation,Quaternion theAngularVelocity )
+            :base(theName,theMass,thePosition,theVelocity,theRotation,theAngularVelocity)
         {
             mModel = theModel;
 
@@ -25,7 +27,7 @@ namespace _3dplayground
         /// <param name="thePosition">The poisition in space of the body in the field</param>
         /// <param name="magnitude">Currently unused, but represents the mass of the body in the field</param>
         /// <returns></returns>
-        public Vector3 Force(Vector3 thePosition, int magnitude)
+        public Vector3 Acceleration(Vector3 thePosition, int magnitude)
         {
             Vector3 sumforce = Vector3.Zero;
             Vector3 displacementVector;
@@ -63,16 +65,6 @@ namespace _3dplayground
         }
 
  
-
-        public override  void Update(Microsoft.Xna.Framework.GameTime timeInterval)
-        {
-            //ToDp: Implement some movement algorithm here maybe
-            
-            //Will do this by writing an orbiter component (through  an IRobiter interface) that given timestep, distance and initial offset will
-            //calculate orbit position. We can then use the interface to implement different kinds of orbiter.  
-            // The object with the orbiter component wil have to have a reference to its center of orbit object.
-            
-        }
 
 
         #endregion
