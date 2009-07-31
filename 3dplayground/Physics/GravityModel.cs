@@ -10,31 +10,34 @@ namespace _3dplayground.Physics
     abstract class GravityModel : PhysicsModel , IGetEffectedByGravity 
     {
 
-        protected IFieldPhysics mPhys;
+        protected IFieldPhysics mFieldPhysics;
+        protected DisplacementStructure  mGravityDisplacement;
 
         public GravityModel(string theName, int theMass, Vector3 thePosition,
             Vector3 theVelocity, Quaternion theRotation,Quaternion theAngularVelocity, IModel theModel, IFieldPhysics theFieldPhysics)
             : base(theName, theMass, thePosition, theVelocity, theRotation,theAngularVelocity, theModel)
         {
-            mPhys = theFieldPhysics;
+            mFieldPhysics = theFieldPhysics;
+        }
+        #region IGetEffectedByGravity Members
+        public DisplacementStructure GravityDisplacement
+        {
+            get { return mGravityDisplacement; }
         }
 
 
 
-
-        #region IGetEffectedByGravity Members
-
-        public DisplacementStructure GetGravityDisplacement(GameTime theTime)
+        public void ExecuteGravityDisplacement(TimeSpan  theTime)
         {
             New_pos_and_vel disp;
-            disp = mPhys.dothe_phys(theTime.ElapsedGameTime.Milliseconds, this);
+            disp = mFieldPhysics.dothe_phys(theTime.Milliseconds , this);
+            mGravityDisplacement = new DisplacementStructure((IAmInSpace)this, disp.position, disp.velocity, mRotation, Quaternion.Identity);
+            mTotalDisplacement = DisplacementStructure.CombineStructure(mTotalDisplacement, mGravityDisplacement);
 
-            DisplacementStructure theArgs;
-            theArgs = new DisplacementStructure((IAmInSpace)this, disp.position, disp.velocity, mRotation,Quaternion.Identity );
 
-            return theArgs;
         }
 
         #endregion
+
     }
 }

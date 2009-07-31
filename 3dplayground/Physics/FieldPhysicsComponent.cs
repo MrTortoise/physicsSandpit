@@ -17,14 +17,14 @@ namespace _3dplayground.Physics
         {
             float hstep = step / 20f;
             step = step / 10;
-            Vector3 force = Vector3.Zero;            
+            Vector3 force = Vector3.Zero;
 
-            GameObjectDictionary instance = GameObjectDictionary.GetInstance(); 
+            GameSpaceUnit space = i.Space ; 
 
                 Vector3 K1pos = i.Velocity;
-                foreach (IEmitPointField j in instance.PointFieldEmitters.Values)
+                foreach (IEmitPointField j in space.PointFieldEmitters.Values)
                 {
-                    if (i == j) { } else { force = force + j.Acceleration(i.Position, 1234); }
+                    if (i == j) { } else { force = force + j.Acceleration(i.Position); }
                 }
                 Vector3 K1vel = force;
 
@@ -32,9 +32,9 @@ namespace _3dplayground.Physics
 
                 force = Vector3.Zero;
 
-                foreach (IEmitPointField j in instance.PointFieldEmitters.Values)
+                foreach (IEmitPointField j in space.PointFieldEmitters.Values)
                 {
-                    if (i == j) { } else { force = force + j.Acceleration(i.Position + K1pos * hstep, 1234); }
+                    if (i == j) { } else { force = force + j.Acceleration(i.Position + K1pos * hstep); }
                 }
 
                 Vector3 K2vel = force;
@@ -43,17 +43,17 @@ namespace _3dplayground.Physics
 
                 force = Vector3.Zero;
 
-                foreach (IEmitPointField j in instance.PointFieldEmitters.Values)
+                foreach (IEmitPointField j in space.PointFieldEmitters.Values)
                 {
-                    if (i == j) { } else { force = force + j.Acceleration(i.Position + K2pos * hstep, 1234); }
+                    if (i == j) { } else { force = force + j.Acceleration(i.Position + K2pos * hstep); }
                 }
                 Vector3 K3vel = force;
 
                 Vector3 k4pos = K3vel * (float)step + i.Velocity;
                 force = Vector3.Zero;
-                foreach (IEmitPointField j in instance.PointFieldEmitters.Values)
+                foreach (IEmitPointField j in space.PointFieldEmitters.Values)
                 {
-                    if (i == j) { } else { force = force + j.Acceleration(i.Position + K3pos, 1234); }
+                    if (i == j) { } else { force = force + j.Acceleration(i.Position + K3pos); }
                 }
                 Vector3 k4vel = force;
 

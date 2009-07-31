@@ -9,7 +9,7 @@ using Microsoft.Xna.Framework.Content;
 namespace _3dplayground.Graphics.D3
 {
     /// <summary>
-    /// This class assumes that the model is centered at 0,0,0 in model space
+    /// This class assumes that the model is centered at 0,0,0 in model space.
     /// </summary>
     class BoundedBox : BoundedSphere, IHasBoundedBox   
     { 
@@ -17,10 +17,41 @@ namespace _3dplayground.Graphics.D3
 
         #region ILoadable Members
 
-        public void LoadContent(ContentManager  theContentManager, string ContentName)
+        public override  void LoadContent(ContentManager  theContentManager, string ContentName)
         {
             base.LoadContent(theContentManager, ContentName);
+            CalculateBox();    
 
+            
+        }
+
+        #endregion
+
+        #region IHasBoundedBox Members
+
+        public BoundingBox boundingBox
+        {
+            get { return mBoundingBox; }
+        } 
+
+        public Vector3 Volume
+        {
+            get { return Vector3.Subtract(mBoundingBox.Max, mBoundingBox.Min); }
+        }
+
+        public Vector3 Max
+        { get { return mBoundingBox.Max; } }
+
+        public Vector3 Min
+        { get { return mBoundingBox.Min; } }
+
+        #endregion
+
+        #region IHasBoundedBox Members
+
+
+        public void CalculateBox()
+        {
             //the 2 vecotors that go int the bounding box constructor
             Vector3 Max = new Vector3(float.MinValue, float.MinValue, float.MinValue);
             Vector3 Min = new Vector3(float.MaxValue, float.MaxValue, float.MaxValue);
@@ -57,29 +88,7 @@ namespace _3dplayground.Graphics.D3
             }
 
             mBoundingBox = new BoundingBox(Min, Max);
-
-            
         }
-
-        #endregion
-
-        #region IHasBoundedBox Members
-
-        public BoundingBox boundingBox
-        {
-            get { return mBoundingBox; }
-        } 
-
-        public Vector3 Volume
-        {
-            get { return Vector3.Subtract(mBoundingBox.Max, mBoundingBox.Min); }
-        }
-
-        public Vector3 Max
-        { get { return mBoundingBox.Max; } }
-
-        public Vector3 Min
-        { get { return mBoundingBox.Min; } }
 
         #endregion
     }

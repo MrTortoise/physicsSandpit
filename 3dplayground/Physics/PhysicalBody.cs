@@ -20,8 +20,11 @@ namespace _3dplayground.Physics
         protected Quaternion mAngularVelocity;
         protected Quaternion mRotation;
         protected int mMass;
+        protected GameSpaceUnit mSpace;
 
-        protected bool mIsDrawActive = true;
+        protected bool mIsDrawActive = true;  
+        
+        protected DisplacementStructure mTotalDisplacement;
 
 
         #region Constructor
@@ -34,6 +37,7 @@ namespace _3dplayground.Physics
             mMass = theMass;
             mVelocity = theVelocity;
             mAngularVelocity = theAngularVelocity;
+            
         }
         #endregion
 
@@ -90,6 +94,14 @@ namespace _3dplayground.Physics
             get { return mIsDrawActive; }
         }
 
+        /// <summary>
+        /// Returns the Space that the object inahbits
+        /// </summary>
+        public GameSpaceUnit Space
+        {
+            get { return mSpace; }
+        }
+
 
 
         #endregion 
@@ -97,6 +109,11 @@ namespace _3dplayground.Physics
         #region Public Methods
 
         public abstract void Draw(Camera theCamera);
+
+        public void CompileDisplacementStructure()
+        {
+            throw new NotImplementedException();
+        }
 
         /// <summary>
         /// Once a move request has been adjusted it is executed on the object
@@ -125,5 +142,29 @@ namespace _3dplayground.Physics
 
 
 
+    
+        #region IAmInSpace Members
+
+
+
+
+        #endregion
+
+        #region ICanMove Members
+
+
+ 
+
+        #endregion
+
+        #region ICanMove Members
+
+
+        public void ResetDisplacementStructures()
+        {
+            mTotalDisplacement = new DisplacementStructure(this, Vector3.Zero, Vector3.Zero, Quaternion.Identity, Quaternion.Identity);
+        }
+
+        #endregion
     }
 }

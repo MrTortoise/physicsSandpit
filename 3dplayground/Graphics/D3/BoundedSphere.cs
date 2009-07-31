@@ -18,7 +18,10 @@ namespace _3dplayground.Graphics.D3
         // 3. Write a scaling algorithm so we can specify the render size of the model.  - this might be a bad idea.
         // 4. Implement the rotation stuff.
 
-        // 5. Repeat in a new class, but for a suboid model. 
+        // 5. Repeat in a new class, but for a suboid model.
+ 
+        // If we take the bounding box of the bounding sphere then we have a very fast axis aligned bounding check
+        // essentially this will be a bounding cube
 
         BoundingSphere mBoundingSphere;        
 

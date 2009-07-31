@@ -7,5 +7,8 @@ namespace _3dplayground.Physics
 {
     interface IPhysicsObject : IGameObject, IHasMass
     {
+
+        // 
+
     }
 }

@@ -12,6 +12,25 @@ namespace _3dplayground.Physics
     /// </summary>
     public struct DisplacementStructure
     {
+        /// <summary>
+        /// Takes 2 dsplacement structures and returns a displacement structure representing their combination
+        /// uses the IaMInSpace of s1
+        /// </summary>
+        /// <param name="s1"></param>
+        /// <param name="s2"></param>
+        /// <returns></returns>
+        public static DisplacementStructure CombineStructure(DisplacementStructure s1, DisplacementStructure s2)
+        {
+              //ToDo: implement me
+            throw new NotFiniteNumberException();
+           
+
+        }
+
+
+        //ToDo: This is wrong. It needs to be a structure and copy out the values it needs from the IAmInSpace object as this will be used in the buffers later
+        //this willb emore obvious once some kind of buffer system is written .... The problem is taking this structure in on ebuffer and being able to associate it with
+        //the correct copy of the object in the new buffer
          IAmInSpace  mIamInSpace;
          Vector3 mDeltaPosition;
          Vector3 mDeltaVelocity;

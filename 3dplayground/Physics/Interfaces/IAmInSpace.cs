@@ -17,7 +17,8 @@ namespace _3dplayground.Physics
         Quaternion  Rotation
         { get; }
 
-
+        GameSpaceUnit Space
+        { get; } 
 
 
     }

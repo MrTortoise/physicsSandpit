@@ -25,9 +25,8 @@ namespace _3dplayground
         /// Implement gravity equation here i guess.
         /// </summary>
         /// <param name="thePosition">The poisition in space of the body in the field</param>
-        /// <param name="magnitude">Currently unused, but represents the mass of the body in the field</param>
         /// <returns></returns>
-        public Vector3 Acceleration(Vector3 thePosition, int magnitude)
+        public Vector3 Acceleration(Vector3 thePosition)
         {
             Vector3 sumforce = Vector3.Zero;
             Vector3 displacementVector;

@@ -23,5 +23,6 @@ namespace _3dplayground.Graphics.D3
         { get; }
 
 
+        void CalculateBox();
     }
 }

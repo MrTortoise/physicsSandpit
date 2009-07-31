@@ -19,10 +19,12 @@ namespace _3dplayground.Physics
                  
 
         event EventHandler<DisplacementArgs> RequestMove;
+
+        void CompileDisplacementStructure();
         void RaiseRequestMove(DisplacementArgs theArgs);
-
         void ExecuteDisplacementStructure(DisplacementStructure theStructure);
+        void ResetDisplacementStructures();
 
-
+        
     }
 }

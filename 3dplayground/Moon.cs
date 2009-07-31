@@ -13,7 +13,8 @@ namespace _3dplayground
     {             
 
         protected  IFieldPhysics mFieldPhysics;
-        protected IModel mModel;                       
+        protected IModel mModel;
+        protected DisplacementStructure mGravityDisplacement;      
 
         public Moon(IModel theModel, IFieldPhysics theFPC,string theName,int theMass, 
             Vector3 thePosition, Vector3 theVelocity, Quaternion  theRotation, Quaternion theAngularVelocity)
@@ -21,7 +22,7 @@ namespace _3dplayground
         {            
             mFieldPhysics = theFPC;
             mModel = theModel;
-        }
+        }        
 
         public override void Draw(Camera theCamera)
         {   
@@ -29,26 +30,27 @@ namespace _3dplayground
             {
                 mModel.draw(mPosition, mRotation, theCamera);
             }    
-        }   
+        }
 
 
         #region IGetEffectedByGravity Members
-
-        public DisplacementStructure GetGravityDisplacement(GameTime theTime)
+        public DisplacementStructure GravityDisplacement
         {
-            New_pos_and_vel vals;
-            vals = mFieldPhysics.dothe_phys((float)theTime.ElapsedGameTime.Milliseconds, this);
-
-            DisplacementStructure theArgs;
-            theArgs = new DisplacementStructure(this, vals.position, vals.velocity,mRotation, Quaternion.Identity);
-
-            return theArgs;
+            get { return mGravityDisplacement; }
         }
 
 
 
-        #endregion
+        public void ExecuteGravityDisplacement(TimeSpan  theTime)
+        {
+            New_pos_and_vel disp;
+            disp = mFieldPhysics.dothe_phys(theTime.Milliseconds, this);
+            mGravityDisplacement = new DisplacementStructure((IAmInSpace)this, disp.position, disp.velocity, mRotation, Quaternion.Identity);
+            mTotalDisplacement = DisplacementStructure.CombineStructure(mTotalDisplacement, mGravityDisplacement);
 
-      
+
+        }
+
+        #endregion
     }
 }

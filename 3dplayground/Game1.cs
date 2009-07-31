@@ -29,7 +29,7 @@ namespace _3dplayground
         GraphicsDeviceManager graphics;
        // SpriteBatch spriteBatch;
 
-        GameObjectDictionary mObjects;
+        GameSpaceUnit mObjects;
 
         //phys_planet mSphere = new phys_planet(1000000, Vector3.Zero);
        // List<phys_planet> theSphereList = new List<phys_planet>();   
@@ -45,9 +45,9 @@ namespace _3dplayground
             graphics.PreferredBackBufferWidth = 1280;
             graphics.PreferredBackBufferHeight = 800;
             graphics.SynchronizeWithVerticalRetrace = false;
-            
 
-            mObjects = GameObjectDictionary.GetInstance();
+
+            mObjects = new GameSpaceUnit();
 
             Components.Add(new CommonObjects.Components.FPS(this));
         }

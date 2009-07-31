@@ -22,7 +22,11 @@ namespace _3dplayground.Physics
         //Note, when you add an interface the namespace will be namespace _3dplayground.DIRECTORYNAME 
         //... remember that it will place objects into a different namespace (not a bad thing, but just an organisational thing)
 
-        DisplacementStructure GetGravityDisplacement(GameTime theTime);
+         
+        void ExecuteGravityDisplacement(TimeSpan  theTime);
+
+        DisplacementStructure GravityDisplacement
+        { get; }
 
 
     }

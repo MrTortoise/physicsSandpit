@@ -96,8 +96,9 @@
     <Compile Include="Graphics\D3\BoundedBox.cs" />
     <Compile Include="Graphics\D3\IHasBoundedBox.cs" />
     <Compile Include="Graphics\D3\IHasBoundingSphere.cs" />
+    <Compile Include="Physics\Exceptions\ObjectsNotEqualException.cs" />
     <Compile Include="Physics\FieldPhysicsComponent.cs" />
-    <Compile Include="GameObjectDictionary.cs" />
+    <Compile Include="GameSpaceUnit.cs" />
     <Compile Include="Physics\Interfaces\ICanMove.cs" />
     <Compile Include="Graphics\IDrawable.cs" />
     <Compile Include="Physics\Interfaces\IEmitPointField.cs" />
@@ -115,7 +116,6 @@
     <Compile Include="Physics\New_pos_and_vel.cs" />
     <Compile Include="Physics\PhysicsModel.cs" />
     <Compile Include="Physics\PhysicalBody.cs" />
-    <Compile Include="Plane.cs" />
     <Compile Include="Planet.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Program.cs" />
