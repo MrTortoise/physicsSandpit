@@ -36,7 +36,9 @@ namespace _3dplayground.Physics
 
         //ToDo: This is wrong. It needs to be a structure and copy out the values it needs from the IAmInSpace object as this will be used in the buffers later
         //this willb emore obvious once some kind of buffer system is written .... The problem is taking this structure in on ebuffer and being able to associate it with
-        //the correct copy of the object in the new buffer
+        //the correct copy of the object in the new buffer   .
+
+        // if we use an object reference it will point to somewhere bad, if we clone then we copy too much data ...
          IAmInSpace  mIamInSpace;
          Vector3 mDeltaPosition;
          Vector3 mDeltaVelocity;
