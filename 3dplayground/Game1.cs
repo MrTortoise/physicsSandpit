@@ -13,6 +13,7 @@ using Microsoft.Xna.Framework.Storage;
 
 using _3dplayground.Graphics.D3;
 using _3dplayground.Physics;
+using _3dplayground.EventManagement;
 
 
 
@@ -36,6 +37,8 @@ namespace _3dplayground
 
         private Camera mCamera = new Camera();
        // private Matrix gameWorldRotation = 0.0f;
+
+        EventManager mEventManager = EventManager.GetInstance();
 
         public Game1()
         {
@@ -75,6 +78,8 @@ namespace _3dplayground
         {
             // Create a new SpriteBatch, which can be used to draw 2D textures.
            // spriteBatch = new SpriteBatch(GraphicsDevice);
+
+            
 
             BasicModel  theSphere;
             theSphere = new BasicModel();
@@ -140,6 +145,8 @@ namespace _3dplayground
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Update(GameTime gameTime)
         {
+
+            mEventManager.ProcessInput();
             // Allows the game to exit
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed)
                 this.Exit();
