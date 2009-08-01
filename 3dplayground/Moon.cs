@@ -9,16 +9,19 @@ using _3dplayground.Physics;
 namespace _3dplayground
 {
 
+    /// <summary>
+    /// overrtides reset displacement structures
+    /// </summary>
     class Moon : PhysicalBody,  IGetEffectedByGravity   
     {             
 
         protected  IFieldPhysics mFieldPhysics;
         protected IModel mModel;
-        protected DisplacementStructure mGravityDisplacement;      
+        protected DisplacementStructure mGravityDisplacement;
 
-        public Moon(IModel theModel, IFieldPhysics theFPC,string theName,int theMass, 
+        public Moon(IModel theModel, IFieldPhysics theFPC, GameSpaceUnit theSpace, string theName, int theMass, 
             Vector3 thePosition, Vector3 theVelocity, Quaternion  theRotation, Quaternion theAngularVelocity)
-            :base(theName,theMass,thePosition,theVelocity,theRotation,theAngularVelocity )
+            :base(theName,theSpace, theMass,thePosition,theVelocity,theRotation,theAngularVelocity )
         {            
             mFieldPhysics = theFPC;
             mModel = theModel;
@@ -46,9 +49,13 @@ namespace _3dplayground
             New_pos_and_vel disp;
             disp = mFieldPhysics.dothe_phys(theTime.Milliseconds, this);
             mGravityDisplacement = new DisplacementStructure((IAmInSpace)this, disp.position, disp.velocity, mRotation, Quaternion.Identity);
-            mTotalDisplacement = DisplacementStructure.CombineStructure(mTotalDisplacement, mGravityDisplacement);
+            mTotalDisplacement = DisplacementStructure.CombineStructure(mTotalDisplacement, mGravityDisplacement); 
+        }
 
 
+        public override void ResetDisplacementStructures()
+        {
+            mGravityDisplacement = DisplacementStructure.Zero(this);
         }
 
         #endregion

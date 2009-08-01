@@ -22,9 +22,15 @@ namespace _3dplayground.Physics
         public static DisplacementStructure CombineStructure(DisplacementStructure s1, DisplacementStructure s2)
         {
               //ToDo: implement me
-            throw new NotFiniteNumberException();
-           
+            throw new NotImplementedException();  
+        
+            //morevoer consider rewriting to use one of the variables as an output parameter - gotta be more efficient to reuse.
 
+        }
+
+        public static DisplacementStructure Zero(IAmInSpace source)
+        {
+            return new DisplacementStructure(source, Vector3.Zero, Quaternion.Identity);
         }
 
 

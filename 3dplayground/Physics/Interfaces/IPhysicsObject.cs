@@ -5,7 +5,7 @@ using System.Text;
 
 namespace _3dplayground.Physics
 {
-    interface IPhysicsObject : IGameObject, IHasMass
+    public interface IPhysicsObject : IGameObject, IHasMass
     {
 
         // 

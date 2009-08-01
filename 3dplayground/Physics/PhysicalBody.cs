@@ -29,7 +29,7 @@ namespace _3dplayground.Physics
 
         #region Constructor
 
-        public PhysicalBody(string theName, int theMass, Vector3 thePosition,Vector3 theVelocity, Quaternion theRotation, Quaternion theAngularVelocity)
+        public PhysicalBody(string theName,GameSpaceUnit theSpace, int theMass, Vector3 thePosition,Vector3 theVelocity, Quaternion theRotation, Quaternion theAngularVelocity)
         {
             mName = theName;
             mPosition = thePosition;
@@ -37,6 +37,7 @@ namespace _3dplayground.Physics
             mMass = theMass;
             mVelocity = theVelocity;
             mAngularVelocity = theAngularVelocity;
+            mSpace = theSpace;
             
         }
         #endregion
@@ -100,7 +101,8 @@ namespace _3dplayground.Physics
         public GameSpaceUnit Space
         {
             get { return mSpace; }
-        }
+        }      
+       
 
 
 
@@ -108,11 +110,24 @@ namespace _3dplayground.Physics
 
         #region Public Methods
 
-        public abstract void Draw(Camera theCamera);
+        public abstract void Draw(Camera theCamera); 
 
-        public void CompileDisplacementStructure()
+
+
+        #endregion  
+    
+
+        #region ICanMove Members
+
+
+        public virtual  void ResetDisplacementStructures()
         {
-            throw new NotImplementedException();
+            mTotalDisplacement = new DisplacementStructure(this, Vector3.Zero, Vector3.Zero, Quaternion.Identity, Quaternion.Identity);
+        }
+
+        public DisplacementStructure GetDisplacementStructure
+        {
+            get { return mTotalDisplacement; }
         }
 
         /// <summary>
@@ -136,11 +151,6 @@ namespace _3dplayground.Physics
         }
 
         #endregion  
-    
-
-
-
-
 
     
         #region IAmInSpace Members
@@ -150,21 +160,8 @@ namespace _3dplayground.Physics
 
         #endregion
 
-        #region ICanMove Members
 
 
- 
 
-        #endregion
-
-        #region ICanMove Members
-
-
-        public void ResetDisplacementStructures()
-        {
-            mTotalDisplacement = new DisplacementStructure(this, Vector3.Zero, Vector3.Zero, Quaternion.Identity, Quaternion.Identity);
-        }
-
-        #endregion
     }
 }

@@ -13,9 +13,9 @@ namespace _3dplayground.Physics
 
         protected IModel mModel;   
 
-        public PhysicsModel(string theName, int theMass, Vector3 thePosition, Vector3 theVelocity,
+        public PhysicsModel(string theName,GameSpaceUnit theSpace, int theMass, Vector3 thePosition, Vector3 theVelocity,
             Quaternion theRotation, Quaternion theAngularVelocity, IModel theModel)
-            : base(theName, theMass, thePosition,theVelocity, theRotation,theAngularVelocity )
+            : base(theName,theSpace, theMass, thePosition,theVelocity, theRotation,theAngularVelocity )
         {
             mModel = theModel;
         }  

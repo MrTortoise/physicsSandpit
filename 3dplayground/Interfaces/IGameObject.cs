@@ -7,7 +7,7 @@ using _3dplayground.Physics;
 
 namespace _3dplayground
 {
-    interface IGameObject : IAmInSpace, IDrawable
+   public interface IGameObject : IAmInSpace, IDrawable
     {
 
     }

@@ -13,8 +13,8 @@ namespace _3dplayground
 
         protected IModel mModel;
 
-        public Planet(IModel theModel, string theName, int theMass,Vector3 thePosition, Vector3 theVelocity, Quaternion theRotation,Quaternion theAngularVelocity )
-            :base(theName,theMass,thePosition,theVelocity,theRotation,theAngularVelocity)
+        public Planet(IModel theModel,GameSpaceUnit theSpace, string theName, int theMass,Vector3 thePosition, Vector3 theVelocity, Quaternion theRotation,Quaternion theAngularVelocity )
+            :base(theName,theSpace, theMass,thePosition,theVelocity,theRotation,theAngularVelocity)
         {
             mModel = theModel;
 

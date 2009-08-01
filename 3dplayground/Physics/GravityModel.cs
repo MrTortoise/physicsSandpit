@@ -13,9 +13,9 @@ namespace _3dplayground.Physics
         protected IFieldPhysics mFieldPhysics;
         protected DisplacementStructure  mGravityDisplacement;
 
-        public GravityModel(string theName, int theMass, Vector3 thePosition,
+        public GravityModel(string theName,GameSpaceUnit theSpace, int theMass, Vector3 thePosition,
             Vector3 theVelocity, Quaternion theRotation,Quaternion theAngularVelocity, IModel theModel, IFieldPhysics theFieldPhysics)
-            : base(theName, theMass, thePosition, theVelocity, theRotation,theAngularVelocity, theModel)
+            : base(theName,theSpace, theMass, thePosition, theVelocity, theRotation,theAngularVelocity, theModel)
         {
             mFieldPhysics = theFieldPhysics;
         }
@@ -38,6 +38,11 @@ namespace _3dplayground.Physics
         }
 
         #endregion
+
+        public override void ResetDisplacementStructures()
+        {
+            mGravityDisplacement = DisplacementStructure.Zero(this);
+        }
 
     }
 }
