@@ -110,7 +110,7 @@ namespace _3dplayground.Physics
 
         #region Public Methods
 
-        public abstract void Draw(Camera theCamera); 
+        public abstract void Draw(Camera theCamera, Vector3 thePosition, Quaternion theRotation); 
 
 
 

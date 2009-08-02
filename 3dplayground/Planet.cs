@@ -58,9 +58,9 @@ namespace _3dplayground
 
         #region  Overridden methods
 
-        public override   void Draw(Camera theCamera)
+        public override   void Draw(Camera theCamera,Vector3 thePosition, Quaternion theRotation)
         {
-            mModel.draw(mPosition, mRotation, theCamera);
+            mModel.draw(thePosition, theRotation, theCamera);
         }
 
  

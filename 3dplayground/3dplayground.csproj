@@ -88,7 +88,7 @@
     <Compile Include="Camera.cs" />
     <Compile Include="Components\FPS.cs" />
     <Compile Include="Constants.cs" />
-    <Compile Include="Physics\DisplacementStructure.cs" />
+    <Compile Include="DisplacementStructure.cs" />
     <Compile Include="Physics\EventArgs\DisplacementArgs.cs" />
     <Compile Include="EventManager\EventManager.cs" />
     <Compile Include="EventManager\InputEventArgs.cs" />
@@ -100,7 +100,7 @@
     <Compile Include="Physics\FieldPhysicsComponent.cs" />
     <Compile Include="GameSpaceUnit.cs" />
     <Compile Include="Physics\Interfaces\ICanMove.cs" />
-    <Compile Include="Graphics\IDrawable.cs" />
+    <Compile Include="Interfaces\IDrawable.cs" />
     <Compile Include="Physics\Interfaces\IEmitPointField.cs" />
     <Compile Include="Physics\Interfaces\IFieldPhysics.cs" />
     <Compile Include="Physics\Interfaces\IAmInSpace.cs" />
@@ -167,6 +167,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="EventArgs\" />
+    <Folder Include="Graphics\Message\" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\XNA Game Studio\Microsoft.Xna.GameStudio.targets" />

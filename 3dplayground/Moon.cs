@@ -27,11 +27,11 @@ namespace _3dplayground
             mModel = theModel;
         }        
 
-        public override void Draw(Camera theCamera)
+        public override void Draw(Camera theCamera,Vector3 thePosition, Quaternion theRotation)
         {   
             if (mIsDrawActive)
             {
-                mModel.draw(mPosition, mRotation, theCamera);
+                mModel.draw(thePosition, theRotation, theCamera);
             }    
         }
 

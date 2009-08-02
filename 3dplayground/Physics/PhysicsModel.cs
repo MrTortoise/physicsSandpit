@@ -20,11 +20,11 @@ namespace _3dplayground.Physics
             mModel = theModel;
         }  
 
-        public override  void Draw(Camera theCamera)
+        public override  void Draw(Camera theCamera,Vector3 thePosition, Quaternion theRotiation)
         {
             if (mIsDrawActive)
             {
-                mModel.draw(mPosition, mRotation, theCamera);
+                mModel.draw(thePosition, theRotiation, theCamera);
             }
         } 
     }

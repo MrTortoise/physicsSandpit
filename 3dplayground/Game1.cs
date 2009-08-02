@@ -166,7 +166,7 @@ namespace _3dplayground
 
             foreach ( IDrawable d in mObjects.DrawableObjects.Values )
             {
-                d.Draw(mCamera);
+               // d.Draw(mCamera);
             }  
 
             base.Draw(gameTime);
