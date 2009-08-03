@@ -55,7 +55,8 @@ namespace _3dplayground
         protected Dictionary<string, GameSpaceUnit> mGameSpaceUnits;
 
 
-        protected List<DisplacementStructure> mStructures;
+        protected List<DisplacementStructure> mUpdateStructures;
+      //  protected List<DisplacementStructure> mDrawStructures;
 
 
         public GameSpaceUnit()
@@ -67,7 +68,7 @@ namespace _3dplayground
           //  mUpdateableObjects = new Dictionary<string, IUpdateable>();
             mDrawableObjects = new Dictionary<string, IDrawable>();
             mLastUpdateTime = DateTime.Now;
-            mStructures = new List<DisplacementStructure>();
+            mUpdateStructures = new List<DisplacementStructure>();
             CollisionComponent mCollisionComponent = new CollisionComponent();
            
         }
@@ -160,10 +161,11 @@ namespace _3dplayground
 
         void phys_RequestMove(object sender, DisplacementArgs e)
         {
+            // add the movement to the list to be processed
             AddDisplacementStructure(e.Displacement);
         }
 
-
+        #region Update Stuff
 
         public void UpdateSpace(DateTime UpdateTime)
         {
@@ -202,37 +204,57 @@ namespace _3dplayground
             }
         }
 
-        #region DisplacementStructure Stuff
+
         protected void AddDisplacementStructure(DisplacementStructure theStructure)
         {
-            int theIndex = mStructures.IndexOf(theStructure);
+            int theIndex = mUpdateStructures.IndexOf(theStructure);
             if (theIndex > 0)
             {
                 //ToDo: Implement +=
-                mStructures[theIndex]= mStructures[theIndex] + theStructure;
+                mUpdateStructures[theIndex]= mUpdateStructures[theIndex] + theStructure;
             }
             else
             {
-                mStructures.Add(theStructure);
+                mUpdateStructures.Add(theStructure);
             }
 
         }
 
         protected DisplacementStructure GetNext()
         {
-            DisplacementStructure retVal = mStructures[0];
-            mStructures.RemoveAt(0);
+            DisplacementStructure retVal = mUpdateStructures[0];
+            mUpdateStructures.RemoveAt(0);
             return retVal;
         }
-        #endregion
+
 
         protected void PerformCollisionCalculation(TimeSpan UpdatePeriod)
         {
             //no collisions atm.
 
+            foreach (DisplacementStructure d in mUpdateStructures)
+            {
+              
+            }
+
+        }
+
+        #endregion
+
+        #region Drawing Stuff
+
+        public void Draw(Camera theCamera)
+        {
+            foreach (IPhysicsObject p in mDrawableObjects.Values )
+            {
+                p.Draw(theCamera, p.Position.ToVector3(), Quaternion.Identity);
+            }
+
+
         }
 
 
+        #endregion
 
 
 

@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
+using Microsoft.Xna.Framework;
+
 namespace _3dplayground.Maths
 {
     /// <summary>
@@ -123,6 +125,7 @@ namespace _3dplayground.Maths
         }
 
 
+
         #endregion
         #endregion
 
@@ -173,6 +176,13 @@ namespace _3dplayground.Maths
             //ToDo: establish wether this or pow is faster of doubles.
             double retVal;
             retVal = Math.Sqrt(mX * mX + mY * mY + mZ * mZ);
+            return retVal;
+
+        }
+
+        public Vector3 ToVector3()
+        {
+            Vector3 retVal = new Vector3((float)mX, (float)mY, (float)mZ);
             return retVal;
 
         }
