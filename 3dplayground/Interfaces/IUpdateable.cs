@@ -12,7 +12,7 @@ namespace _3dplayground
     public interface IUpdateable  : IHasName 
     {
 
-        void Update(GameTime timeInterval);
+        void Update(TimeSpan  timeInterval);
 
         bool IsUpdateActive
         { get; }

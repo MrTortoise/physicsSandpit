@@ -1,10 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using Microsoft.Xna.Framework;
+
 using _3dplayground.Physics;
 using _3dplayground.Graphics.D3;
+using _3dplayground.Maths;
 
 namespace _3dplayground
 {
@@ -13,7 +12,9 @@ namespace _3dplayground
 
         protected IModel mModel;
 
-        public Planet(IModel theModel,GameSpaceUnit theSpace, string theName, int theMass,Vector3 thePosition, Vector3 theVelocity, Quaternion theRotation,Quaternion theAngularVelocity )
+        public Planet(IModel theModel, GameSpaceUnit theSpace, string theName, int theMass,
+            DVector3 thePosition, DVector3 theVelocity,
+            Quaternion theRotation, Quaternion theAngularVelocity)
             :base(theName,theSpace, theMass,thePosition,theVelocity,theRotation,theAngularVelocity)
         {
             mModel = theModel;
@@ -26,16 +27,14 @@ namespace _3dplayground
         /// </summary>
         /// <param name="thePosition">The poisition in space of the body in the field</param>
         /// <returns></returns>
-        public Vector3 Acceleration(Vector3 thePosition)
+        public DVector3  PointFieldAcceleration(DVector3  thePosition)
         {
-            Vector3 sumforce = Vector3.Zero;
-            Vector3 displacementVector;
-            displacementVector = Vector3.Subtract(mPosition , thePosition );
-            float distance = displacementVector.Length();
+            DVector3 sumforce = DVector3.Zero;
+            DVector3 displacementVector;
+            displacementVector =mPosition - thePosition;
+            double distance = displacementVector.Length();
                 
-            double tmpR = 0;
-
-
+            double tmpR = 0;  
 
                    // tmpR = Math.Pow((i.Position.X - pos.X), 2) + Math.Pow((i.Position.Y - pos.Y), 2) + Math.Pow((i.Position.Z - pos.Z), 2);
                    // tmpR = mMass  * Constants.G  / Math.Pow(tmpR, 1.5);
@@ -49,9 +48,9 @@ namespace _3dplayground
                //     sumforce.Y = sumforce.Y + (i.Position.Y - pos.Y) * (float)tmpR;
               //      sumforce.Z = sumforce.Z + (i.Position.Z - pos.Z) * (float)tmpR;
 
-                    sumforce.X  =  displacementVector.X  * (float)tmpR;
-                    sumforce.Y = displacementVector.Y * (float)tmpR;
-                    sumforce.Z = displacementVector.Z * (float)tmpR;
+                    sumforce.X  =  displacementVector.X  * tmpR;
+                    sumforce.Y = displacementVector.Y * tmpR;
+                    sumforce.Z = displacementVector.Z * tmpR;
             
             return sumforce;
         }          
@@ -60,7 +59,7 @@ namespace _3dplayground
 
         public override   void Draw(Camera theCamera,Vector3 thePosition, Quaternion theRotation)
         {
-            mModel.draw(thePosition, theRotation, theCamera);
+            mModel.Draw(theCamera, thePosition, theRotation);
         }
 
  

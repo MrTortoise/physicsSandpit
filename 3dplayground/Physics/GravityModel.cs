@@ -1,20 +1,23 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using Microsoft.Xna.Framework;
+
 using _3dplayground.Graphics.D3;
+using _3dplayground.Maths;
 
 namespace _3dplayground.Physics
 {
+    /// <summary>
+    /// This is an abstract base for any class wishing to inherit from a gravitational mass.
+    /// Thi sclass probably doesn;t wan to be abstract.
+    /// </summary>
     abstract class GravityModel : PhysicsModel , IGetEffectedByGravity 
     {
 
         protected IFieldPhysics mFieldPhysics;
         protected DisplacementStructure  mGravityDisplacement;
 
-        public GravityModel(string theName,GameSpaceUnit theSpace, int theMass, Vector3 thePosition,
-            Vector3 theVelocity, Quaternion theRotation,Quaternion theAngularVelocity, IModel theModel, IFieldPhysics theFieldPhysics)
+        public GravityModel(string theName,GameSpaceUnit theSpace, int theMass, DVector3 thePosition,
+            DVector3 theVelocity,Quaternion theRotation,Quaternion theAngularVelocity, IModel theModel, IFieldPhysics theFieldPhysics)
             : base(theName,theSpace, theMass, thePosition, theVelocity, theRotation,theAngularVelocity, theModel)
         {
             mFieldPhysics = theFieldPhysics;
@@ -31,7 +34,7 @@ namespace _3dplayground.Physics
         {
             New_pos_and_vel disp;
             disp = mFieldPhysics.dothe_phys(theTime.Milliseconds , this);
-            mGravityDisplacement = new DisplacementStructure((IAmInSpace)this, disp.position, disp.velocity, mRotation, Quaternion.Identity);
+            mGravityDisplacement = new DisplacementStructure((IAmInSpace)this, mPosition, disp.position, mVelocity, disp.velocity);
             mTotalDisplacement = DisplacementStructure.CombineStructure(mTotalDisplacement, mGravityDisplacement);
 
 
@@ -39,9 +42,10 @@ namespace _3dplayground.Physics
 
         #endregion
 
-        public override void ResetDisplacementStructures()
+        public override void ResetDisplacementStructures()            
         {
-            mGravityDisplacement = DisplacementStructure.Zero(this);
+            base.ResetDisplacementStructures();
+            mGravityDisplacement = DisplacementStructure.ZeroDeltas((ICanMove) this);
         }
 
     }

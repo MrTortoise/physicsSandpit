@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Microsoft.Xna.Framework;
+using _3dplayground.Maths;
 
 namespace _3dplayground.Physics
 {
@@ -15,10 +16,14 @@ namespace _3dplayground.Physics
         public event EventHandler<DisplacementArgs> RequestMove;
 
         protected  string mName;
-        protected Vector3 mPosition;
-        protected Vector3 mVelocity;
+        protected DVector3 mPosition;
+        protected DVector3 mVelocity;
+        
+
         protected Quaternion mAngularVelocity;
         protected Quaternion mRotation;
+
+
         protected int mMass;
         protected GameSpaceUnit mSpace;
 
@@ -29,25 +34,39 @@ namespace _3dplayground.Physics
 
         #region Constructor
 
-        public PhysicalBody(string theName,GameSpaceUnit theSpace, int theMass, Vector3 thePosition,Vector3 theVelocity, Quaternion theRotation, Quaternion theAngularVelocity)
+        public PhysicalBody(string theName, GameSpaceUnit theSpace, int theMass, 
+            DVector3 thePosition, DVector3 theVelocity, 
+            Quaternion theRotation, Quaternion theAngularVelocity)
         {
             mName = theName;
             mPosition = thePosition;
             mRotation = theRotation;
             mMass = theMass;
             mVelocity = theVelocity;
+           
             mAngularVelocity = theAngularVelocity;
             mSpace = theSpace;
+
+            mTotalDisplacement = DisplacementStructure.ZeroDeltas((ICanMove)this);
             
         }
         #endregion
 
         #region Properties
         /// <summary>
+        /// Gets the position of the Object in space
+        /// </summary>
+        public DVector3 Position
+        {
+            get { return mPosition; }
+        }
+
+        /// <summary>
         /// Gets the Velocity of the Object
         /// </summary>
-        public Vector3 Velocity
-        { get { return mVelocity; } }
+        public DVector3 Velocity
+        { get { return mVelocity; } } 
+ 
 
         /// <summary>
         /// Gets the Angular Velocity of the object.
@@ -55,16 +74,10 @@ namespace _3dplayground.Physics
         public Quaternion AngularVelocity
         { get { return mAngularVelocity; } }
 
-        /// <summary>
-        /// Gets the position of the Object in space
-        /// </summary>
-        public Vector3 Position
-        {
-            get { return mPosition; }
-        }
+       
 
         /// <summary>
-        /// Gets the rotation of the body about its volumetric center in space
+        /// Gets the rotation of the body about its center in space
         /// </summary>
         public Quaternion Rotation
         {
@@ -101,16 +114,15 @@ namespace _3dplayground.Physics
         public GameSpaceUnit Space
         {
             get { return mSpace; }
-        }      
-       
+        }         
 
 
 
         #endregion 
 
-        #region Public Methods
+        #region IDrawable Methods
 
-        public abstract void Draw(Camera theCamera, Vector3 thePosition, Quaternion theRotation); 
+        public abstract void Draw(Camera theCamera, Vector3   thePosition, Quaternion theRotation); 
 
 
 
@@ -122,7 +134,7 @@ namespace _3dplayground.Physics
 
         public virtual  void ResetDisplacementStructures()
         {
-            mTotalDisplacement = new DisplacementStructure(this, Vector3.Zero, Vector3.Zero, Quaternion.Identity, Quaternion.Identity);
+            mTotalDisplacement = DisplacementStructure.ZeroDeltas((ICanMove)this);
         }
 
         public DisplacementStructure GetDisplacementStructure
@@ -138,10 +150,12 @@ namespace _3dplayground.Physics
         {
             mPosition += theStructure.DeltaPosition;
             mVelocity += theStructure.DeltaVelocity;
-            mRotation += theStructure.DeltaRotation;
-            mAngularVelocity += theStructure.DeltaAngularVelocity;
         }
 
+        /// <summary>
+        /// Raises the event that fires the move request up to the Space Unit
+        /// </summary>
+        /// <param name="theArgs"></param>
         public void RaiseRequestMove(DisplacementArgs theArgs)
         {
             if (RequestMove != null)

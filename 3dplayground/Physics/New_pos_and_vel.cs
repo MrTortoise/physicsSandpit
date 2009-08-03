@@ -1,17 +1,27 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+
 using Microsoft.Xna.Framework;
+
+using _3dplayground.Maths;
 
 namespace _3dplayground.Physics
 {
+    /// <summary>
+    /// Does this store deltas or absolutes?
+    /// </summary>
     struct New_pos_and_vel
     {
-        public Vector3 position;
-        public Vector3 velocity;
+        /// <summary>
+        /// 
+        /// </summary>
+        public DVector3  position;
 
-        public New_pos_and_vel(Vector3 thePosition, Vector3 theVelocity)
+        /// <summary>
+        /// 
+        /// </summary>
+        public DVector3 velocity;
+
+        public New_pos_and_vel(DVector3 thePosition, DVector3 theVelocity)
         {
             position = thePosition;
             velocity = theVelocity;

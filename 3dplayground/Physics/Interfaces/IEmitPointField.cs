@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using Microsoft.Xna.Framework;
 
+using _3dplayground.Maths;
+
 namespace _3dplayground.Physics
 {
     /// <summary>
@@ -17,6 +19,6 @@ namespace _3dplayground.Physics
         /// </summary>
         /// <param name="thePosition">The position of the object in space</param>       
         /// <returns></returns>
-        Vector3 Acceleration(Vector3 thePosition); 
+        DVector3  PointFieldAcceleration(DVector3 thePosition); 
     }
 }

@@ -7,10 +7,8 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace _3dplayground.Graphics.D3
 {
-    interface IModel : ILoadable
-    {
-
-        void draw(Vector3 position, Quaternion  rotation, Camera theCamera);
+    interface IModel : ILoadable ,IDrawable 
+    {      
 
 
     }

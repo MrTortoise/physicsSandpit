@@ -8,6 +8,7 @@ namespace _3dplayground
     public interface IHasName
     {
         string Name
-        { get; }
+        { get; }    
+   
     }
 }

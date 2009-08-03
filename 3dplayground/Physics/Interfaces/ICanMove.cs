@@ -4,14 +4,16 @@ using System.Linq;
 using System.Text;
 using Microsoft.Xna.Framework;
 
+using _3dplayground.Maths;
+
 namespace _3dplayground.Physics
 {
     /// <summary>
     /// If an object wants to be moved around then it needs to implement this interface.
     /// </summary>
-    public interface ICanMove
+    public interface ICanMove : IAmInSpace 
     {
-        Vector3 Velocity
+        DVector3 Velocity
         { get; }
 
         Quaternion AngularVelocity
@@ -25,6 +27,7 @@ namespace _3dplayground.Physics
         /// </summary>
         DisplacementStructure GetDisplacementStructure
         { get; }
+
         void RaiseRequestMove(DisplacementArgs theArgs);
         void ExecuteDisplacementStructure(DisplacementStructure theStructure);
         void ResetDisplacementStructures();

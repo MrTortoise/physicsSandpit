@@ -23,7 +23,13 @@ namespace _3dplayground.Graphics.D3
         // If we take the bounding box of the bounding sphere then we have a very fast axis aligned bounding check
         // essentially this will be a bounding cube
 
-        BoundingSphere mBoundingSphere;        
+
+
+        BoundingSphere mBoundingSphere;
+
+        public BoundedSphere(string theName)
+            : base(theName) { }
+
 
         public override  void LoadContent(ContentManager contentManager, string contentName)
         {

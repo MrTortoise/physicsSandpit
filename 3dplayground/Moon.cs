@@ -1,10 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using Microsoft.Xna.Framework;
+
 using _3dplayground.Graphics.D3;
 using _3dplayground.Physics;
+using _3dplayground.Maths;
 
 namespace _3dplayground
 {
@@ -19,8 +18,8 @@ namespace _3dplayground
         protected IModel mModel;
         protected DisplacementStructure mGravityDisplacement;
 
-        public Moon(IModel theModel, IFieldPhysics theFPC, GameSpaceUnit theSpace, string theName, int theMass, 
-            Vector3 thePosition, Vector3 theVelocity, Quaternion  theRotation, Quaternion theAngularVelocity)
+        public Moon(IModel theModel, IFieldPhysics theFPC, GameSpaceUnit theSpace, string theName, int theMass,
+            DVector3 thePosition, DVector3 theVelocity, Quaternion theRotation, Quaternion theAngularVelocity)
             :base(theName,theSpace, theMass,thePosition,theVelocity,theRotation,theAngularVelocity )
         {            
             mFieldPhysics = theFPC;
@@ -31,7 +30,7 @@ namespace _3dplayground
         {   
             if (mIsDrawActive)
             {
-                mModel.draw(thePosition, theRotation, theCamera);
+                mModel.Draw(theCamera, thePosition, theRotation);
             }    
         }
 
@@ -48,14 +47,14 @@ namespace _3dplayground
         {
             New_pos_and_vel disp;
             disp = mFieldPhysics.dothe_phys(theTime.Milliseconds, this);
-            mGravityDisplacement = new DisplacementStructure((IAmInSpace)this, disp.position, disp.velocity, mRotation, Quaternion.Identity);
+            mGravityDisplacement = new DisplacementStructure((IAmInSpace)this,mPosition, disp.position,mVelocity, disp.velocity);
             mTotalDisplacement = DisplacementStructure.CombineStructure(mTotalDisplacement, mGravityDisplacement); 
         }
 
 
         public override void ResetDisplacementStructures()
         {
-            mGravityDisplacement = DisplacementStructure.Zero(this);
+            mGravityDisplacement = DisplacementStructure.ZeroDeltas((ICanMove)this);
         }
 
         #endregion

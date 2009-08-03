@@ -1,9 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+
 using Microsoft.Xna.Framework;
 using _3dplayground.Physics;
+using _3dplayground.Maths;
 
 namespace _3dplayground.Physics
 {
@@ -13,162 +12,120 @@ namespace _3dplayground.Physics
     /// </summary>
     public struct DisplacementStructure
     {
+        #region Static Methods
         /// <summary>
         /// Takes 2 dsplacement structures and returns a displacement structure representing their combination
-        /// uses the IaMInSpace of s1 ... calculates s2-s1
+        /// uses the IaMInSpace of s1 ... calculates s2+s1
         /// </summary>
         /// <param name="s1"></param>
         /// <param name="s2"></param>
         /// <returns></returns>
-        public static DisplacementStructure CombineStructure(DisplacementStructure s1, DisplacementStructure s2)
+        public static DisplacementStructure CombineStructure(DisplacementStructure s1,DisplacementStructure s2)
         {
 
-            DisplacementStructure retVal;
+            if ((s1.Position != s2.Position) || (s1.Velocity != s2.Velocity) )
+            {
+                ArgumentException e = new ArgumentException("Exception whilst combining 2 Displacement Structures. They do not contain the same base locations.");
+                throw e;
 
-            Vector3 position;
-            Vector3 rotation;
+            }
 
+            DisplacementStructure retVal = new DisplacementStructure(s1.mIamInSpace,
+                s1.Position, s2.DeltaPosition + s1.DeltaPosition,
+                s1.Velocity, s2.Velocity + s1.Velocity);
+     
 
-            
-
-            
-            //ToDo: implement me
-            throw new NotImplementedException();  
-        
-            //morevoer consider rewriting to use one of the variables as an output parameter - gotta be more efficient to reuse.
+            return retVal;
 
         }
 
-        public static DisplacementStructure Zero(IAmInSpace source)
+        /// <summary>
+        /// Creates a displacement structure that preserves the origional position but has - as a value for all deltas.
+        /// </summary>
+        /// <param name="source"></param>
+        /// <returns></returns>
+        public static DisplacementStructure ZeroDeltas(IAmInSpace source)
         {
-            return new DisplacementStructure(source, Vector3.Zero, Quaternion.Identity);
+            return new DisplacementStructure(source, source.Position, DVector3.Zero);
         }
 
+        public static DisplacementStructure ZeroDeltas(ICanMove  source)
+        {
+            return new DisplacementStructure(source, source.Position, source.Velocity  );
+        }
 
+        #endregion
+        #region Fields
         // if we use an object reference it will point to somewhere bad, if we clone then we copy too much data ...
          IAmInSpace  mIamInSpace;
 
-         Vector3 mPosition;
-         Quaternion mRotation;
+        DVector3  mPosition;
+        DVector3 mDeltaPosition;
+
+        DVector3 mVelocity;
+        DVector3 mDeltaVelocity;
 
 
-         Vector3 mDeltaPosition;
-         Quaternion mDeltaRotation; 
-
-        /// <summary>
-        /// Constructs the DisplacementStructurewith no velocities
-        /// </summary>
-        /// <param name="theObject">The object that implements the interface.</param>
-         /// <param name="TheDeltaPosition">The vector describing the change in position.</param>
-         /// <param name="theDeltaRotiation">The vector describing the change in rotation.</param>                                     
-        public DisplacementStructure(IAmInSpace theObject, Vector3 TheDeltaPosition,  Quaternion theDeltaRotiation)
-        {
-           mIamInSpace = theObject;
-           mDeltaPosition = TheDeltaPosition;
-           mDeltaRotation = theDeltaRotiation;
-           mDeltaVelocity = Vector3.Zero;
-            mDeltaAngularRotation = Quaternion.Identity;
-
-        }
-
-        /// <summary>
-        /// constructs the displacement structure with velicoties.
-        /// </summary>
-        /// <param name="theObject">The object that implements the IAmInSpace interface.</param>
-        /// <param name="ThePosition">The chang ein position of the object</param>
-        /// <param name="theVelocity">The change in velocity of the object</param>
-        /// <param name="theRotiation">The change in rotation of te object</param>
-        /// <param name="theAngularVelocity">the change in the angular velocity of the object.</param>
-        public DisplacementStructure(IAmInSpace theObject, Vector3 ThePosition, Vector3 theVelocity,
-            Quaternion theRotiation, Quaternion theAngularVelocity)
+        #endregion
+        #region Constructor
+                                    
+        public DisplacementStructure(IAmInSpace theObject,
+            DVector3 TheOrigionalPosition, DVector3 TheDeltaPosition,
+            DVector3 TheOrigionalVelocity, DVector3 TheDeltaVelocity)
         {
             mIamInSpace = theObject;
-            mDeltaPosition = ThePosition;
-            mDeltaRotation = theRotiation;
-            mDeltaVelocity = theVelocity;
-            mDeltaAngularRotation = theAngularVelocity;
 
+            mPosition = TheOrigionalPosition;
+            mVelocity = TheOrigionalVelocity;
+
+
+            mDeltaPosition = TheDeltaPosition;
+            mDeltaVelocity = TheDeltaVelocity;
         }
 
-        /// <summary>
-        /// Gets the change in position 
-        /// </summary>
-        public Vector3 DeltaPosition
-        { get { return mDeltaPosition; } }
+        public DisplacementStructure(IAmInSpace theObject, DVector3 thePosition, DVector3 theVelocity)
+        {
+            mIamInSpace = theObject;
+            mPosition = thePosition;
+            mVelocity = theVelocity;
+     
 
-        /// <summary>
-        /// Gets the change in rotation
-        /// </summary>
-        public Quaternion DeltaRotation
-        { get { return mDeltaRotation; } }
+      
+            mDeltaPosition = DVector3.Zero;
+            mDeltaVelocity = DVector3.Zero;
+        }
+        #endregion
 
-        /// <summary>
-        /// Gets the change in velocity
-        /// </summary>
-        public Vector3 DeltaVelocity
-        { get { return mDeltaVelocity; } }
-
-        /// <summary>
-        /// Getst he change in angular velocity
-        /// </summary>
-        public Quaternion  DeltaAngularVelocity
-        { get { return mDeltaAngularRotation; } }
-
+        #region Properties
         /// <summary>
         /// Gets the position of the object (prior to the change vector)
         /// </summary>
-        public Vector3 Position
-        { get { return mIamInSpace.Position; } }
-
+        public DVector3 Position
+        { get { return mPosition; } }
         /// <summary>
-        /// Gets the rotation of the object prior to the change vecotr
+        /// Gets the change in position 
         /// </summary>
-        public Quaternion Rotation
-        { get { return mIamInSpace.Rotation; } }
+        public DVector3 DeltaPosition
+        { get { return mDeltaPosition; } }
 
         /// <summary>
-        /// Gets the velocity of the object prior to the change vector.
+        /// Gets the velocity of the object (prior to the change vector)
         /// </summary>
-        public Vector3 Velocity
-        {
-            get
-            {
-                Vector3 retVal;
-                ICanMove temp;
-                temp = mIamInSpace as ICanMove;
-                if (temp != null)
-                { retVal = temp.Velocity; }
-                else
-                { retVal = Vector3.Zero; }
-                return retVal;
-            }
-        }
-         
-
+        public DVector3 Velocity
+        { get { return mVelocity ; } }
         /// <summary>
-        /// Gets the angular velocity of the object prior to the change vector.
+        /// Gets the change in Velocity 
         /// </summary>
-        public Quaternion AngularVelocity
-        {
-            get
-            {
-                Quaternion retVal;
-                ICanMove temp;
-                temp = mIamInSpace as ICanMove;
-                if (temp != null)
-                { retVal = temp.AngularVelocity; }
-                else
-                { retVal = Quaternion.Identity; }
-                return retVal;
-            }
-        }
+        public DVector3 DeltaVelocity
+        { get { return mDeltaVelocity; } }
 
-        /// <summary>
+
+         /// <summary>
         /// Gets the name of the object.
         /// </summary>
         public string Name
         { get { return mIamInSpace.Name; } }
 
-
+        #endregion
     }
 }

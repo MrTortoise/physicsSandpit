@@ -13,7 +13,10 @@ namespace _3dplayground.Graphics.D3
     /// </summary>
     class BoundedBox : BoundedSphere, IHasBoundedBox   
     { 
-        BoundingBox mBoundingBox; 
+        BoundingBox mBoundingBox;
+
+        public BoundedBox(string theName)
+            : base(theName) { }
 
         #region ILoadable Members
 

@@ -6,7 +6,7 @@ using System.Text;
 namespace _3dplayground.Physics
 {
 
-   public  interface IHasMass : ICanMove 
+   public  interface IHasMass 
     {
         int Mass
         { get; }

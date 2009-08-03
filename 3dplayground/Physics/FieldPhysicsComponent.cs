@@ -1,8 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+
 using Microsoft.Xna.Framework;
+using _3dplayground.Maths;
 
 namespace _3dplayground.Physics
 {
@@ -13,49 +12,60 @@ namespace _3dplayground.Physics
     {  
         #region IFieldPhysics Members        
 
-        public New_pos_and_vel dothe_phys(float step,IGetEffectedByGravity  i)
+        /// <summary>
+        /// please fill me in as john is a dumbass and forgot. :D
+        /// Im also rapidly trying to do the same for you
+        /// </summary>
+        /// <param name="step"></param>
+        /// <param name="i"></param>
+        /// <returns></returns>
+        public New_pos_and_vel dothe_phys(double  step,IGetEffectedByGravity  i)
         {
-            float hstep = step / 20f;
+            //ToDo can you use the xml comment to tell me what the return values are
+            // I think they are the change in position and velocity, but am not sure 
+            // ...   just type /// above a method to do the comment thang btw
+
+            double hstep = step / 20f;
             step = step / 10;
-            Vector3 force = Vector3.Zero;
+            DVector3 force = DVector3.Zero;
 
-            GameSpaceUnit space = i.Space ; 
+            GameSpaceUnit space = i.Space ;
 
-                Vector3 K1pos = i.Velocity;
+            DVector3 K1pos = i.Velocity;
                 foreach (IEmitPointField j in space.PointFieldEmitters.Values)
                 {
-                    if (i == j) { } else { force = force + j.Acceleration(i.Position); }
+                    if (i == j) { } else { force = force + j.PointFieldAcceleration(i.Position); }
                 }
-                Vector3 K1vel = force;
+                DVector3 K1vel = force;
 
-                Vector3 K2pos = K1vel * (float)hstep + i.Velocity;
+                DVector3 K2pos = K1vel * hstep + i.Velocity;
 
-                force = Vector3.Zero;
-
-                foreach (IEmitPointField j in space.PointFieldEmitters.Values)
-                {
-                    if (i == j) { } else { force = force + j.Acceleration(i.Position + K1pos * hstep); }
-                }
-
-                Vector3 K2vel = force;
-
-                Vector3 K3pos = K2vel * (float)hstep + i.Velocity;
-
-                force = Vector3.Zero;
+                force = DVector3.Zero;
 
                 foreach (IEmitPointField j in space.PointFieldEmitters.Values)
                 {
-                    if (i == j) { } else { force = force + j.Acceleration(i.Position + K2pos * hstep); }
+                    if (i == j) { } else { force = force + j.PointFieldAcceleration(i.Position + K1pos * hstep); }
                 }
-                Vector3 K3vel = force;
 
-                Vector3 k4pos = K3vel * (float)step + i.Velocity;
-                force = Vector3.Zero;
+                DVector3 K2vel = force;
+
+                DVector3 K3pos = K2vel * hstep + i.Velocity;
+
+                force = DVector3.Zero;
+
                 foreach (IEmitPointField j in space.PointFieldEmitters.Values)
                 {
-                    if (i == j) { } else { force = force + j.Acceleration(i.Position + K3pos); }
+                    if (i == j) { } else { force = force + j.PointFieldAcceleration(i.Position + K2pos * hstep); }
                 }
-                Vector3 k4vel = force;
+                DVector3 K3vel = force;
+
+                DVector3 k4pos = K3vel * step + i.Velocity;
+                force = DVector3.Zero;
+                foreach (IEmitPointField j in space.PointFieldEmitters.Values)
+                {
+                    if (i == j) { } else { force = force + j.PointFieldAcceleration(i.Position + K3pos); }
+                }
+                DVector3 k4vel = force;
 
 
              New_pos_and_vel meow;
