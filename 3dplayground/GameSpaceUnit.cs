@@ -43,6 +43,7 @@ namespace _3dplayground
        protected string mName;
 
         DateTime mLastUpdateTime;
+        CollisionComponent mCollisionComponent;
 
         protected Dictionary<string, IAmInSpace> mIAmInSpace;
         protected Dictionary<string, IGetEffectedByGravity> mFieldObjects;
@@ -54,6 +55,9 @@ namespace _3dplayground
         protected Dictionary<string, GameSpaceUnit> mGameSpaceUnits;
 
 
+        protected List<DisplacementStructure> mStructures;
+
+
         public GameSpaceUnit()
         {
             mIAmInSpace = new Dictionary<string, IAmInSpace>();
@@ -63,6 +67,9 @@ namespace _3dplayground
           //  mUpdateableObjects = new Dictionary<string, IUpdateable>();
             mDrawableObjects = new Dictionary<string, IDrawable>();
             mLastUpdateTime = DateTime.Now;
+            mStructures = new List<DisplacementStructure>();
+            CollisionComponent mCollisionComponent = new CollisionComponent();
+           
         }
         #region Properties
        public string Name
@@ -127,6 +134,8 @@ namespace _3dplayground
                     }
                 }
 
+                phys.RequestMove += new EventHandler<DisplacementArgs>(phys_RequestMove);
+
                 //IUpdateable updateable = theGameObject as IUpdateable;
                 //if (updateable != null)
                 //{
@@ -149,26 +158,27 @@ namespace _3dplayground
             }
         }
 
+        void phys_RequestMove(object sender, DisplacementArgs e)
+        {
+            AddDisplacementStructure(e.Displacement);
+        }
+
 
 
         public void UpdateSpace(DateTime UpdateTime)
         {
             TimeSpan UpdatePeriod = UpdateTime - mLastUpdateTime;
 
-            ResetForUpdate();
+           
+            // Perform updates in order of dependance - objects that use propulsion require knowledge of gravity?             
+            // how is ai going to work with gravity path finding lol?
+            //Can we use your technique to sample many points on a path to get an average? - easier solution would be to make them navigate by planets
+            PerformGravityUpdate(UpdatePeriod);             
+            PerformCompoundUpdates(UpdatePeriod);
 
-            PerformGravityUpdate(UpdatePeriod);
-          //  PerformAnotherUpdateType(UpdatePeriod);
+            //objects that get updated raise their own events handled by  phys_RequestMove
 
-        }
-
-        protected void ResetForUpdate()
-        {
-            foreach (IPhysicsObject p in mPhysicsObjects.Values )
-            {
-                p.ResetDisplacementStructures();
-            }
-
+            PerformCollisionCalculation(UpdatePeriod);
 
         }
 
@@ -176,9 +186,54 @@ namespace _3dplayground
         {
             foreach (IGetEffectedByGravity i in mFieldObjects.Values )
             {
-                i.ExecuteGravityDisplacement(UpdatePeriod);                
+                i.ExecuteGravityDisplacement(UpdatePeriod);
+                
             }
-        }        
+        } 
+        protected void PerformCompoundUpdates(TimeSpan UpdatePeriod)
+        {
+
+            // This is a loop for multithreading
+            foreach (IPhysicsObject p in mPhysicsObjects.Values)
+            {
+                p.ResetDisplacementStructures();
+                p.Update(UpdatePeriod);
+               
+            }
+        }
+
+        #region DisplacementStructure Stuff
+        protected void AddDisplacementStructure(DisplacementStructure theStructure)
+        {
+            int theIndex = mStructures.IndexOf(theStructure);
+            if (theIndex > 0)
+            {
+                //ToDo: Implement +=
+                mStructures[theIndex]= mStructures[theIndex] + theStructure;
+            }
+            else
+            {
+                mStructures.Add(theStructure);
+            }
+
+        }
+
+        protected DisplacementStructure GetNext()
+        {
+            DisplacementStructure retVal = mStructures[0];
+            mStructures.RemoveAt(0);
+            return retVal;
+        }
+        #endregion
+
+        protected void PerformCollisionCalculation(TimeSpan UpdatePeriod)
+        {
+            //no collisions atm.
+
+        }
+
+
+
 
 
     }

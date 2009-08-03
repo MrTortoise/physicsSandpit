@@ -34,8 +34,8 @@ namespace _3dplayground.Physics
         {
             New_pos_and_vel disp;
             disp = mFieldPhysics.dothe_phys(theTime.Milliseconds , this);
-            mGravityDisplacement = new DisplacementStructure((IAmInSpace)this, mPosition, disp.position, mVelocity, disp.velocity);
-            mTotalDisplacement = DisplacementStructure.CombineStructure(mTotalDisplacement, mGravityDisplacement);
+            mGravityDisplacement = new DisplacementStructure(this, mPosition, disp.position, mVelocity, disp.velocity);
+            mTotalDisplacement =mTotalDisplacement+ mGravityDisplacement;
 
 
         }
@@ -45,7 +45,7 @@ namespace _3dplayground.Physics
         public override void ResetDisplacementStructures()            
         {
             base.ResetDisplacementStructures();
-            mGravityDisplacement = DisplacementStructure.ZeroDeltas((ICanMove) this);
+            mGravityDisplacement = DisplacementStructure.ZeroDeltas( this);
         }
 
     }

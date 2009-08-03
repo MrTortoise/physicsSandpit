@@ -47,7 +47,7 @@ namespace _3dplayground.Physics
             mAngularVelocity = theAngularVelocity;
             mSpace = theSpace;
 
-            mTotalDisplacement = DisplacementStructure.ZeroDeltas((ICanMove)this);
+            mTotalDisplacement = DisplacementStructure.ZeroDeltas(this);
             
         }
         #endregion
@@ -134,7 +134,8 @@ namespace _3dplayground.Physics
 
         public virtual  void ResetDisplacementStructures()
         {
-            mTotalDisplacement = DisplacementStructure.ZeroDeltas((ICanMove)this);
+
+            mTotalDisplacement = DisplacementStructure.ZeroDeltas(this);
         }
 
         public DisplacementStructure GetDisplacementStructure
@@ -152,10 +153,6 @@ namespace _3dplayground.Physics
             mVelocity += theStructure.DeltaVelocity;
         }
 
-        /// <summary>
-        /// Raises the event that fires the move request up to the Space Unit
-        /// </summary>
-        /// <param name="theArgs"></param>
         public void RaiseRequestMove(DisplacementArgs theArgs)
         {
             if (RequestMove != null)
@@ -163,19 +160,24 @@ namespace _3dplayground.Physics
                 RequestMove(this, theArgs);
             }
         }
+        public void Update(TimeSpan UpdateTime)
+        {
+            if ((mVelocity.X==0)&&(mVelocity.Y==0)&&(mVelocity.Z==0))
+            {
+                DVector3 deltaPosition = mPosition + (mVelocity * (UpdateTime.Milliseconds  / 1000D)); 
 
-        #endregion  
+                mTotalDisplacement.Position = mPosition;
+                mTotalDisplacement.DeltaPosition = deltaPosition;
+                mTotalDisplacement.Velocity = mVelocity;  
+            }
+            // Sorry should of written the opposite test but cba, its late.
+            if (!mTotalDisplacement.HasNoDeltas())
+            {
+                RaiseRequestMove(new DisplacementArgs(mTotalDisplacement));
+            }
+        }
 
-    
-        #region IAmInSpace Members
-
-
-
-
-        #endregion
-
-
-
+        #endregion 
 
     }
 }

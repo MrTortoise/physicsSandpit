@@ -10,6 +10,7 @@ namespace _3dplayground
 
     /// <summary>
     /// overrtides reset displacement structures
+    /// TheGravity Displacement DOES NOT get reset ... this iwll allow its last value to be of use when multithreaded, besides it is a good approximation
     /// </summary>
     class Moon : PhysicalBody,  IGetEffectedByGravity   
     {             
@@ -45,17 +46,16 @@ namespace _3dplayground
 
         public void ExecuteGravityDisplacement(TimeSpan  theTime)
         {
+            
             New_pos_and_vel disp;
             disp = mFieldPhysics.dothe_phys(theTime.Milliseconds, this);
-            mGravityDisplacement = new DisplacementStructure((IAmInSpace)this,mPosition, disp.position,mVelocity, disp.velocity);
-            mTotalDisplacement = DisplacementStructure.CombineStructure(mTotalDisplacement, mGravityDisplacement); 
+            mGravityDisplacement = new DisplacementStructure(this,mPosition, disp.position,mVelocity, disp.velocity);
+            //Gravity is going to run first in the update loop - prior to any ai / user updates anyway.
+            mTotalDisplacement = mGravityDisplacement; 
         }
 
 
-        public override void ResetDisplacementStructures()
-        {
-            mGravityDisplacement = DisplacementStructure.ZeroDeltas((ICanMove)this);
-        }
+
 
         #endregion
     }

@@ -9,7 +9,7 @@ namespace _3dplayground.Physics
     /// <summary>
     /// Implement this interface to be added to the list of objects that can be effected by fields.
     /// </summary>
-    public interface IGetEffectedByGravity : IAmInSpace, IHasMass, ICanMove   
+    public interface IGetEffectedByGravity : IPhysicsObject   
     {
         //I am not sure you even want this. 
         //I guess you need to ask space what the force is on you.

@@ -90,7 +90,8 @@
     <Compile Include="Camera.cs" />
     <Compile Include="Components\FPS.cs" />
     <Compile Include="Constants.cs" />
-    <Compile Include="DisplacementStructure.cs" />
+    <Compile Include="Physics\CollisionComponent.cs" />
+    <Compile Include="Physics\DisplacementStructure.cs" />
     <Compile Include="Physics\EventArgs\DisplacementArgs.cs" />
     <Compile Include="EventManager\EventManager.cs" />
     <Compile Include="EventManager\InputEventArgs.cs" />
