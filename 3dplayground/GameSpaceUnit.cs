@@ -167,7 +167,7 @@ namespace _3dplayground
 
         #region Update Stuff
 
-        public void UpdateSpace(DateTime UpdateTime)
+        public void UpdateSpace(DateTime   UpdateTime)
         {
             TimeSpan UpdatePeriod = UpdateTime - mLastUpdateTime;
 
@@ -196,9 +196,9 @@ namespace _3dplayground
         {
 
             // This is a loop for multithreading
-            foreach (IPhysicsObject p in mPhysicsObjects.Values)
+            foreach (IPhysicsObject   p in mPhysicsObjects.Values)
             {
-                p.ResetDisplacementStructures();
+               // p.ResetDisplacementStructures(); moved into the objects own update
                 p.Update(UpdatePeriod);
                
             }
@@ -208,7 +208,7 @@ namespace _3dplayground
         protected void AddDisplacementStructure(DisplacementStructure theStructure)
         {
             int theIndex = mUpdateStructures.IndexOf(theStructure);
-            if (theIndex > 0)
+            if (theIndex > -1)
             {
                 //ToDo: Implement +=
                 mUpdateStructures[theIndex]= mUpdateStructures[theIndex] + theStructure;
@@ -234,7 +234,7 @@ namespace _3dplayground
 
             foreach (DisplacementStructure d in mUpdateStructures)
             {
-              
+                d.IAmInSpace.ExecuteDisplacementStructure(d);              
             }
 
         }

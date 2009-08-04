@@ -158,21 +158,36 @@ namespace _3dplayground.Physics
                 RequestMove(this, theArgs);
             }
         }
-        public void Update(TimeSpan UpdateTime)
-        {
-            if ((mVelocity.X==0)&&(mVelocity.Y==0)&&(mVelocity.Z==0))
-            {
-                DVector3 deltaPosition = mPosition + (mVelocity * (UpdateTime.Milliseconds  / 1000D)); 
+        /// <summary>
+        /// This is the Update Wrapper that is to be called eals with resetting, executing the Detail and raising event.
+        /// </summary>
+        /// <param name="UpdateTime"></param>
+        public  void Update(TimeSpan UpdateTime)
+        {   
+            ResetDisplacementStructures();
 
-                mTotalDisplacement.Position = mPosition;
-                mTotalDisplacement.DeltaPosition = deltaPosition;
-                mTotalDisplacement.Velocity = mVelocity;  
-            }
+            UpdateDetail(UpdateTime);
+                
+            
             // Sorry should of written the opposite test but cba, its late.
             if (!mTotalDisplacement.HasNoDeltas())
             {
                 RaiseRequestMove(new DisplacementArgs(mTotalDisplacement));
             }
+        }
+
+        /// <summary>
+        /// This is the class to override to provide additional update logic.
+        /// </summary>
+        /// <param name="UpdateTime"></param>
+        protected virtual void UpdateDetail(TimeSpan UpdateTime)
+        {
+          DVector3 deltaPosition = mPosition + (mVelocity * (UpdateTime.Milliseconds  / 1000D)); 
+
+                mTotalDisplacement.Position = mPosition;
+                mTotalDisplacement.DeltaPosition += deltaPosition;
+                mTotalDisplacement.Velocity = mVelocity;
+                mTotalDisplacement.DeltaVelocity = DVector3.Zero;
         }
 
         #endregion 

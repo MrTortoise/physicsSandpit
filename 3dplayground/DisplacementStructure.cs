@@ -167,10 +167,10 @@ namespace _3dplayground
 
         public bool HasNoDeltas()
         {
-            bool retVal = false ;
-            if ((mDeltaPosition == DVector3.Zero) && (mDeltaVelocity == DVector3.Zero))
+            bool retVal = true ;
+            if ((mDeltaPosition != DVector3.Zero) || (mDeltaVelocity != DVector3.Zero))
             {
-                retVal = true;
+                retVal = false;
             }
             return retVal;
         }

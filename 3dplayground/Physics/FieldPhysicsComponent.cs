@@ -24,7 +24,7 @@ namespace _3dplayground.Physics
             //ToDo can you use the xml comment to tell me what the return values are
             // I think they are the change in position and velocity, but am not sure 
             // ...   just type /// above a method to do the comment thang btw
-
+            
             double hstep = step / 20f;
             step = step / 10;
             DVector3 force = DVector3.Zero;

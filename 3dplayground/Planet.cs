@@ -29,7 +29,7 @@ namespace _3dplayground
         /// <returns></returns>
         public DVector3  PointFieldAcceleration(DVector3  thePosition)
         {
-            DVector3 sumforce = DVector3.Zero;
+            DVector3 sumforce = new DVector3();
             DVector3 displacementVector;
             displacementVector =mPosition - thePosition;
             double distance = displacementVector.Length();

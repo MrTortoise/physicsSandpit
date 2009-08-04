@@ -26,9 +26,7 @@ namespace _3dplayground.Physics
         public DisplacementStructure GravityDisplacement
         {
             get { return mGravityDisplacement; }
-        }
-
-
+        }  
 
         public void ExecuteGravityDisplacement(TimeSpan  theTime)
         {

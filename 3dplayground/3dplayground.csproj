@@ -121,6 +121,7 @@
     <Compile Include="Physics\PhysicalBody.cs" />
     <Compile Include="Maths\Structures\DVector3.cs" />
     <Compile Include="Planet.cs" />
+    <Compile Include="Player.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Game1.cs" />

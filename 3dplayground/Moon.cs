@@ -35,6 +35,8 @@ namespace _3dplayground
             }    
         }
 
+         
+
 
         #region IGetEffectedByGravity Members
         public DisplacementStructure GravityDisplacement
@@ -42,21 +44,29 @@ namespace _3dplayground
             get { return mGravityDisplacement; }
         }
 
-
+                                                          
 
         public void ExecuteGravityDisplacement(TimeSpan  theTime)
         {
             
             New_pos_and_vel disp;
-            disp = mFieldPhysics.dothe_phys(theTime.Milliseconds, this);
+            disp = mFieldPhysics.dothe_phys(theTime.Milliseconds/10000, this);
             mGravityDisplacement = new DisplacementStructure(this,mPosition, disp.position,mVelocity, disp.velocity);
             //Gravity is going to run first in the update loop - prior to any ai / user updates anyway.
-            mTotalDisplacement = mGravityDisplacement; 
+           
         }
 
 
 
 
         #endregion
+
+        protected override void UpdateDetail(TimeSpan UpdateTime)
+        {
+          
+            mTotalDisplacement.DeltaPosition  = mGravityDisplacement.DeltaPosition;
+            mTotalDisplacement.DeltaVelocity = mGravityDisplacement.DeltaVelocity;
+
+        }
     }
 }
