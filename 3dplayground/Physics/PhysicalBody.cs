@@ -182,7 +182,7 @@ namespace _3dplayground.Physics
         /// <param name="UpdateTime"></param>
         protected virtual void UpdateDetail(TimeSpan UpdateTime)
         {
-          DVector3 deltaPosition = mPosition + (mVelocity * (UpdateTime.Milliseconds  / 1000D)); 
+          DVector3 deltaPosition = mPosition + (mVelocity * (UpdateTime.Milliseconds  / Constants.TimeScale )); 
 
                 mTotalDisplacement.Position = mPosition;
                 mTotalDisplacement.DeltaPosition += deltaPosition;

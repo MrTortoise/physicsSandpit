@@ -50,9 +50,8 @@ namespace _3dplayground
         {
             
             New_pos_and_vel disp;
-            disp = mFieldPhysics.dothe_phys(theTime.Milliseconds/10000, this);
-            mGravityDisplacement = new DisplacementStructure(this,mPosition, disp.position,mVelocity, disp.velocity);
-            //Gravity is going to run first in the update loop - prior to any ai / user updates anyway.
+            disp = mFieldPhysics.dothe_phys(theTime.Milliseconds/Constants.TimeScale, this);
+            mGravityDisplacement = new DisplacementStructure(this,mPosition, disp.position,mVelocity, disp.velocity);           
            
         }
 
@@ -62,8 +61,7 @@ namespace _3dplayground
         #endregion
 
         protected override void UpdateDetail(TimeSpan UpdateTime)
-        {
-          
+        {               
             mTotalDisplacement.DeltaPosition  = mGravityDisplacement.DeltaPosition;
             mTotalDisplacement.DeltaVelocity = mGravityDisplacement.DeltaVelocity;
 
