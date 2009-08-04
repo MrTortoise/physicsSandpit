@@ -48,7 +48,11 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DisplacementStructureTest.cs" />
     <Compile Include="DVector3Test.cs" />
+    <Compile Include="mocks\IAmInSpaceMock.cs" />
+    <Compile Include="mocks\ICanMoveMock.cs" />
+    <Compile Include="mocks\IPhysicsObjectMock.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

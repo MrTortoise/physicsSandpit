@@ -78,6 +78,12 @@ namespace _3dplayground
             mDeltaVelocity = TheDeltaVelocity;
         }
 
+        /// <summary>
+        /// This constructor can be used in cases where there is no change in velocity or position
+        /// </summary>
+        /// <param name="theObject"></param>
+        /// <param name="thePosition"></param>
+        /// <param name="theVelocity"></param>
         public DisplacementStructure(IPhysicsObject theObject, DVector3 thePosition, DVector3 theVelocity)
         {
             mIamInSpace = theObject;
@@ -93,7 +99,7 @@ namespace _3dplayground
 
         #region Properties
 
-        public IPhysicsObject IAmInSpace
+        public IPhysicsObject IPhysicsObject
         { get { return mIamInSpace; } }
 
         /// <summary>

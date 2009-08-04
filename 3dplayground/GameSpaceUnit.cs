@@ -234,7 +234,7 @@ namespace _3dplayground
 
             foreach (DisplacementStructure d in mUpdateStructures)
             {
-                d.IAmInSpace.ExecuteDisplacementStructure(d);              
+                d.IPhysicsObject.ExecuteDisplacementStructure(d);              
             }
 
         }
