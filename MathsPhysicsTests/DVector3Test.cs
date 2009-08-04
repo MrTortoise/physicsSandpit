@@ -286,14 +286,16 @@ namespace MathsPhysicsTests
         [TestMethod()]
         public void op_AdditionTest()
         {
-            DVector3 v1 = new DVector3(); // TODO: Initialize to an appropriate value
-            DVector3 v2 = new DVector3(); // TODO: Initialize to an appropriate value
-            DVector3 expected = new DVector3(); // TODO: Initialize to an appropriate value
+            DVector3 v1 = new DVector3(1,2,3); 
+            DVector3 v2 = new DVector3(4,5,6); 
+            DVector3 expected = new DVector3(5,7,9); 
             DVector3 actual;
             actual = (v1 + v2);
             Assert.AreEqual(expected, actual);
-            Assert.Inconclusive("Verify the correctness of this test method.");
+           
         }
+
+
 
         /// <summary>
         ///A test for Length
@@ -301,27 +303,18 @@ namespace MathsPhysicsTests
         [TestMethod()]
         public void LengthTest()
         {
-            DVector3 target = new DVector3(); // TODO: Initialize to an appropriate value
-            double expected = 0F; // TODO: Initialize to an appropriate value
+            DVector3 target = new DVector3(1,4,8);
+            double expected = 9D; ;
             double actual;
             actual = target.Length();
             Assert.AreEqual(expected, actual);
-            Assert.Inconclusive("Verify the correctness of this test method.");
+
+
+
+            
         }
 
-        /// <summary>
-        ///A test for GetHashCode
-        ///</summary>
-        [TestMethod()]
-        public void GetHashCodeTest()
-        {
-            DVector3 target = new DVector3(); // TODO: Initialize to an appropriate value
-            int expected = 0; // TODO: Initialize to an appropriate value
-            int actual;
-            actual = target.GetHashCode();
-            Assert.AreEqual(expected, actual);
-            Assert.Inconclusive("Verify the correctness of this test method.");
-        }
+
 
         /// <summary>
         ///A test for Equals
@@ -329,13 +322,18 @@ namespace MathsPhysicsTests
         [TestMethod()]
         public void EqualsTest1()
         {
-            DVector3 target = new DVector3(); // TODO: Initialize to an appropriate value
-            object obj = null; // TODO: Initialize to an appropriate value
-            bool expected = false; // TODO: Initialize to an appropriate value
+            DVector3 target = new DVector3(MathHelper.Pi,-MathHelper.E,10);
+            object obj = target;
+            bool expected = true ; 
             bool actual;
             actual = target.Equals(obj);
-            Assert.AreEqual(expected, actual);
-            Assert.Inconclusive("Verify the correctness of this test method.");
+            Assert.AreEqual(expected, actual,"object should equal target.");
+
+            target.X = 1;
+            expected = false;
+            actual = target.Equals(obj);
+            Assert.AreEqual(expected, actual, "object should not equal target.");
+          
         }
 
         /// <summary>
@@ -344,13 +342,27 @@ namespace MathsPhysicsTests
         [TestMethod()]
         public void EqualsTest()
         {
-            DVector3 target = new DVector3(); // TODO: Initialize to an appropriate value
-            DVector3 other = new DVector3(); // TODO: Initialize to an appropriate value
-            bool expected = false; // TODO: Initialize to an appropriate value
+            DVector3 target = new DVector3(); 
+            DVector3 other = new DVector3(); 
+            bool expected = true ;
             bool actual;
             actual = target.Equals(other);
             Assert.AreEqual(expected, actual);
-            Assert.Inconclusive("Verify the correctness of this test method.");
+
+
+            target = new DVector3(1.029374765, 1239747, 12989238.092830948);
+            other = target;
+            expected = true;
+            actual = target.Equals(other);
+            Assert.AreEqual(expected, actual);
+
+            target = new DVector3(1, 1239747, 12989238.092830948);
+            expected = false;
+            actual = target.Equals(other);
+            Assert.AreEqual(expected, actual);
+
+
+
         }
 
         /// <summary>
@@ -359,17 +371,17 @@ namespace MathsPhysicsTests
         [TestMethod()]
         public void AddTest()
         {
-            DVector3 V1 = new DVector3(); // TODO: Initialize to an appropriate value
-            DVector3 V1Expected = new DVector3(); // TODO: Initialize to an appropriate value
-            DVector3 V2 = new DVector3(); // TODO: Initialize to an appropriate value
-            DVector3 V2Expected = new DVector3(); // TODO: Initialize to an appropriate value
-            DVector3 expected = new DVector3(); // TODO: Initialize to an appropriate value
+            DVector3 V1 = new DVector3(234,654,123);
+            DVector3 V1Expected = V1;
+            DVector3 V2 = new DVector3(123, 234, 234);
+            DVector3 V2Expected = V2;
+            DVector3 expected = new DVector3(357, 888, 357);
             DVector3 actual;
             actual = DVector3.Add(ref V1, ref V2);
             Assert.AreEqual(V1Expected, V1);
             Assert.AreEqual(V2Expected, V2);
             Assert.AreEqual(expected, actual);
-            Assert.Inconclusive("Verify the correctness of this test method.");
+            
         }
 
         /// <summary>
@@ -378,11 +390,13 @@ namespace MathsPhysicsTests
         [TestMethod()]
         public void DVector3ConstructorTest()
         {
-            double x = 0F; // TODO: Initialize to an appropriate value
-            double y = 0F; // TODO: Initialize to an appropriate value
-            double z = 0F; // TODO: Initialize to an appropriate value
+            double x = 0.726D;
+            double y = MathHelper.Pi;
+            double z = -1;
             DVector3 target = new DVector3(x, y, z);
-            Assert.Inconclusive("TODO: Implement code to verify target");
+            Assert.AreEqual<double>(x,target.X);
+            Assert.AreEqual<double>(y,target.Y);
+            Assert.AreEqual<double>(z,target.Z);
         }
     }
 }

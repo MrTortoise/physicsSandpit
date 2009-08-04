@@ -96,9 +96,9 @@ namespace _3dplayground.Maths
         {
             DVector3 retVal = new DVector3();
 
-            retVal.mX = v1.mX - v2.mX;
-            retVal.mY = v1.mY - v2.mY;
-            retVal.mZ = v1.mZ - v2.mZ;
+            retVal.mX = v1.mX + v2.mX;
+            retVal.mY = v1.mY + v2.mY;
+            retVal.mZ = v1.mZ + v2.mZ;
 
             return retVal;
         }
