@@ -10,59 +10,25 @@ namespace _3dplayground.Graphics.D3
 {
     /// <summary>
     /// This class assumes that the model is centered at 0,0,0 in model space.
+    /// Provides helper funciton for creating bounding objects.
     /// </summary>
-    class BoundedBox : BoundedSphere, IHasBoundedBox   
-    { 
-        BoundingBox mBoundingBox;
-
-        public BoundedBox(string theName)
-            : base(theName) { }
-
-        #region ILoadable Members
-
-        public override  void LoadContent(ContentManager  theContentManager, string ContentName)
+   static class BoundingHelper 
+    {    
+       //This is like this because eventually we will need a function to create larger bounding boxes out of a list.
+       
+                                               
+        public static  BoundingBox  CalculateBox(Model theModel)
         {
-            base.LoadContent(theContentManager, ContentName);
-            CalculateBox();    
-
-            
-        }
-
-        #endregion
-
-        #region IHasBoundedBox Members
-
-        public BoundingBox boundingBox
-        {
-            get { return mBoundingBox; }
-        } 
-
-        public Vector3 Volume
-        {
-            get { return Vector3.Subtract(mBoundingBox.Max, mBoundingBox.Min); }
-        }
-
-        public Vector3 Max
-        { get { return mBoundingBox.Max; } }
-
-        public Vector3 Min
-        { get { return mBoundingBox.Min; } }
-
-        #endregion
-
-        #region IHasBoundedBox Members
-
-
-        public void CalculateBox()
-        {
+            //ps i ripped this code off :D
+            BoundingBox retVal;
             //the 2 vecotors that go int the bounding box constructor
             Vector3 Max = new Vector3(float.MinValue, float.MinValue, float.MinValue);
             Vector3 Min = new Vector3(float.MaxValue, float.MaxValue, float.MaxValue);
 
-            foreach (ModelMesh mesh in mModel.Meshes)
+            foreach (ModelMesh mesh in theModel.Meshes)
             {
                 // get the transform for each bone in model space.
-                Matrix transform = mModel.Bones[mesh.ParentBone.Index].Transform;    // could add world matrix in here for a gereric function
+                Matrix transform = theModel.Bones[mesh.ParentBone.Index].Transform;    // could add world matrix in here for a gereric function
                 //iterate through each mesh part to Get at the models VertexBuffer buffers
                 foreach (ModelMeshPart part in mesh.MeshParts)
                 {
@@ -90,9 +56,10 @@ namespace _3dplayground.Graphics.D3
                 }
             }
 
-            mBoundingBox = new BoundingBox(Min, Max);
+            retVal  = new BoundingBox(Min, Max);
+            return retVal;
         }
 
-        #endregion
+    
     }
 }

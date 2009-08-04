@@ -121,7 +121,9 @@ namespace _3dplayground
             mCamera.NearClippingPlane = 1.0f;
             mCamera.Position = new Vector3(0, 0, 400);
             mCamera.Target = Vector3.Zero;
-            mCamera.UpVector = Vector3.UnitY ;     
+            mCamera.UpVector = Vector3.UnitY ;
+
+            mCamera.Compile(); 
 
                      
         
@@ -180,15 +182,7 @@ namespace _3dplayground
 
         }
 
-        // I really don't get how your thing works
-        // If the way i have exposed things isn't what you need 
 
-        // you can do all of this in 1 for each loop i think
-  
-    /*
-
-
-      */
 
 
     }

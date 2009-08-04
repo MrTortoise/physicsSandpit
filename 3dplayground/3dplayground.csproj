@@ -96,7 +96,7 @@
     <Compile Include="EventManager\EventManager.cs" />
     <Compile Include="EventManager\InputEventArgs.cs" />
     <Compile Include="Graphics\D3\BasicModel.cs" />
-    <Compile Include="Graphics\D3\BoundedBox.cs" />
+    <Compile Include="Graphics\D3\BoundingHelper.cs" />
     <Compile Include="Graphics\D3\IHasBoundedBox.cs" />
     <Compile Include="Graphics\D3\IHasBoundingSphere.cs" />
     <Compile Include="Physics\Exceptions\ObjectsNotEqualException.cs" />
@@ -125,7 +125,6 @@
     <Compile Include="Program.cs" />
     <Compile Include="Game1.cs" />
     <Compile Include="Physics\GravityModel.cs" />
-    <Compile Include="Graphics\D3\BoundedSphere.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Game.ico" />

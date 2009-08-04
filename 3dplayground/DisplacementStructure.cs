@@ -7,7 +7,7 @@ using _3dplayground.Maths;
 namespace _3dplayground
 {
     /// <summary>
-    /// This structure contains the Displacement vectors - NOT THE ABSOLUTE VECTORS.
+    /// This structure contains the Displacement vectors .
     /// It is used to allow the containing space object to rectify any physics collisions and then apply the changes back to the object in quetsion.
     /// </summary>
     public struct DisplacementStructure : IEquatable<DisplacementStructure>

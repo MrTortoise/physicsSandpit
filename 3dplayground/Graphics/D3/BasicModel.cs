@@ -22,16 +22,65 @@ namespace _3dplayground.Graphics.D3
        protected bool mIsDrawActive = true;
        protected string mName;
 
-
-
+       protected BoundingBox mBoundingBox;
+       protected BoundingBox mLargeBoundingBox;
+       protected BoundingSphere mBoundingSphere;
+ 
        public BasicModel(string theName)
        { mName = theName; }
+
+
+       #region IModel Members
+
+       public BoundingBox CompoundBoundingBox
+       {
+           get { return mBoundingBox ; }
+       }
+
+       public BoundingSphere  CompoundBoundingSphere
+       {
+           get { return mBoundingSphere; }
+       }
+
+       public BoundingBox CompoundSafeBoundingBox
+       {
+           get { return mLargeBoundingBox; }
+       }
+
+       public void CalculateBoundingBoxes()
+       {
+           CalculateCompoundBoundingBox();
+           CalculateCompoundBoundingSphere();
+           CalculateCompoundSafeBoundingBox();
+       }
+
+       public void CalculateCompoundBoundingBox()
+       {
+           mBoundingBox = BoundingHelper.CalculateBox(mModel);
+       }
+
+       public void CalculateCompoundBoundingSphere()
+       {
+           foreach (ModelMesh m in mModel.Meshes)
+           {
+               mBoundingSphere = BoundingSphere.CreateMerged(mBoundingSphere, m.BoundingSphere);
+           }   
+       }
+
+       public void CalculateCompoundSafeBoundingBox()
+       {
+           mLargeBoundingBox = BoundingBox.CreateFromSphere(mBoundingSphere);
+       }
+
+       #endregion
+
 
         #region ILoadable Members
 
         public virtual  void LoadContent(ContentManager theContentManager, string ContentName)
         {
             mModel = theContentManager.Load<Model>(ContentName);
+            CalculateBoundingBoxes();
         }
 
         #endregion
@@ -47,7 +96,8 @@ namespace _3dplayground.Graphics.D3
 
         public void Draw(Camera theCamera, Vector3 thePosition, Quaternion theRotation)
         {
-            //ToDo: havent implemented rotation ... not really plyed with quaterions before - they are vector 3's with a 4th float.
+            //ToDo: havent implemented rotation ... not really plyed with quaterions before
+            // - they are vector 3's with a 4th float.
             Matrix[] transforms = new Matrix[mModel.Bones.Count];
             mModel.CopyAbsoluteBoneTransformsTo(transforms);
 
@@ -76,5 +126,6 @@ namespace _3dplayground.Graphics.D3
         }
 
         #endregion
+
     }
 }

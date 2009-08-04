@@ -124,8 +124,6 @@ namespace _3dplayground.Physics
 
         public abstract void Draw(Camera theCamera, Vector3   thePosition, Quaternion theRotation); 
 
-
-
         #endregion  
     
 
