@@ -12,9 +12,9 @@ namespace _3dplayground.Maths
     /// </summary>
     public struct DVector3 : IEquatable<DVector3>
     {
-        /*   I cannot stress enough how much we need certainty in how this works. This is not a class we want to be debugging in 3 weeks time.
+        /*   
          *   This is also a class that I expect will benefit from being optomised ... however, right now certainty of operation is key.
-         *   At least until we have a good set of unit tests set up from debugging.
+         *   At least until we have a good set of unit tests set up from debugging - we can bung traces on things to decide what to optomise.
          *   
          *   This is definatley one of th emost importnat classes in the project imo.
          * 
@@ -49,6 +49,17 @@ namespace _3dplayground.Maths
 
         #endregion
         #region Static Methods
+
+        /// <summary>
+        /// Takes a DVector3 and retunrs its unit vector.
+        /// </summary>
+        /// <param name="SourceVetor"></param>
+        /// <returns></returns>
+        public static DVector3 GetUnitVector(DVector3 SourceVetor)
+        {
+            throw new NotImplementedException("Rick ... you can probably do this faster than me.");
+
+        }
         /// <summary>
         /// Takes references to the 2 input structures and returns a new struct containing the answer.
         /// </summary>

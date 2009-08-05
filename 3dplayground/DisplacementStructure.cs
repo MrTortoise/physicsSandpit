@@ -32,7 +32,7 @@ namespace _3dplayground
 
             DisplacementStructure retVal = new DisplacementStructure(s1.mIamInSpace,
                 s1.Position, s2.DeltaPosition + s1.DeltaPosition,
-                s1.Velocity, s2.Velocity + s1.Velocity);
+                s1.Velocity, s2.DeltaVelocity  + s1.DeltaVelocity);
      
 
             return retVal;

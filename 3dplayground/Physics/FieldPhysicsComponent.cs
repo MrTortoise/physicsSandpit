@@ -21,7 +21,7 @@ namespace _3dplayground.Physics
         /// <returns></returns>
         public New_pos_and_vel dothe_phys(double  step,IGetEffectedByGravity  i)
         {
-            //ToDo can you use the xml comment to tell me what the return values are
+            //ToDo please can you use the xml comment to tell me what the return values are :D
             // I think they are the change in position and velocity, but am not sure 
             // ...   just type /// above a method to do the comment thang btw
             

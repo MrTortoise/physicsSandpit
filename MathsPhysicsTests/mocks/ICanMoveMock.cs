@@ -38,7 +38,7 @@ namespace MathsPhysicsTests.mocks
 
         public void RaiseRequestMove(DisplacementArgs theArgs)
         {
-            
+            RequestMove(this, null); 
         }
 
         public void ExecuteDisplacementStructure(DisplacementStructure theStructure)

@@ -117,6 +117,7 @@
     <Compile Include="Interfaces\IUpdateable.cs" />
     <Compile Include="Moon.cs" />
     <Compile Include="Physics\New_pos_and_vel.cs" />
+    <Compile Include="Physics\PhysFunc.cs" />
     <Compile Include="Physics\PhysicsModel.cs" />
     <Compile Include="Physics\PhysicalBody.cs" />
     <Compile Include="Maths\Structures\DVector3.cs" />
@@ -126,6 +127,10 @@
     <Compile Include="Program.cs" />
     <Compile Include="Game1.cs" />
     <Compile Include="Physics\GravityModel.cs" />
+    <Compile Include="Ships\BasicEngine.cs" />
+    <Compile Include="Ships\Interfaces\IAmShip.cs" />
+    <Compile Include="Ships\Interfaces\IAmShipEngine.cs" />
+    <Compile Include="Ships\Ship.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Game.ico" />

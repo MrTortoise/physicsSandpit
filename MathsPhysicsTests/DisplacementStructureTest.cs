@@ -248,13 +248,14 @@ namespace MathsPhysicsTests
         [TestMethod()]
         public void AddTest()
         {
-            DisplacementStructure s1 = new DisplacementStructure(); // TODO: Initialize to an appropriate value
-            DisplacementStructure s2 = new DisplacementStructure(); // TODO: Initialize to an appropriate value
-            DisplacementStructure expected = new DisplacementStructure(); // TODO: Initialize to an appropriate value
+            IPhysicsObject obj = new IPhysicsObjectMock();
+            DisplacementStructure s1 = new DisplacementStructure(obj,DVector3.Zero,DVector3.Zero,DVector3.Zero,DVector3.Zero); 
+            DisplacementStructure s2 = new DisplacementStructure(obj,DVector3.Zero,DVector3.UnitX,DVector3.Zero,DVector3.UnitX );
+            DisplacementStructure expected = s2;
             DisplacementStructure actual;
             actual = DisplacementStructure.Add(s1, s2);
             Assert.AreEqual(expected, actual);
-            Assert.Inconclusive("Verify the correctness of this test method.");
+            
         }
 
         /// <summary>
@@ -263,13 +264,17 @@ namespace MathsPhysicsTests
         [TestMethod()]
         public void DisplacementStructureConstructorTest1()
         {
-            IPhysicsObject theObject = null; // TODO: Initialize to an appropriate value
-            DVector3 TheOrigionalPosition = new DVector3(); // TODO: Initialize to an appropriate value
-            DVector3 TheDeltaPosition = new DVector3(); // TODO: Initialize to an appropriate value
-            DVector3 TheOrigionalVelocity = new DVector3(); // TODO: Initialize to an appropriate value
-            DVector3 TheDeltaVelocity = new DVector3(); // TODO: Initialize to an appropriate value
+            IPhysicsObject theObject = new IPhysicsObjectMock();
+            DVector3 TheOrigionalPosition = new DVector3(123, 432, 456);
+            DVector3 TheDeltaPosition = new DVector3(12.563534, 213431.43565, 2134231.456);
+            DVector3 TheOrigionalVelocity = new DVector3(123, 435, 345);
+            DVector3 TheDeltaVelocity = new DVector3(645,2345,765); 
             DisplacementStructure target = new DisplacementStructure(theObject, TheOrigionalPosition, TheDeltaPosition, TheOrigionalVelocity, TheDeltaVelocity);
-            Assert.Inconclusive("TODO: Implement code to verify target");
+            Assert.AreEqual(TheOrigionalPosition,target.Position);
+            Assert.AreEqual(TheDeltaPosition,target.DeltaPosition);
+            Assert.AreEqual(TheOrigionalVelocity,target.Velocity);
+            Assert.AreEqual(TheDeltaVelocity,target.DeltaVelocity);
+           
         }
 
         /// <summary>
@@ -278,11 +283,14 @@ namespace MathsPhysicsTests
         [TestMethod()]
         public void DisplacementStructureConstructorTest()
         {
-            IPhysicsObject theObject = null; // TODO: Initialize to an appropriate value
-            DVector3 thePosition = new DVector3(); // TODO: Initialize to an appropriate value
-            DVector3 theVelocity = new DVector3(); // TODO: Initialize to an appropriate value
+            IPhysicsObject theObject = new IPhysicsObjectMock();
+            DVector3 thePosition = new DVector3(123,234,324); 
+            DVector3 theVelocity = new DVector3(123,34,56); 
             DisplacementStructure target = new DisplacementStructure(theObject, thePosition, theVelocity);
-            Assert.Inconclusive("TODO: Implement code to verify target");
+            Assert.AreEqual(thePosition, target.Position);
+            Assert.AreEqual(theVelocity, target.Velocity);
+            Assert.AreEqual(DVector3.Zero, target.DeltaPosition);
+            Assert.AreEqual(DVector3.Zero, target.DeltaVelocity );
         }
     }
 }
