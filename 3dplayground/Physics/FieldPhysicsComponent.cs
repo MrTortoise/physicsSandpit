@@ -23,7 +23,9 @@ namespace _3dplayground.Physics
         {
             //ToDo please can you use the xml comment to tell me what the return values are :D
             // I think they are the change in position and velocity, but am not sure 
-            // ...   just type /// above a method to do the comment thang btw
+            // ...   just type /// above a method to do the comment thang btw  .
+
+            //The xml comments can be turned into a proper developer help system ala msdn later using sandcastle
             
             double hstep = step / 20f;
             step = step / 10;

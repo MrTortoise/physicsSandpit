@@ -9,9 +9,12 @@ namespace _3dplayground
     /// <summary>
     /// This structure contains the Displacement vectors .
     /// It is used to allow the containing space object to rectify any physics collisions and then apply the changes back to the object in quetsion.
+    /// It is totally independant of draw logic, draw has its own objects
     /// </summary>
     public struct DisplacementStructure : IEquatable<DisplacementStructure>
     {
+
+        //TpDo: Implement rotation into displacement structure
          
         #region Static Methods
         /// <summary>

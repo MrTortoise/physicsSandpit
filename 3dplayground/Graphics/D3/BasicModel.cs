@@ -10,24 +10,26 @@ namespace _3dplayground.Graphics.D3
 {
     /// <summary>
     /// This class provides basic model funcitonality and can be used as a component or as a basis for inheritence.
-    /// i REALLY DO NOT LIKE THIS CLASS OR THE BOUNDED SPHERE / BOX ... THESE ARE NOT MANT TO BE GAME OBJECTS
-    /// THIS IS AN INTERFACE HEIRACHY PROBLEM - IT JUST SHOWS THAT I DONT HAVE IT ALL CLEAR IN MY HEAD YET NICE AND EARLY
-    /// 
-    /// THEN HAVING A NAME IS FREAKING CUMBERSOME.
     /// </summary>
    public  class BasicModel  : IModel 
     {
 
        protected  Model mModel;
        protected bool mIsDrawActive = true;
+
        protected string mName;
+       protected string mContentName;
+       protected int mID;
 
        protected BoundingBox mBoundingBox;
        protected BoundingBox mLargeBoundingBox;
        protected BoundingSphere mBoundingSphere;
- 
-       public BasicModel(string theName)
-       { mName = theName; }
+
+       public BasicModel(string theName, string ContentName)
+       {
+           mName = theName;
+           mContentName = ContentName;
+       }
 
 
        #region IModel Members
@@ -77,10 +79,16 @@ namespace _3dplayground.Graphics.D3
 
         #region ILoadable Members
 
-        public virtual  void LoadContent(ContentManager theContentManager, string ContentName)
+        public virtual  void LoadContent(ContentManager theContentManager)
         {
-            mModel = theContentManager.Load<Model>(ContentName);
+            mModel = theContentManager.Load<Model>(mContentName);
             CalculateBoundingBoxes();
+        }
+
+        public string ContentName
+        {
+            get { return mContentName; }
+            set { mContentName = value; }
         }
 
         #endregion
@@ -125,6 +133,10 @@ namespace _3dplayground.Graphics.D3
             get { return mName; }
         }
 
+        public int ID
+        {
+            get { return mID; }
+        }
         #endregion
 
     }

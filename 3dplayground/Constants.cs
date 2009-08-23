@@ -9,7 +9,7 @@ namespace _3dplayground
    static  class Constants
     {
        public const double G = 6.673E-5;
-       public const double TimeScale = 10000;
+       public const float  TimeScale = 1000000;
 
 
 

@@ -27,11 +27,11 @@ namespace _3dplayground
             mModel = theModel;
         }        
 
-        public override void Draw(Camera theCamera,Vector3 thePosition, Quaternion theRotation)
+        public override void Draw(float GameTime, Camera theCamera)
         {   
             if (mIsDrawActive)
             {
-                mModel.Draw(theCamera, thePosition, theRotation);
+                mModel.Draw(theCamera, mDrawPosition , mDrawRotation );
             }    
         }
 
@@ -46,11 +46,11 @@ namespace _3dplayground
 
                                                           
 
-        public void ExecuteGravityDisplacement(TimeSpan  theTime)
+        public void ExecuteGravityDisplacement(float   theTime)
         {
             
             New_pos_and_vel disp;
-            disp = mFieldPhysics.dothe_phys(theTime.Milliseconds/Constants.TimeScale, this);
+            disp = mFieldPhysics.dothe_phys(theTime, this);
             mGravityDisplacement = new DisplacementStructure(this,mPosition, disp.position,mVelocity, disp.velocity);           
            
         }
@@ -60,7 +60,7 @@ namespace _3dplayground
 
         #endregion
 
-        protected override void UpdateDetail(TimeSpan UpdateTime)
+        protected override void UpdateDetail(float  UpdateTime)
         {               
             mTotalDisplacement.DeltaPosition  = mGravityDisplacement.DeltaPosition;
             mTotalDisplacement.DeltaVelocity = mGravityDisplacement.DeltaVelocity;

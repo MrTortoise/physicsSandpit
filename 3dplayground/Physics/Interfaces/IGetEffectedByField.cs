@@ -23,7 +23,7 @@ namespace _3dplayground.Physics
         //... remember that it will place objects into a different namespace (not a bad thing, but just an organisational thing)
 
          
-        void ExecuteGravityDisplacement(TimeSpan  theTime);
+        void ExecuteGravityDisplacement(float   theTime);
 
         DisplacementStructure GravityDisplacement
         { get; }

@@ -39,6 +39,9 @@ namespace MathsPhysicsTests.mocks
             get { return "Mock IAmInSpace"; }
         }
 
+        public int ID
+        { get { return -1; } }
+
         #endregion
     }
 }

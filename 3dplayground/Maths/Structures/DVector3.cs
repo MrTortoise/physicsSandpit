@@ -57,7 +57,11 @@ namespace _3dplayground.Maths
         /// <returns></returns>
         public static DVector3 GetUnitVector(DVector3 SourceVetor)
         {
-            throw new NotImplementedException("Rick ... you can probably do this faster than me.");
+            DVector3 retVal;
+            double len = SourceVetor.Length();
+
+            retVal = SourceVetor / len;
+            return retVal;
 
         }
         /// <summary>
@@ -133,6 +137,18 @@ namespace _3dplayground.Maths
             return new DVector3(v1.X * v2,
                 v1.Y * v2,
                 v1.Z * v2);
+        }
+        public static DVector3 operator /(DVector3 v1, double val)
+        {
+            return new DVector3(v1.X / val,
+                v1.Y / val,
+                v1.Z / val);
+        }
+        public static DVector3 operator /(double val, DVector3 v1)
+        {
+            return new DVector3(val/v1.X ,
+                val/v1.Y ,
+                val/v1.Z );
         }
 
 

@@ -3,32 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Microsoft.Xna.Framework;
+
 using _3dplayground.Physics;
+using _3dplayground.Graphics.D3;
+using _3dplayground.Graphics;
+
 
 namespace _3dplayground
 {
-
-    /*
-     *   Parts of the update loop will be multithreaded.
-     *   the main Division will be Physics and the rest. 
-     *   
-     *   Current PC's and laptops are dual core - IE only 2 threads will have good performance
-     *   Otherwise context switching dominates
-     *   
-     *   However multithreading everything has to remain a possibility. 
-     *   Maybe one day it will run on a server box with 16 cores.
-     *   
-     *   Processing should be seperated by independant phases Eg gravity, Player / input movement
-     *   the assumpti is that combinatino of such operations will be 
-     *   both associative and comutative in its combination
-     *   
-     *   However caluculating world forces prior to the forces internal - i know its wrong but cant 
-     *   think of a better way to say it -  to the objects will allow
-     *   the availability of the world forces on each object for use in their calculations.
-     * 
-     * 
-     * So for now just write the operations a seperate and assume that the threading will be handled higher up.
-     * * */
 
     /// <summary>
     /// This class represents a unit of gamespace containing all the objects in that space.
@@ -40,60 +22,69 @@ namespace _3dplayground
     /// </summary>
    public  class GameSpaceUnit
     {
-       protected string mName;
+       protected string mName;    
 
         DateTime mLastUpdateTime;
         CollisionComponent mCollisionComponent;
 
-        protected Dictionary<string, IAmInSpace> mIAmInSpace;
-        protected Dictionary<string, IGetEffectedByGravity> mFieldObjects;
-        protected Dictionary<string, IEmitPointField> mPointFieldEmitters;
-        protected Dictionary<string, IPhysicsObject> mPhysicsObjects;
+        protected Dictionary<int, IAmInSpace> mIAmInSpace;
+        protected Dictionary<int, IGetEffectedByGravity> mFieldObjects;
+        protected Dictionary<int, IEmitPointField> mPointFieldEmitters;
+        protected Dictionary<int, IPhysicsObject> mPhysicsObjects;
       //  protected Dictionary<string, IUpdateable> mUpdateableObjects;
-        protected Dictionary<string, IDrawable> mDrawableObjects;
+        protected Dictionary<int, I3DDrawable> mDrawableObjects;
 
-        protected Dictionary<string, GameSpaceUnit> mGameSpaceUnits;
+        protected Dictionary<int, GameSpaceUnit> mGameSpaceUnits;
 
 
         protected List<DisplacementStructure> mUpdateStructures;
-      //  protected List<DisplacementStructure> mDrawStructures;
+      //  protected List<DisplacementStructure> mDrawStructures;   
+
+       // protected Dictionary<int, DrawingBufferItem> mDrawingItems;
+
+        
+
 
 
         public GameSpaceUnit()
         {
-            mIAmInSpace = new Dictionary<string, IAmInSpace>();
-            mFieldObjects = new Dictionary<string, IGetEffectedByGravity>();
-            mPointFieldEmitters = new Dictionary<string, IEmitPointField>();
-            mPhysicsObjects = new Dictionary<string, IPhysicsObject>();
+            mIAmInSpace = new Dictionary<int, IAmInSpace>();
+            mFieldObjects = new Dictionary<int, IGetEffectedByGravity>();
+            mPointFieldEmitters = new Dictionary<int, IEmitPointField>();
+            mPhysicsObjects = new Dictionary<int, IPhysicsObject>();
           //  mUpdateableObjects = new Dictionary<string, IUpdateable>();
-            mDrawableObjects = new Dictionary<string, IDrawable>();
+            mDrawableObjects = new Dictionary<int, I3DDrawable>();
             mLastUpdateTime = DateTime.Now;
             mUpdateStructures = new List<DisplacementStructure>();
-            CollisionComponent mCollisionComponent = new CollisionComponent();
+            mCollisionComponent = new CollisionComponent();
+          //  mDrawingItems = new Dictionary<int, DrawingBufferItem>();
+            mGameSpaceUnits = new Dictionary<int, GameSpaceUnit>();
+
            
         }
         #region Properties
        public string Name
        {get{return mName;}}
 
-        public Dictionary<string, IAmInSpace> InSpaceObjects
+       public Dictionary<int, IAmInSpace> InSpaceObjects
         { get { return mIAmInSpace; } }
 
-        public Dictionary<string, IEmitPointField> PointFieldEmitters
+       public Dictionary<int, IEmitPointField> PointFieldEmitters
         { get { return mPointFieldEmitters; } }
 
         //public Dictionary<string, IUpdateable> UpdateableObjects
         //{ get { return mUpdateableObjects; } }
 
-        public Dictionary<string, IPhysicsObject> PhysicsObjects
+       public Dictionary<int, IPhysicsObject> PhysicsObjects
         { get { return mPhysicsObjects; } }
 
-        public Dictionary<string, IDrawable> DrawableObjects
+       public Dictionary<int, I3DDrawable> DrawableObjects
         { get { return mDrawableObjects; } }
         #endregion  
        
-        public IAmInSpace GetGameObject(string name)
-        { return mIAmInSpace[name]; }
+        public IAmInSpace GetGameObject(int id)
+        { return mIAmInSpace[id]; }  
+   
 
         /// <summary>
         /// Adds the object to he collection and any other relevant lists.
@@ -102,25 +93,25 @@ namespace _3dplayground
         public void AddGameObject(IAmInSpace theGameObject)
         {              
 
-            if (!mIAmInSpace.ContainsKey(theGameObject.Name))
+            if (!mIAmInSpace.ContainsKey(theGameObject.ID))
             {
-                mIAmInSpace.Add(theGameObject.Name, theGameObject);
+                mIAmInSpace.Add(theGameObject.ID, theGameObject);
                 // This casts the object, but sets it to null if the cast fails rather than throwing an exception
                 IGetEffectedByGravity effect = theGameObject as IGetEffectedByGravity;
                 if (effect != null)
                 {
-                    if (!mFieldObjects.ContainsKey(effect.Name))
+                    if (!mFieldObjects.ContainsKey(effect.ID ))
                     {
-                        mFieldObjects.Add(effect.Name, effect);
+                        mFieldObjects.Add(effect.ID, effect);
                     }
                 }
 
                 IEmitPointField emitter = theGameObject as IEmitPointField;
                 if (emitter != null)
                 {
-                    if (!mPointFieldEmitters.ContainsKey(emitter.Name))
+                    if (!mPointFieldEmitters.ContainsKey(emitter.ID))
                     {
-                        mPointFieldEmitters.Add(emitter.Name, emitter);
+                        mPointFieldEmitters.Add(emitter.ID, emitter);
 
                     }
                 }
@@ -128,9 +119,9 @@ namespace _3dplayground
                 IPhysicsObject phys = theGameObject as IPhysicsObject;
                 if (phys != null)
                 {
-                    if (!mPhysicsObjects.ContainsKey(phys.Name))
+                    if (!mPhysicsObjects.ContainsKey(phys.ID))
                     {
-                        mPhysicsObjects.Add(phys.Name, phys);
+                        mPhysicsObjects.Add(phys.ID, phys);
 
                     }
                 }
@@ -146,18 +137,20 @@ namespace _3dplayground
                 //    }
                 //}
 
-                IDrawable drawable = theGameObject as IDrawable;
+                I3DDrawable drawable = theGameObject as I3DDrawable;
                 if (drawable != null)
                 {
-                    if (!mDrawableObjects.ContainsKey(drawable.Name))
+                    if (!mDrawableObjects.ContainsKey(drawable.ID))
                     {
-                        mDrawableObjects.Add(drawable.Name, drawable);
+                        mDrawableObjects.Add(drawable.ID, drawable);
                     }
                 }
 
                 
             }
         }
+
+       
 
         void phys_RequestMove(object sender, DisplacementArgs e)
         {
@@ -167,24 +160,58 @@ namespace _3dplayground
 
         #region Update Stuff
 
-        public void UpdateSpace(DateTime   UpdateTime)
+       /// <summary>
+       /// Performs the upate on the GameSoaceUnit. This updates all objects recursivley and publishes their changes in 
+        /// DrawingBufferItems. It also adds these DrawingBufferItems to the buffer.
+       /// </summary>
+       /// <param name="UpdateTime"></param>
+        public void UpdateSpace(float UpdateTime, DrawingBufferManager theBuffer)
         {
-            TimeSpan UpdatePeriod = UpdateTime - mLastUpdateTime;
+            // ToDo: when multi GameSpaceUnits are implemented then this will need to solve the boundary collisions
+            foreach (GameSpaceUnit g in mGameSpaceUnits.Values)
+            {
+                g.UpdateSpace(UpdateTime,theBuffer );
+            }
+            // Clear the buffer lists
+          
+            mUpdateStructures.Clear();
 
-           
             // Perform updates in order of dependance - objects that use propulsion require knowledge of gravity?             
             // how is ai going to work with gravity path finding lol?
-            //Can we use your technique to sample many points on a path to get an average? - easier solution would be to make them navigate by planets
-            PerformGravityUpdate(UpdatePeriod);             
-            PerformCompoundUpdates(UpdatePeriod);
+            // Can we use your technique to sample many points on a path to get an average? - easier solution would be to make them navigate by planets
+         
+           PerformGravityUpdate(UpdateTime);
+            
+            
+            PerformCompoundUpdates(UpdateTime);
 
-            //objects that get updated raise their own events handled by  phys_RequestMove
+            //objects that get updated raise their own events handled by  phys_RequestMove which constructs the list of displacement structures to be resolved
+            PerformCollisionCalculation(UpdateTime);
+            //the displacement structures have now been updated to reflect their collision evalutated state
+      
+        
+            foreach (DisplacementStructure d in mUpdateStructures)
+            {
+                // for each object that needs to be updated, execute its update args.
+                d.IPhysicsObject.ExecuteDisplacementStructure(d);
 
-            PerformCollisionCalculation(UpdatePeriod);
-
+                // If object is drawable 
+                // Generate the DrawingStructures - this is done so that the update can get on with 
+                // changing whatever it wants whilst the draw uses this structure
+                I3DDrawable draw = d.IPhysicsObject  as I3DDrawable;
+                if (draw != null)
+                {
+                    // now we need to add it to the drawing buffer.
+                    // We can use the IphysicsObject because we know that the updates have taken place
+                    DrawingBufferItem i = new DrawingBufferItem(draw,d.IPhysicsObject.IsDrawActive, 
+                        d.IPhysicsObject.Position.ToVector3(), d.IPhysicsObject.Rotation);
+                    
+                    theBuffer.Add(i);
+                }
+            }  
         }
 
-        protected void PerformGravityUpdate(TimeSpan  UpdatePeriod)
+        protected void PerformGravityUpdate(float   UpdatePeriod)
         {
             foreach (IGetEffectedByGravity i in mFieldObjects.Values )
             {
@@ -192,17 +219,19 @@ namespace _3dplayground
                 
             }
         } 
-        protected void PerformCompoundUpdates(TimeSpan UpdatePeriod)
+        protected void PerformCompoundUpdates(float  UpdatePeriod)
         {
-
             // This is a loop for multithreading
             foreach (IPhysicsObject   p in mPhysicsObjects.Values)
-            {
-               // p.ResetDisplacementStructures(); moved into the objects own update
-                p.Update(UpdatePeriod);
-               
+            {            
+                p.Update(UpdatePeriod);                   
             }
         }
+        protected void PerformCollisionCalculation(float UpdatePeriod)
+        {
+            //no collisions atm. 
+        }
+
 
 
         protected void AddDisplacementStructure(DisplacementStructure theStructure)
@@ -225,36 +254,11 @@ namespace _3dplayground
             DisplacementStructure retVal = mUpdateStructures[0];
             mUpdateStructures.RemoveAt(0);
             return retVal;
-        }
-
-
-        protected void PerformCollisionCalculation(TimeSpan UpdatePeriod)
-        {
-            //no collisions atm.
-
-            foreach (DisplacementStructure d in mUpdateStructures)
-            {
-                d.IPhysicsObject.ExecuteDisplacementStructure(d);              
-            }
-
-        }
+        }          
 
         #endregion
 
-        #region Drawing Stuff
 
-        public void Draw(Camera theCamera)
-        {
-            foreach (IPhysicsObject p in mDrawableObjects.Values )
-            {
-                p.Draw(theCamera, p.Position.ToVector3(), Quaternion.Identity);
-            }
-
-
-        }
-
-
-        #endregion
 
 
 

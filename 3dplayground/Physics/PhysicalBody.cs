@@ -3,7 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Microsoft.Xna.Framework;
+
 using _3dplayground.Maths;
+using _3dplayground.Graphics;
+
+
+
 
 namespace _3dplayground.Physics
 {
@@ -11,26 +16,41 @@ namespace _3dplayground.Physics
     /// abstract implementation of a pysical body.
     /// Update and draw are intended to be overriden.
     /// </summary>
-    public abstract  class  PhysicalBody : IPhysicsObject 
+    public abstract  class  PhysicalBody : IPhysicsObject
     {
-        public event EventHandler<DisplacementArgs> RequestMove;
+        #region Fields
 
         protected  string mName;
+        protected int mID = GlobalIDGenerator.GetNextID();
+
+        #region UpdateFields
+        public event EventHandler<DisplacementArgs> RequestMove;
+        protected bool mIsCanMoveActive = true;
+
         protected DVector3 mPosition;
-        protected DVector3 mVelocity;
-        
+        protected DVector3 mVelocity;        
 
         protected Quaternion mAngularVelocity;
         protected Quaternion mRotation;
 
-
         protected int mMass;
         protected GameSpaceUnit mSpace;
 
-        protected bool mIsDrawActive = true;  
-        
         protected DisplacementStructure mTotalDisplacement;
 
+        #endregion
+
+        #region DrawFields
+
+
+        protected bool mIsDrawActive = true;
+
+        protected Vector3 mDrawPosition;
+        protected Quaternion  mDrawRotation;
+
+        #endregion
+
+        #endregion
 
         #region Constructor
 
@@ -40,7 +60,9 @@ namespace _3dplayground.Physics
         {
             mName = theName;
             mPosition = thePosition;
+            mDrawPosition = thePosition.ToVector3();
             mRotation = theRotation;
+            mDrawRotation = theRotation;
             mMass = theMass;
             mVelocity = theVelocity;
            
@@ -53,6 +75,19 @@ namespace _3dplayground.Physics
         #endregion
 
         #region Properties
+
+        public int ID
+        { get { return mID; } }
+
+        /// <summary>
+        /// Getsw the objects name
+        /// </summary>
+        public string Name
+        {
+            get { return mName; }
+        }
+
+        #region Update
         /// <summary>
         /// Gets the position of the Object in space
         /// </summary>
@@ -84,13 +119,6 @@ namespace _3dplayground.Physics
             get { return mRotation; }
         }
 
-        /// <summary>
-        /// Getsw the objects name
-        /// </summary>
-        public string Name
-        {
-            get { return mName; }
-        }
 
         /// <summary>
         /// Gets the objects mass
@@ -99,6 +127,16 @@ namespace _3dplayground.Physics
         {
             get { return mMass; }
         }
+        /// <summary>
+        /// Returns the Space that the object inahbits
+        /// </summary>
+        public GameSpaceUnit Space
+        {
+            get { return mSpace; }
+        }  
+
+        #endregion
+        #region Draw
 
         /// <summary>
         /// Returns wether drawing is currently enablesd for this objewct
@@ -109,23 +147,24 @@ namespace _3dplayground.Physics
         }
 
         /// <summary>
-        /// Returns the Space that the object inahbits
+        /// Returns the position a draw call would place the object in space
         /// </summary>
-        public GameSpaceUnit Space
+        public Vector3  DrawPosition
         {
-            get { return mSpace; }
-        }         
+            get { return mDrawPosition; }
+        }
 
+        /// <summary>
+        /// Returns the rotation of the object that a draw call would use.
+        /// </summary>
+        public Quaternion DrawRotation
+        {
+            get { return mDrawRotation; }
+        }
 
+        #endregion        
 
-        #endregion 
-
-        #region IDrawable Methods
-
-        public abstract void Draw(Camera theCamera, Vector3   thePosition, Quaternion theRotation); 
-
-        #endregion  
-    
+        #endregion    
 
         #region ICanMove Members
 
@@ -162,7 +201,7 @@ namespace _3dplayground.Physics
         /// This is the Update Wrapper that is to be called eals with resetting, executing the Detail and raising event.
         /// </summary>
         /// <param name="UpdateTime"></param>
-        public  void Update(TimeSpan UpdateTime)
+        public  void Update(float UpdateTime)
         {   
             ResetDisplacementStructures();
 
@@ -180,9 +219,9 @@ namespace _3dplayground.Physics
         /// This is the class to override to provide additional update logic.
         /// </summary>
         /// <param name="UpdateTime"></param>
-        protected virtual void UpdateDetail(TimeSpan UpdateTime)
+        protected virtual void UpdateDetail(float  UpdateTime)
         {
-          DVector3 deltaPosition = mPosition + (mVelocity * (UpdateTime.Milliseconds  / Constants.TimeScale )); 
+          DVector3 deltaPosition = mVelocity * UpdateTime; 
 
                 mTotalDisplacement.Position = mPosition;
                 mTotalDisplacement.DeltaPosition += deltaPosition;
@@ -190,7 +229,40 @@ namespace _3dplayground.Physics
                 mTotalDisplacement.DeltaVelocity = DVector3.Zero;
         }
 
-        #endregion 
+
+        public bool IsCanMoveActive
+        {
+            get { return mIsCanMoveActive; }
+        }
+
+        #endregion       
+
+        #region IGameDrawable Members
+
+        public abstract void Draw(float GameTime, Camera theCamera); 
+        public virtual void ApplyDrawingstructure(DrawingStructure theBufferItem)
+        {
+            mIsDrawActive = theBufferItem.IsActive;
+            mDrawPosition = theBufferItem.Position;
+            mDrawRotation = theBufferItem.Rotation;
+            
+        }
+
+
+        public virtual  DrawingStructure ConstructDrawingStuct(DisplacementStructure theSource)
+        {
+            Vector3 pos = (theSource.Position + theSource.DeltaPosition).ToVector3();
+            Quaternion rot = mRotation;
+
+            //ToDo: implement rotation
+
+            DrawingStructure retVal = new DrawingStructure(mID,theSource.IPhysicsObject.IsDrawActive, pos, rot);
+            return retVal;
+
+        }
+
+        #endregion
+
 
     }
 }

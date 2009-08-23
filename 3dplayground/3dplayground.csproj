@@ -14,6 +14,7 @@
     <XnaCrossPlatformGroupID>6590b85c-0fcc-4d19-aee3-e3e0213cb3b3</XnaCrossPlatformGroupID>
     <ApplicationIcon>Game.ico</ApplicationIcon>
     <Thumbnail>GameThumbnail.png</Thumbnail>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
     <PublishUrl>publish\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
@@ -26,7 +27,6 @@
     <MapFileExtensions>true</MapFileExtensions>
     <ApplicationRevision>0</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
-    <IsWebBootstrapper>false</IsWebBootstrapper>
     <UseApplicationTrust>false</UseApplicationTrust>
     <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
@@ -73,6 +73,9 @@
     <Reference Include="System.configuration" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Web.Extensions">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml">
       <Private>False</Private>
@@ -90,6 +93,15 @@
     <Compile Include="Camera.cs" />
     <Compile Include="Components\FPS.cs" />
     <Compile Include="Constants.cs" />
+    <Compile Include="Core\GlobalIDGenerator.cs" />
+    <Compile Include="GameEngine.cs" />
+    <Compile Include="GameGraphicsManager.cs" />
+    <Compile Include="Graphics\D3\D3DrawableArgs.cs" />
+    <Compile Include="Graphics\DrawingBufferManager.cs" />
+    <Compile Include="Graphics\DrawingBufferItem.cs" />
+    <Compile Include="Graphics\Interfaces\IGameDrawable.cs" />
+    <Compile Include="Graphics\Message\DrawingStructure.cs" />
+    <Compile Include="Graphics\Message\DrawingStructureEventArgs.cs" />
     <Compile Include="Physics\CollisionComponent.cs" />
     <Compile Include="DisplacementStructure.cs" />
     <Compile Include="Physics\EventArgs\DisplacementArgs.cs" />
@@ -103,7 +115,7 @@
     <Compile Include="Physics\FieldPhysicsComponent.cs" />
     <Compile Include="GameSpaceUnit.cs" />
     <Compile Include="Physics\Interfaces\ICanMove.cs" />
-    <Compile Include="Interfaces\IDrawable.cs" />
+    <Compile Include="Graphics\D3\I3DDrawable.cs" />
     <Compile Include="Physics\Interfaces\IEmitPointField.cs" />
     <Compile Include="Physics\Interfaces\IFieldPhysics.cs" />
     <Compile Include="Interfaces\IAmInSpace.cs" />
@@ -121,6 +133,7 @@
     <Compile Include="Physics\PhysicsModel.cs" />
     <Compile Include="Physics\PhysicalBody.cs" />
     <Compile Include="Maths\Structures\DVector3.cs" />
+    <Compile Include="Physics\GamePhysicsManager.cs" />
     <Compile Include="Planet.cs" />
     <Compile Include="Player.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -172,11 +185,12 @@
   <ItemGroup>
     <None Include="App.config" />
     <None Include="FieldPhysicsDiagram.cd" />
+    <None Include="GameUpdateDraw.cd" />
     <None Include="Interfaces\Interfaces.cd" />
+    <None Include="Physics\PhysicsDiagram.cd" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="EventArgs\" />
-    <Folder Include="Graphics\Message\" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\XNA Game Studio\Microsoft.Xna.GameStudio.targets" />

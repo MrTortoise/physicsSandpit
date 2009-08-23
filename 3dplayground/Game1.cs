@@ -32,6 +32,7 @@ namespace _3dplayground
        // SpriteBatch spriteBatch;
 
         GameSpaceUnit mObjects;
+        GameEngine mEngine;
 
         //phys_planet mSphere = new phys_planet(1000000, Vector3.Zero);
        // List<phys_planet> theSphereList = new List<phys_planet>();   
@@ -41,6 +42,8 @@ namespace _3dplayground
 
         EventManager mEventManager = EventManager.GetInstance();
 
+
+
         public Game1()
         {
             graphics = new GraphicsDeviceManager(this);
@@ -48,12 +51,13 @@ namespace _3dplayground
 
             graphics.PreferredBackBufferWidth = 1280;
             graphics.PreferredBackBufferHeight = 800;
-            graphics.SynchronizeWithVerticalRetrace = false;
+         
 
 
             mObjects = new GameSpaceUnit();
 
             Components.Add(new CommonObjects.Components.FPS(this));
+        
         }
 
         /// <summary>
@@ -83,47 +87,58 @@ namespace _3dplayground
             
 
             BasicModel  theSphere;
-            theSphere = new BasicModel("BasicSphere");
-            theSphere.LoadContent(Content, "sphere");
+            theSphere = new BasicModel("BasicSphere","sphere");
+            theSphere.LoadContent(Content);
 
             Planet mPlanet;
             mPlanet = new Planet(theSphere, mObjects, "planet1", 1000000000, DVector3.Zero, DVector3.Zero, Quaternion.Identity, Quaternion.Identity);
 
             mObjects.AddGameObject(mPlanet);
 
+            mPlanet = new Planet(theSphere, mObjects, "planet2", 1000000000, new DVector3(0, 100, 0), DVector3.Zero, Quaternion.Identity, Quaternion.Identity);
+
+            mObjects.AddGameObject(mPlanet);
+
+            mPlanet = new Planet(theSphere, mObjects, "planet3", 1000000000, new DVector3(0, 0, 100), DVector3.Zero, Quaternion.Identity, Quaternion.Identity);
+
+            mObjects.AddGameObject(mPlanet);
+
+          
             IFieldPhysics  mFPC;
             mFPC=new FieldPhysicsComponent();
 
             Moon mMoon;
-            mMoon = new Moon(theSphere, mFPC, mObjects, "Moon1", 100000, new DVector3(100, 0, 0), new DVector3(0, 1, 0), Quaternion.Identity, Quaternion.Identity);
+            mMoon = new Moon(theSphere, mFPC, mObjects, "Moon1", 100000, new DVector3(100, 0, 0), new DVector3(0, 0, 0), Quaternion.Identity, Quaternion.Identity);
             mObjects.AddGameObject(mMoon);
-           /*
+           
             Moon mMoon2;
-            mMoon2 = new Moon(theSphere, mFPC, "Moon2", 100000000, new Vector3(0, 10, 0), new Vector3(-0.25f, 0,0 ), Quaternion.Identity);
+            mMoon2 = new Moon(theSphere, mFPC, mObjects, "Moon1", 100000, new DVector3(100, 100, 0), new DVector3(0, 0, 0), Quaternion.Identity, Quaternion.Identity);
             mObjects.AddGameObject(mMoon2);
 
             Moon mMoon3;
-            mMoon3 = new Moon(theSphere, mFPC, "Moon23", 100000000, new Vector3(0, 0, 10), new Vector3(0, -0.25f, 0), Quaternion.Identity);
+            mMoon3 = new Moon(theSphere, mFPC, mObjects, "Moon1", 100000, new DVector3(100, 0, 100), new DVector3(0, 0, 0), Quaternion.Identity, Quaternion.Identity);
             mObjects.AddGameObject(mMoon3);
 
             Moon mMoon4;
-            mMoon4 = new Moon(theSphere, mFPC, "Moon24", 100000000, new Vector3(10, 10, 0), new Vector3(-0.25f, -0.25f, 0), Quaternion.Identity);
+            mMoon4 = new Moon(theSphere, mFPC, mObjects, "Moon1", 100000, new DVector3(100, 100, 100), new DVector3(0, 0, 0), Quaternion.Identity, Quaternion.Identity);
             mObjects.AddGameObject(mMoon4);
 
             Moon mMoon5;
-            mMoon5 = new Moon(theSphere, mFPC, "Moon5", 100000000, new Vector3(0, 10, 10), new Vector3(-0.25f, 0, -0.25f), Quaternion.Identity);
+            mMoon5 = new Moon(theSphere, mFPC, mObjects, "Moon1", 100000, new DVector3(0, 100, 0), new DVector3(0, 0, 0), Quaternion.Identity, Quaternion.Identity);
             mObjects.AddGameObject(mMoon5);
                 
-             */
+             
             mCamera.AspectRatio=graphics.GraphicsDevice.Viewport.Width / (float)graphics.GraphicsDevice.Viewport.Height;
-            mCamera.FarClippingPlane=10000.0f;
+            mCamera.FarClippingPlane=1000.0f;
             mCamera.FieldOfView=MathHelper.ToRadians(30f);
             mCamera.NearClippingPlane = 1.0f;
-            mCamera.Position = new Vector3(0, 0, 400);
+            mCamera.Position = new Vector3(500, 500, 0);
             mCamera.Target = Vector3.Zero;
-            mCamera.UpVector = Vector3.UnitY ;
+            mCamera.UpVector = Vector3.UnitZ  ; 
 
-            mCamera.Compile(); 
+            mCamera.Compile();
+
+            mEngine = new GameEngine(mObjects, mCamera);
 
                      
         
@@ -153,8 +168,8 @@ namespace _3dplayground
             // Allows the game to exit
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed)
                 this.Exit();
-
-            mObjects.UpdateSpace(DateTime.Now);            
+            mEngine.Update(gameTime.ElapsedRealTime.Ticks  / Constants.TimeScale);
+            
 
             base.Update(gameTime);
         }
@@ -166,8 +181,7 @@ namespace _3dplayground
         protected override void Draw(GameTime gameTime)
         {
             GraphicsDevice.Clear(Color.Black );
-
-            mObjects.Draw(mCamera);
+            mEngine.Draw(gameTime.ElapsedRealTime.Ticks /Constants.TimeScale );            
 
             base.Draw(gameTime);
 

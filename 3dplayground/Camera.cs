@@ -7,12 +7,21 @@ using Microsoft.Xna.Framework.Content;
 
 namespace _3dplayground
 {
+
+    public enum CameraMode
+    {
+        Attached,
+        detached
+
+    }
+
     /// <summary>
     /// This class respresents the camera will will define the view into the object space and the methods available to the camera.
     /// Provides access to a frustrum for visibility detection.
     /// </summary>
    public  class Camera
-    {    
+    {   
+       //ToDo: make camera so it can be attached to an object.
         float mAspectRatio = 1;
         float mFOV = MathHelper.ToRadians(180-1) ;
         float mNearClip = 1;
@@ -26,11 +35,18 @@ namespace _3dplayground
         Vector3 mCameraTarget=Vector3.Zero;
         Vector3 mCameraUpVector=Vector3.UnitZ ;
 
+        IAmInSpace mTarget;
+
         public Camera()
         {
             GenerateProjection();
             GenerateView();
             GenerateFrustrum();
+        }
+
+        public void SetTarget(IAmInSpace theTarget)
+        {
+            mTarget = theTarget;
         }
 
         public void Compile()
@@ -185,9 +201,7 @@ namespace _3dplayground
        /// </summary>
         public void GenerateFrustrum()
         {
-            mFrustrum = new BoundingFrustum(Matrix.Multiply(mView, mProjection));
-
-
+            mFrustrum = new BoundingFrustum(Matrix.Multiply(mView, mProjection));     
         }
 
         #endregion

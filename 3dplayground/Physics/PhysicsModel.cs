@@ -17,14 +17,16 @@ namespace _3dplayground.Physics
             : base(theName,theSpace, theMass, thePosition,theVelocity, theRotation,theAngularVelocity )
         {
             mModel = theModel;
-        }  
+        }
 
-        public override  void Draw(Camera theCamera,Vector3  thePosition, Quaternion theRotation)
+        public override void Draw(float GameTime, Camera theCamera)
         {
             if (mIsDrawActive)
             {
-                mModel.Draw(theCamera,thePosition,theRotation);
+                mModel.Draw( theCamera,mDrawPosition,mDrawRotation );
             }
-        } 
+        }
+
+
     }
 }

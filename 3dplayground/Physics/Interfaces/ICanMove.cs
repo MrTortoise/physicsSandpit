@@ -17,7 +17,10 @@ namespace _3dplayground.Physics
         { get; }
 
         Quaternion AngularVelocity
-        { get; }                 
+        { get; }
+
+        bool IsCanMoveActive
+        { get; }
 
         event EventHandler<DisplacementArgs> RequestMove;
 
@@ -30,6 +33,6 @@ namespace _3dplayground.Physics
         void ExecuteDisplacementStructure(DisplacementStructure theStructure);
         void ResetDisplacementStructures();
 
-        void Update(TimeSpan UpdateTime);
+        void Update(float UpdateTime);
     }
 }

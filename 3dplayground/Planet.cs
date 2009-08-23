@@ -57,13 +57,10 @@ namespace _3dplayground
 
         #region  Overridden methods
 
-        public override   void Draw(Camera theCamera,Vector3 thePosition, Quaternion theRotation)
+        public override void Draw(float GameTime, Camera theCamera)
         {
-            mModel.Draw(theCamera, thePosition, theRotation);
+            mModel.Draw( theCamera,mDrawPosition,mDrawRotation );
         }
-
- 
-
 
         #endregion
 

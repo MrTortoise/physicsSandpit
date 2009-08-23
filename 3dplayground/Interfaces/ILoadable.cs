@@ -7,10 +7,12 @@ using Microsoft.Xna.Framework.Content;
 
 namespace _3dplayground
 {
-    interface ILoadable
+    interface ILoadable : IHasName 
     {
+        string ContentName
+        { get; set; }
 
-        void LoadContent(ContentManager theContentManager, string ContentName);
+        void LoadContent(ContentManager theContentManager);
 
     }
 }

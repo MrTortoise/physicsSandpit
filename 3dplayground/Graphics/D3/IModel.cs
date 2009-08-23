@@ -7,7 +7,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace _3dplayground.Graphics.D3
 {
-    interface IModel : ILoadable ,IDrawable 
+    interface IModel : ILoadable  
     {
         /// <summary>
         /// Gets the smallest box that will fit the model and all its meshes
@@ -35,8 +35,8 @@ namespace _3dplayground.Graphics.D3
         void CalculateCompoundBoundingBox();
         void CalculateCompoundBoundingSphere();
         void CalculateCompoundSafeBoundingBox();
-        
 
+        void Draw(Camera thecamera, Vector3 thePosition, Quaternion theRotation);
 
 
 

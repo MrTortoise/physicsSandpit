@@ -28,10 +28,10 @@ namespace _3dplayground.Physics
             get { return mGravityDisplacement; }
         }  
 
-        public void ExecuteGravityDisplacement(TimeSpan  theTime)
+        public void ExecuteGravityDisplacement(float   theTime)
         {
             New_pos_and_vel disp;
-            disp = mFieldPhysics.dothe_phys(theTime.Milliseconds , this);
+            disp = mFieldPhysics.dothe_phys(theTime , this);
             mGravityDisplacement = new DisplacementStructure(this, mPosition, disp.position, mVelocity, disp.velocity);
            
 
@@ -42,7 +42,7 @@ namespace _3dplayground.Physics
 
 
 
-        protected override void UpdateDetail(TimeSpan UpdateTime)
+        protected override void UpdateDetail(float  UpdateTime)
         {
             mTotalDisplacement.DeltaPosition = mGravityDisplacement.DeltaPosition;
             mTotalDisplacement.DeltaVelocity = mGravityDisplacement.DeltaVelocity;

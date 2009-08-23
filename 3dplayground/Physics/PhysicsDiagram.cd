@@ -1,0 +1,126 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="_3dplayground.Physics.FieldPhysicsComponent" BaseTypeListCollapsed="true">
+    <Position X="13.75" Y="3" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Physics\FieldPhysicsComponent.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="_3dplayground.Physics.PhysicalBody" BaseTypeListCollapsed="true">
+    <Position X="0.5" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAECAABAAgAoAgIAEAAAQBAAQAAAYAAAgAgAWEAgE=</HashCode>
+      <FileName>Physics\PhysicalBody.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="mTotalDisplacement" />
+    </ShowAsAssociation>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="_3dplayground.Physics.GravityModel" BaseTypeListCollapsed="true">
+    <Position X="9" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAgAAAAAAAAAAAAAAAAAAEAAEAAAAIgAAAAAAAA=</HashCode>
+      <FileName>Physics\GravityModel.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="mFieldPhysics" />
+    </ShowAsAssociation>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="_3dplayground.Physics.PhysFunc">
+    <Position X="13.75" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Physics\PhysFunc.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="_3dplayground.Physics.PhysicsModel">
+    <Position X="4" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAIgAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Physics\PhysicsModel.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="mModel" />
+    </ShowAsAssociation>
+  </Class>
+  <Struct Name="_3dplayground.Physics.New_pos_and_vel">
+    <Position X="13.75" Y="4.5" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAAAAQAAAAAAAA=</HashCode>
+      <FileName>Physics\New_pos_and_vel.cs</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="_3dplayground.DisplacementStructure">
+    <Position X="4" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IAIAAAAAAEAAQAAowAgAAAQAAAACAAAAAAgAAADEAgI=</HashCode>
+      <FileName>DisplacementStructure.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="DeltaPosition" />
+    </ShowAsAssociation>
+    <Lollipop Position="0.2" />
+  </Struct>
+  <Struct Name="_3dplayground.Maths.DVector3">
+    <Position X="6.75" Y="6.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAIAIgAAAAAAAAAE4AUGQABAASAEAIAAABAAAAAAYiE=</HashCode>
+      <FileName>Maths\Structures\DVector3.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Struct>
+  <Interface Name="_3dplayground.Physics.ICanMove">
+    <Position X="9" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAAAgAAAAIAAAAAABAAQAAAAAAAAAgAAEAAE=</HashCode>
+      <FileName>Physics\Interfaces\ICanMove.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="_3dplayground.Physics.IPhysicsObject">
+    <Position X="11.25" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Physics\Interfaces\IPhysicsObject.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="_3dplayground.Physics.IEmitPointField" Collapsed="true">
+    <Position X="6.75" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAA=</HashCode>
+      <FileName>Physics\Interfaces\IEmitPointField.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="_3dplayground.Physics.IFieldPhysics">
+    <Position X="11.25" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Physics\Interfaces\IFieldPhysics.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="_3dplayground.Physics.IGetEffectedByGravity">
+    <Position X="13.75" Y="6.5" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAEAAEAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Physics\Interfaces\IGetEffectedByField.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="_3dplayground.Physics.IHasMass">
+    <Position X="11.25" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAAAA=</HashCode>
+      <FileName>Physics\Interfaces\IHasMass.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="_3dplayground.Graphics.D3.IModel">
+    <Position X="6.75" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAQAAAAgAAAACAgAAAAAAAAAAAJEAAAAAAAA=</HashCode>
+      <FileName>Graphics\D3\IModel.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
