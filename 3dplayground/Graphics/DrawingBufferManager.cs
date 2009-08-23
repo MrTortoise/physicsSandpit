@@ -11,7 +11,7 @@ namespace _3dplayground.Graphics
     /// I want to test this - i want a problem if i need 2 so i can think properly about it.
     /// This class assumes that structures represent abolute values and not differentials that need summing.
     /// </summary>
-    public class DrawingBufferManager
+    public sealed  class DrawingBufferManager
     {
         //ToDo: turn this into a generic class ... buffers for all then :D
 
@@ -79,7 +79,10 @@ namespace _3dplayground.Graphics
         /// </summary>
         /// <param name="theItem"></param>
         public void Add(DrawingBufferItem theItem)
-        {                                            
+        {
+            Monitor.Enter(mLockUpdate);
+            try
+            {
                 switch (mUpdateBuffer)
                 {
                     case eBuffer.first:
@@ -88,12 +91,21 @@ namespace _3dplayground.Graphics
                     case eBuffer.second:
                         AddToBuffer(mItems2, theItem);
                         break;
-                } 
+                }
+            }
+            catch (Exception ex)
+            { throw new Exception("Eception whilst Adding a drawing buffer item", ex); }
+            finally
+            {
+                Monitor.Pulse(mLockUpdate);
+                Monitor.Exit(mLockUpdate);
+            }
         }
 
 
         public void ApplyDrawBuffer()
         {
+            
             Monitor.Enter(mLockFinished);
             try
             {
@@ -125,6 +137,7 @@ namespace _3dplayground.Graphics
         /// </summary>
         public  void UpdateFinished()
         {
+            Monitor.Enter(mLockUpdate);
             Monitor.Enter(mLockFinished);
             try
             {  
@@ -144,7 +157,8 @@ namespace _3dplayground.Graphics
             {
                 Monitor.Pulse(mLockFinished);
                 Monitor.Exit(mLockFinished);
-
+                Monitor.Pulse(mLockUpdate);
+                Monitor.Exit(mLockUpdate);
             }
             
 

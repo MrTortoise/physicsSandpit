@@ -1,0 +1,106 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="_3dplayground.GameEngine">
+    <Position X="1" Y="0.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQIQAAAAAAgCgCAAAAAAAAAAAAAAAQAAAAAAAAAAAA=</HashCode>
+      <FileName>GameEngine.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="mCamera" />
+      <Field Name="mBuffer" />
+      <Field Name="mGraphics" />
+      <Field Name="mPhysics" />
+      <Field Name="mSpace" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="_3dplayground.Camera">
+    <Position X="1" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AEgEgABgAAAAAQAgQggAACCAAAGBQAgCCAAAABAQEEI=</HashCode>
+      <FileName>Camera.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="_3dplayground.Graphics.DrawingBufferManager">
+    <Position X="10.75" Y="0.75" Width="1.75" />
+    <NestedTypes>
+      <Enum Name="_3dplayground.Graphics.DrawingBufferManager.eBuffer" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>Graphics\DrawingBufferManager.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Enum>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>EgIAkAAAAEgAAAAAAAAABACADAAEAEAAAAIAAABEAEA=</HashCode>
+      <FileName>Graphics\DrawingBufferManager.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsCollectionAssociation>
+      <Field Name="mItems" />
+      <Field Name="mItems2" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Class Name="_3dplayground.GameGraphicsManager">
+    <Position X="8.25" Y="1" Width="1.5" />
+    <AssociationLine Name="mSpace" Type="_3dplayground.GameSpaceUnit" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="8.25" Y="2.381" />
+        <Point X="6.438" Y="2.381" />
+        <Point X="6.438" Y="4" />
+      </Path>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>AAAAAAABAAAAAgCAAAAAAAAAAAAAAAQAAAAAAAAAAAA=</HashCode>
+      <FileName>GameGraphicsManager.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="mBuffer" />
+      <Field Name="mSpace" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="_3dplayground.GameSpaceUnit">
+    <Position X="4.75" Y="4" Width="2" />
+    <AssociationLine Name="mGameSpaceUnits" Type="_3dplayground.GameSpaceUnit" ManuallyRouted="true" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="4.75" Y="9.5" />
+        <Point X="4.375" Y="9.5" />
+        <Point X="4.375" Y="10.228" />
+        <Point X="6.055" Y="10.228" />
+        <Point X="6.055" Y="9.853" />
+      </Path>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>AABAAIgAgAAAACQYAgACAAQAgAAQAAIAAAwAHAAiAAQ=</HashCode>
+      <FileName>GameSpaceUnit.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsCollectionAssociation>
+      <Field Name="mGameSpaceUnits" />
+      <Field Name="mUpdateStructures" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Class Name="_3dplayground.Physics.GameSpacePhysics">
+    <Position X="5" Y="0.5" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAA=</HashCode>
+      <FileName>Physics\GamePhysicsManager.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="mSpace" />
+    </ShowAsAssociation>
+  </Class>
+  <Struct Name="_3dplayground.DisplacementStructure">
+    <Position X="8.25" Y="4" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IAIAAAAAAEAAQAAowAgAAAQAAAACAAAAAAgAAADEAgI=</HashCode>
+      <FileName>DisplacementStructure.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Struct>
+  <Struct Name="_3dplayground.Graphics.DrawingBufferItem">
+    <Position X="13.75" Y="0.75" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAgAAAAgIAgAAAAAAQAAAAAAAAAgAABAIAAABA=</HashCode>
+      <FileName>Graphics\DrawingBufferItem.cs</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

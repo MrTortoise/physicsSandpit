@@ -15,7 +15,7 @@ namespace _3dplayground
     /// I call this game engine, but really its just the 3d part of the game.
     /// The 2D UI will have its own engine for example.
     /// </summary>
-    class GameEngine                                           
+    sealed  class GameEngine                                           
     { 
        
 

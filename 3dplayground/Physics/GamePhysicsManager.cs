@@ -9,7 +9,7 @@ namespace _3dplayground.Physics
     /// <summary>
     /// This class forms the basis of the physics and positional thread
     /// </summary>
-    class GameSpacePhysics
+    sealed  class GameSpacePhysics
     {
 
        // private Dictionary<int, ICanMove> mItems = new Dictionary<int,ICanMove>();

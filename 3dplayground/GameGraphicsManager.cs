@@ -9,7 +9,7 @@ using _3dplayground.Graphics.D3;
 
 namespace _3dplayground
 {
-    class GameGraphicsManager
+    sealed class GameGraphicsManager
     {
 
         GameSpaceUnit mSpace;
@@ -27,21 +27,21 @@ namespace _3dplayground
         /// <param name="theCamera"></param>
         public void Draw(float timeSpan, Camera theCamera)
         {
-            waitForNextFrame();
-
-
-            mBuffer.ApplyDrawBuffer();
-
-            // now we can draw everything using the given camera
-            
-            foreach (IGameDrawable   d in mSpace.DrawableObjects.Values  )
+            if (mBuffer.IsFrameReady)
             {
-                d.Draw(timeSpan, theCamera);
+                mBuffer.ApplyDrawBuffer();
+
+                // now we can draw everything using the given camera
+
+                foreach (IGameDrawable d in mSpace.DrawableObjects.Values)
+                {
+                    d.Draw(timeSpan, theCamera);
+                }
             }
 
         }
 
-        protected void waitForNextFrame()
+        private  void waitForNextFrame()
         {
             while (mBuffer.IsFrameReady == false)
             {
