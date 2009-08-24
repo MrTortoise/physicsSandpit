@@ -14,6 +14,7 @@ namespace _3dplayground
     /// This is the game engine. All objecs to be constructed and loaded externally..
     /// I call this game engine, but really its just the 3d part of the game.
     /// The 2D UI will have its own engine for example.
+    /// This class will also be running the update thread.
     /// </summary>
     sealed  class GameEngine                                           
     { 
@@ -30,6 +31,9 @@ namespace _3dplayground
 
         private Camera mCamera;
 
+        private bool mIsRunning = true;
+        private DateTime mLastUpdateTime;
+
         public GameEngine(GameSpaceUnit GameSpace,Camera theCamera)
         {
             mSpace = GameSpace;
@@ -38,10 +42,31 @@ namespace _3dplayground
             mCamera = theCamera;
         }
 
-        public void Update(float timePeriod)
+        public void StartUpdate()
         {
-            mSpace.UpdateSpace(timePeriod, mBuffer);
-            mBuffer.UpdateFinished();
+            mLastUpdateTime = DateTime.Now;
+
+
+        }
+
+        public void StopUpdate()
+        {
+
+        }
+
+        public  void Update()
+        {
+            DateTime Current;
+            TimeSpan theTimePeriod;
+           // while (mIsRunning)
+           // {
+                Current = DateTime.Now;
+                theTimePeriod = Current - mLastUpdateTime;                
+                float updateTime = ((float)theTimePeriod.Ticks) / Constants.TimeScale;
+                mPhysics.Update(updateTime, mBuffer);
+                mBuffer.UpdateFinished();
+                mLastUpdateTime = Current;
+          //  }
         }
 
         public void Draw(float timeSpan)
