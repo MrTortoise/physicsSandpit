@@ -32,7 +32,7 @@ namespace _3dplayground
         private Camera mCamera;
 
         private bool mIsRunning = true;
-        private DateTime mLastUpdateTime;
+        private DateTime mLastUpdateTime = DateTime.Now ;
 
         public GameEngine(GameSpaceUnit GameSpace,Camera theCamera)
         {

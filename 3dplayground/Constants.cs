@@ -9,7 +9,11 @@ namespace _3dplayground
    static  class Constants
     {
        public const double G = 6.673E-5;
-       public const float  TimeScale = 1000000;
+
+       /// <summary>
+       /// There are 10,000 ticks in a ms
+       /// </summary>
+       public const float  TimeScale = 10000000;
 
 
 

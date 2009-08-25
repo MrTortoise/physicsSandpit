@@ -25,20 +25,19 @@ namespace _3dplayground
        protected string mName;    
 
         DateTime mLastUpdateTime;
-        CollisionComponent mCollisionComponent;
+        CollisionComponent mCollisionComponent = new CollisionComponent();
 
-        protected Dictionary<int, IAmInSpace> mIAmInSpace;
-        protected Dictionary<int, IGetEffectedByGravity> mFieldObjects;
-        protected Dictionary<int, IEmitPointField> mPointFieldEmitters;
-        protected Dictionary<int, IPhysicsObject> mPhysicsObjects;
-      //  protected Dictionary<string, IUpdateable> mUpdateableObjects;
-        protected Dictionary<int, I3DDrawable> mDrawableObjects;
+        protected Dictionary<int, IAmInSpace> mIAmInSpace = new Dictionary<int,IAmInSpace>();
+        protected Dictionary<int, IGetEffectedByGravity> mFieldObjects = new Dictionary<int,IGetEffectedByGravity>();
+        protected Dictionary<int, IEmitPointField> mPointFieldEmitters = new Dictionary<int,IEmitPointField>();
+        protected Dictionary<int, IPhysicsObject> mPhysicsObjects = new Dictionary<int,IPhysicsObject>();
 
-        protected Dictionary<int, GameSpaceUnit> mGameSpaceUnits;
+        protected Dictionary<int, I3DDrawable> mDrawableObjects = new Dictionary<int,I3DDrawable>();
+
+        protected Dictionary<int, GameSpaceUnit> mGameSpaceUnits = new Dictionary<int,GameSpaceUnit>();
 
 
-        protected List<DisplacementStructure> mUpdateStructures;
-      //  protected List<DisplacementStructure> mDrawStructures;   
+        protected List<DisplacementStructure> mUpdateStructures = new List<DisplacementStructure>();  
 
        // protected Dictionary<int, DrawingBufferItem> mDrawingItems;
 
@@ -48,19 +47,7 @@ namespace _3dplayground
 
         public GameSpaceUnit()
         {
-            mIAmInSpace = new Dictionary<int, IAmInSpace>();
-            mFieldObjects = new Dictionary<int, IGetEffectedByGravity>();
-            mPointFieldEmitters = new Dictionary<int, IEmitPointField>();
-            mPhysicsObjects = new Dictionary<int, IPhysicsObject>();
-          //  mUpdateableObjects = new Dictionary<string, IUpdateable>();
-            mDrawableObjects = new Dictionary<int, I3DDrawable>();
-            mLastUpdateTime = DateTime.Now;
-            mUpdateStructures = new List<DisplacementStructure>();
-            mCollisionComponent = new CollisionComponent();
-          //  mDrawingItems = new Dictionary<int, DrawingBufferItem>();
-            mGameSpaceUnits = new Dictionary<int, GameSpaceUnit>();
-
-           
+            mLastUpdateTime = DateTime.Now;           
         }
         #region Properties
        public string Name

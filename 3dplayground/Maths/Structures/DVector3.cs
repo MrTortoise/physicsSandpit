@@ -12,6 +12,7 @@ namespace _3dplayground.Maths
     /// </summary>
     public struct DVector3 : IEquatable<DVector3>
     {
+         
         /*   
          *   This is also a class that I expect will benefit from being optomised ... however, right now certainty of operation is key.
          *   At least until we have a good set of unit tests set up from debugging - we can bung traces on things to decide what to optomise.
@@ -19,6 +20,12 @@ namespace _3dplayground.Maths
          *   This is definatley one of th emost importnat classes in the project imo.
          * 
          * */
+
+        private static DVector3 mZero = new DVector3(0, 0, 0);
+        private static DVector3 mUnitX= new DVector3(1, 0, 0);
+        private static DVector3 mUnitY = new DVector3(0, 1, 0);
+        private static DVector3 mUnitZ = new DVector3(0, 0, 1);
+
         #region Static Classes
 
         #region Static Properties
@@ -27,25 +34,25 @@ namespace _3dplayground.Maths
         /// Gets a zero vector
         /// </summary>
         public static DVector3 Zero
-        { get { return new DVector3(0, 0, 0); } }
+        { get { return mZero; } }
 
         /// <summary>
         /// Gets a Unit Vector in the X dimension
         /// </summary>
         public static DVector3 UnitX
-        { get { return new DVector3(1, 0, 0); } }
+        { get { return mUnitX ; } }
 
         /// <summary>
         /// Gets a Unit Vector in the Y dimension
         /// </summary>
         public static DVector3 UnitY
-        { get { return new DVector3(0, 1, 0); } }
+        { get { return mUnitY ; } }
 
         /// <summary>
         /// Gets a Unit Vector in the Z dimension
         /// </summary>
         public static DVector3 UnitZ
-        { get { return new DVector3(0, 0, 1); } }
+        { get { return mUnitZ; ; } }
 
         #endregion
         #region Static Methods
@@ -263,7 +270,7 @@ namespace _3dplayground.Maths
 
         public override string ToString()
         {
-            string retVal = "DVector3 x=" + mX + ", y={" + mY + " , z=" + mZ;
+            string retVal = "DVector3 x=" + mX + ", y=" + mY + " , z=" + mZ;
             return retVal;
         }
 

@@ -15,7 +15,11 @@
     <ApplicationIcon>Game.ico</ApplicationIcon>
     <Thumbnail>GameThumbnail.png</Thumbnail>
     <IsWebBootstrapper>false</IsWebBootstrapper>
-    <PublishUrl>publish\</PublishUrl>
+    <ManifestCertificateThumbprint>03549419E4EE881817168280B194BF106D37D3E7</ManifestCertificateThumbprint>
+    <ManifestKeyFile>3dplayground_TemporaryKey.pfx</ManifestKeyFile>
+    <GenerateManifests>true</GenerateManifests>
+    <SignManifests>true</SignManifests>
+    <PublishUrl>O:\GameInstall\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
     <UpdateEnabled>false</UpdateEnabled>
@@ -25,7 +29,7 @@
     <UpdatePeriodically>false</UpdatePeriodically>
     <UpdateRequired>false</UpdateRequired>
     <MapFileExtensions>true</MapFileExtensions>
-    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationRevision>2</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <BootstrapperEnabled>true</BootstrapperEnabled>
@@ -101,7 +105,6 @@
     <Compile Include="Graphics\DrawingBufferItem.cs" />
     <Compile Include="Graphics\Interfaces\IGameDrawable.cs" />
     <Compile Include="Graphics\Message\DrawingStructure.cs" />
-    <Compile Include="Graphics\Message\DrawingStructureEventArgs.cs" />
     <Compile Include="Physics\CollisionComponent.cs" />
     <Compile Include="DisplacementStructure.cs" />
     <Compile Include="Physics\EventArgs\DisplacementArgs.cs" />
@@ -109,13 +112,11 @@
     <Compile Include="EventManager\InputEventArgs.cs" />
     <Compile Include="Graphics\D3\BasicModel.cs" />
     <Compile Include="Graphics\D3\BoundingHelper.cs" />
-    <Compile Include="Graphics\D3\IHasBoundedBox.cs" />
-    <Compile Include="Graphics\D3\IHasBoundingSphere.cs" />
     <Compile Include="Physics\Exceptions\ObjectsNotEqualException.cs" />
     <Compile Include="Physics\FieldPhysicsComponent.cs" />
     <Compile Include="GameSpaceUnit.cs" />
     <Compile Include="Physics\Interfaces\ICanMove.cs" />
-    <Compile Include="Graphics\D3\I3DDrawable.cs" />
+    <Compile Include="Graphics\D3\Interfaces\I3DDrawable.cs" />
     <Compile Include="Physics\Interfaces\IEmitPointField.cs" />
     <Compile Include="Physics\Interfaces\IFieldPhysics.cs" />
     <Compile Include="Interfaces\IAmInSpace.cs" />
@@ -124,12 +125,11 @@
     <Compile Include="Physics\Interfaces\IHasMass.cs" />
     <Compile Include="Interfaces\IHasName.cs" />
     <Compile Include="Interfaces\ILoadable.cs" />
-    <Compile Include="Graphics\D3\IModel.cs" />
+    <Compile Include="Graphics\D3\Interfaces\IModel.cs" />
     <Compile Include="Physics\Interfaces\IPhysicsObject.cs" />
     <Compile Include="Interfaces\IUpdateable.cs" />
     <Compile Include="Moon.cs" />
     <Compile Include="Physics\New_pos_and_vel.cs" />
-    <Compile Include="Physics\PhysFunc.cs" />
     <Compile Include="Physics\PhysicsModel.cs" />
     <Compile Include="Physics\PhysicalBody.cs" />
     <Compile Include="Maths\Structures\DVector3.cs" />
@@ -183,8 +183,10 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
+    <None Include="3dplayground_TemporaryKey.pfx" />
     <None Include="App.config" />
     <None Include="FieldPhysicsDiagram.cd" />
+    <None Include="GameEngine.cd" />
     <None Include="GameUpdateDraw.cd" />
     <None Include="Interfaces\Interfaces.cd" />
     <None Include="Physics\PhysicsDiagram.cd" />

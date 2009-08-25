@@ -14,9 +14,7 @@ using Microsoft.Xna.Framework.Storage;
 using _3dplayground.Graphics.D3;
 using _3dplayground.Physics;
 using _3dplayground.EventManagement;
-using _3dplayground.Maths;
-
-
+using _3dplayground.Maths;  
 
 namespace _3dplayground
 {
@@ -29,20 +27,11 @@ namespace _3dplayground
     {
         
         GraphicsDeviceManager graphics;
-       // SpriteBatch spriteBatch;
-
         GameSpaceUnit mObjects;
         GameEngine mEngine;
 
-        //phys_planet mSphere = new phys_planet(1000000, Vector3.Zero);
-       // List<phys_planet> theSphereList = new List<phys_planet>();   
-
         private Camera mCamera = new Camera();
-       // private Matrix gameWorldRotation = 0.0f;
-
         EventManager mEventManager = EventManager.GetInstance();
-
-
 
         public Game1()
         {
@@ -50,12 +39,8 @@ namespace _3dplayground
             Content.RootDirectory = "Content";
 
             graphics.PreferredBackBufferWidth = 1280;
-            graphics.PreferredBackBufferHeight = 800;
-         
-
-
+            graphics.PreferredBackBufferHeight = 1024;          
             mObjects = new GameSpaceUnit();
-
             Components.Add(new CommonObjects.Components.FPS(this));
         
         }
@@ -112,19 +97,19 @@ namespace _3dplayground
             mObjects.AddGameObject(mMoon);
            
             Moon mMoon2;
-            mMoon2 = new Moon(theSphere, mFPC, mObjects, "Moon1", 100000, new DVector3(100, 100, 0), new DVector3(0, 0, 0), Quaternion.Identity, Quaternion.Identity);
+            mMoon2 = new Moon(theSphere, mFPC, mObjects, "Moon2", 100000, new DVector3(100, 100, 0), new DVector3(0, 0, 0), Quaternion.Identity, Quaternion.Identity);
             mObjects.AddGameObject(mMoon2);
 
             Moon mMoon3;
-            mMoon3 = new Moon(theSphere, mFPC, mObjects, "Moon1", 100000, new DVector3(100, 0, 100), new DVector3(0, 0, 0), Quaternion.Identity, Quaternion.Identity);
+            mMoon3 = new Moon(theSphere, mFPC, mObjects, "Moon3", 100000, new DVector3(200, 0, 100), new DVector3(0, 0, 0), Quaternion.Identity, Quaternion.Identity);
             mObjects.AddGameObject(mMoon3);
 
             Moon mMoon4;
-            mMoon4 = new Moon(theSphere, mFPC, mObjects, "Moon1", 100000, new DVector3(100, 100, 100), new DVector3(0, 0, 0), Quaternion.Identity, Quaternion.Identity);
+            mMoon4 = new Moon(theSphere, mFPC, mObjects, "Moon4", 100000, new DVector3(100, 100, 100), new DVector3(0, 0, 0), Quaternion.Identity, Quaternion.Identity);
             mObjects.AddGameObject(mMoon4);
 
             Moon mMoon5;
-            mMoon5 = new Moon(theSphere, mFPC, mObjects, "Moon1", 100000, new DVector3(0, 100, 0), new DVector3(0, 0, 0), Quaternion.Identity, Quaternion.Identity);
+            mMoon5 = new Moon(theSphere, mFPC, mObjects, "Moon5", 100000, new DVector3(200, 100, 0), new DVector3(0, 0, 0), Quaternion.Identity, Quaternion.Identity);
             mObjects.AddGameObject(mMoon5);
                 
              
@@ -132,8 +117,8 @@ namespace _3dplayground
             mCamera.FarClippingPlane=1000.0f;
             mCamera.FieldOfView=MathHelper.ToRadians(30f);
             mCamera.NearClippingPlane = 1.0f;
-            mCamera.Position = new Vector3(500, 500, 0);
-            mCamera.Target = Vector3.Zero;
+            mCamera.Position = new Vector3(500, 500, 100);
+            mCamera.Target = new Vector3(0, 0, 100);
             mCamera.UpVector = Vector3.UnitZ  ; 
 
             mCamera.Compile();
@@ -161,14 +146,14 @@ namespace _3dplayground
         /// checking for collisions, gathering input, and playing audio.
         /// </summary>
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
-        protected override void Update(GameTime gameTime)
+        protected  override void Update(GameTime gameTime)
         {
 
-            mEventManager.ProcessInput();
+           // mEventManager.ProcessInput();
             // Allows the game to exit
-            if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed)
-                this.Exit();
-            mEngine.Update(gameTime.ElapsedRealTime.Ticks  / Constants.TimeScale);
+          //  if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed)
+            //    this.Exit();
+            mEngine.Update();
             
 
             base.Update(gameTime);
@@ -184,15 +169,6 @@ namespace _3dplayground
             mEngine.Draw(gameTime.ElapsedRealTime.Ticks /Constants.TimeScale );            
 
             base.Draw(gameTime);
-
-            //I could of used this code here - Just to demonstrate interfaces
-            //foreach (IDrawable d in mObjects.InSpaceObjects.Values)
-            //{
-            //    d.Draw(mCamera);
-            //}  
-            // Even though objects have been added to a list of interfaces that has nothing to do with the IDrawable Interface
-            // I can still pull the objects that implement IDrawable out of the list.
-            // I elected not to do this as it would have to traverse the whole list every time - better to do this once.
 
         }
 
