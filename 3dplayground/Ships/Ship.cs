@@ -8,15 +8,15 @@ using Microsoft.Xna.Framework.Input;
 
 namespace _3dplayground.Ships
 {
-    class Ship  : GravityModel,IAmShip  
+    class Ship  : GravityEffectedModel,IAmShip  
     {
         protected IAmShipEngine mEngine;
 
 
         public Ship(string theName, GameSpaceUnit theSpace, int theMass, DVector3 thePosition,
-            DVector3 theVelocity, Quaternion theRotation, Quaternion theAngularVelocity, IModel theModel, IFieldPhysics theFieldPhysics,
+            DVector3 theVelocity, Quaternion theRotation, Quaternion theAngularVelocity,DVector3 theUpVector, IModel theModel, IFieldPhysics theFieldPhysics,
             IAmShipEngine theEngine)
-            : base(theName, theSpace, theMass, thePosition, theVelocity, theRotation, theAngularVelocity, theModel, theFieldPhysics)
+            : base(theName, theSpace, theMass, thePosition, theVelocity, theRotation, theAngularVelocity,theUpVector, theModel, theFieldPhysics)
         {
             mEngine = theEngine;
 

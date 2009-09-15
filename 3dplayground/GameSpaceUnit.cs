@@ -38,8 +38,7 @@ namespace _3dplayground
         protected Dictionary<int, I3DDrawable> mDrawableObjects = new Dictionary<int,I3DDrawable>();  
         protected Dictionary<int, GameSpaceUnit> mGameSpaceUnits = new Dictionary<int,GameSpaceUnit>();
 
-        protected Dictionary<int, DisplacementStructure> mUpdateStructures = new Dictionary<int, DisplacementStructure>();
-     
+        protected Dictionary<int, DisplacementStructure> mUpdateStructures = new Dictionary<int, DisplacementStructure>();    
 
 
 

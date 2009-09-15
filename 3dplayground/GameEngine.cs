@@ -77,6 +77,7 @@ namespace _3dplayground
 
         public void Draw(float timeSpan)
         {
+            mCamera.Compile();
             mGraphics.Draw(timeSpan, mCamera);
         }
 

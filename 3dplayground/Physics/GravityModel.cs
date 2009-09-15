@@ -10,15 +10,15 @@ namespace _3dplayground.Physics
     /// This is an abstract base for any class wishing to inherit from a gravitational mass.
     /// Thi sclass probably doesn;t wan to be abstract.
     /// </summary>
-    abstract class GravityModel : PhysicsModel , IGetEffectedByGravity 
+    abstract class GravityEffectedModel : PhysicsModel , IGetEffectedByGravity 
     {
 
         protected IFieldPhysics mFieldPhysics;
         protected DisplacementStructure  mGravityDisplacement;
 
-        public GravityModel(string theName,GameSpaceUnit theSpace, int theMass, DVector3 thePosition,
-            DVector3 theVelocity,Quaternion theRotation,Quaternion theAngularVelocity, IModel theModel, IFieldPhysics theFieldPhysics)
-            : base(theName,theSpace, theMass, thePosition, theVelocity, theRotation,theAngularVelocity, theModel)
+        public GravityEffectedModel(string theName,GameSpaceUnit theSpace, int theMass, DVector3 thePosition,
+            DVector3 theVelocity,Quaternion theRotation,Quaternion theAngularVelocity, DVector3 theUpVector, IModel theModel, IFieldPhysics theFieldPhysics)
+            : base(theName,theSpace, theMass, thePosition, theVelocity, theRotation,theAngularVelocity,theUpVector, theModel)
         {
             mFieldPhysics = theFieldPhysics;
         }

@@ -33,6 +33,8 @@ namespace _3dplayground.Physics
         protected Quaternion mAngularVelocity;
         protected Quaternion mRotation;
 
+        protected DVector3 mUpVector;
+
         protected int mMass;
         protected GameSpaceUnit mSpace;
 
@@ -56,7 +58,7 @@ namespace _3dplayground.Physics
 
         public PhysicalBody(string theName, GameSpaceUnit theSpace, int theMass, 
             DVector3 thePosition, DVector3 theVelocity, 
-            Quaternion theRotation, Quaternion theAngularVelocity)
+            Quaternion theRotation, Quaternion theAngularVelocity, DVector3 theUpVector)
         {
             mName = theName;
             mPosition = thePosition;
@@ -65,6 +67,8 @@ namespace _3dplayground.Physics
             mDrawRotation = theRotation;
             mMass = theMass;
             mVelocity = theVelocity;
+
+            mUpVector = theUpVector;
            
             mAngularVelocity = theAngularVelocity;
             mSpace = theSpace;
@@ -117,6 +121,14 @@ namespace _3dplayground.Physics
         public Quaternion Rotation
         {
             get { return mRotation; }
+        }
+
+        /// <summary>
+        /// Returns the Up Vector of the model - used for the camera
+        /// </summary>
+        public DVector3 UpVector
+        {
+            get { return mUpVector; }
         }
 
 

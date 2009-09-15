@@ -20,7 +20,11 @@ namespace _3dplayground
         { get; }
 
         GameSpaceUnit Space
-        { get; } 
+        { get; }
+
+        DVector3 UpVector
+        { get; }
+
 
 
     }

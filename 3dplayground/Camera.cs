@@ -33,7 +33,7 @@ namespace _3dplayground
         Vector3 mCameraTarget=Vector3.Zero;
         Vector3 mCameraUpVector=Vector3.UnitZ ;
 
-        IAmInSpace mTarget;
+        IAmInSpace mAttachedTo;
         CameraMode mCameraMode = CameraMode.detached;
 
         public Camera()
@@ -52,9 +52,9 @@ namespace _3dplayground
             set { mCameraMode = value; }
         }
 
-        public void SetTarget(IAmInSpace theTarget)
+        public void AttachToObject(IAmInSpace theTarget)
         {
-            mTarget = theTarget;
+            mAttachedTo = theTarget;
         }
 
 
@@ -193,8 +193,17 @@ namespace _3dplayground
        /// Generates the View matrix fromt he camera Position, target and UpVector.
        /// </summary>
         public void GenerateView()
-        {               
-            mView = Matrix.CreateLookAt(mCameraPosition, mCameraTarget, mCameraUpVector);
+        {
+            if (mCameraMode == CameraMode.Attached)
+            {
+                mView = Matrix.CreateLookAt(mAttachedTo.Position.ToVector3() ,
+                    new Vector3(mAttachedTo.Rotation.X,mAttachedTo.Rotation.Y,mAttachedTo.Rotation.Z), 
+                    mAttachedTo.UpVector.ToVector3() );
+            }
+            else
+            {
+                mView = Matrix.CreateLookAt(mCameraPosition, mCameraTarget, mCameraUpVector);
+            }
         }
         #endregion
 
