@@ -26,9 +26,9 @@ namespace _3dplayground.Physics
             // ...   just type /// above a method to do the comment thang btw  .
 
             //The xml comments can be turned into a proper developer help system ala msdn later using sandcastle
+          
+            double hstep = step / 2.0f;
             
-            double hstep = step / 20f;
-            step = step / 10;
             DVector3 force = DVector3.Zero;
 
             GameSpaceUnit space = i.Space ;
