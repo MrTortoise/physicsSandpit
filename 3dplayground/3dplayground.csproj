@@ -98,6 +98,10 @@
     <Compile Include="Components\FPS.cs" />
     <Compile Include="Constants.cs" />
     <Compile Include="Core\GlobalIDGenerator.cs" />
+    <Compile Include="EventManagement\Inputsettings.cs" />
+    <Compile Include="EventManagement\MouseButtons.cs" />
+    <Compile Include="EventManagement\MouseButtonState.cs" />
+    <Compile Include="EventManagement\MousePosition.cs" />
     <Compile Include="GameEngine.cs" />
     <Compile Include="GameGraphicsManager.cs" />
     <Compile Include="Graphics\D3\D3DrawableArgs.cs" />
@@ -108,8 +112,8 @@
     <Compile Include="Physics\CollisionComponent.cs" />
     <Compile Include="DisplacementStructure.cs" />
     <Compile Include="Physics\EventArgs\DisplacementArgs.cs" />
-    <Compile Include="EventManager\EventManager.cs" />
-    <Compile Include="EventManager\InputEventArgs.cs" />
+    <Compile Include="EventManagement\EventManager.cs" />
+    <Compile Include="EventManagement\InputEventArgs.cs" />
     <Compile Include="Graphics\D3\BasicModel.cs" />
     <Compile Include="Graphics\D3\BoundingHelper.cs" />
     <Compile Include="Physics\Exceptions\ObjectsNotEqualException.cs" />

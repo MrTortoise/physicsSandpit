@@ -13,6 +13,9 @@ namespace _3dplayground
     {
         static private int mCount = 0;
 
+        // the idea is that eventually we will need Id reuse when objects are destroyed.
+        // this class can manage that ... we can force objects that get an id to implement IDisposable or summit)
+
 
         protected GlobalIDGenerator()
         { }

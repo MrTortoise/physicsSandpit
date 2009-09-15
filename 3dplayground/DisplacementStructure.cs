@@ -15,10 +15,12 @@ namespace _3dplayground
     {
 
         //TpDo: Implement rotation into displacement structure
+
+        //Feel free to add any other operators as needed.
          
         #region Static Methods
         /// <summary>
-        /// Takes 2 dsplacement structures and returns a displacement structure representing their combination.
+        /// Takes 2 dsplacement structures and returns a new displacement structure representing their combination.
         /// Their absolutes should be the same, the deltas will be added
         /// </summary>
         /// <param name="s1"></param>
@@ -47,6 +49,12 @@ namespace _3dplayground
             return Add(s1, s2);
         }
         
+        /// <summary>
+        /// constructs a Displacement structure that uses the Source object, its position and its velocity
+        /// to create a displacement structure that represents no change int hese values.
+        /// </summary>
+        /// <param name="source"></param>
+        /// <returns></returns>
         public static DisplacementStructure ZeroDeltas(IPhysicsObject source)
         {
             return new DisplacementStructure(source, source.Position, source.Velocity  );

@@ -5,15 +5,15 @@ using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 
+using _3dplayground.EventManagement;
 using _3dplayground.Graphics;
 using _3dplayground.Physics;
+
 
 namespace _3dplayground
 {
     /// <summary>
     /// This is the game engine. All objecs to be constructed and loaded externally..
-    /// I call this game engine, but really its just the 3d part of the game.
-    /// The 2D UI will have its own engine for example.
     /// This class will also be running the update thread.
     /// </summary>
     sealed  class GameEngine                                           
@@ -30,6 +30,8 @@ namespace _3dplayground
         private GameSpacePhysics  mPhysics;
 
         private Camera mCamera;
+
+        private EventManager mEventManager = EventManager.GetInstance();
 
         private bool mIsRunning = true;
         private DateTime mLastUpdateTime = DateTime.Now ;
@@ -54,19 +56,23 @@ namespace _3dplayground
 
         }
 
-        public  void Update()
+        public void Update()
         {
             DateTime Current;
             TimeSpan theTimePeriod;
-           // while (mIsRunning)
-           // {
-                Current = DateTime.Now;
-                theTimePeriod = Current - mLastUpdateTime;                
-                float updateTime = ((float)theTimePeriod.Ticks) / Constants.TimeScale;
-                mPhysics.Update(updateTime, mBuffer);
-                mBuffer.UpdateFinished();
-                mLastUpdateTime = Current;
-          //  }
+            // while (mIsRunning)
+            // {
+            Current = DateTime.Now;
+            theTimePeriod = Current - mLastUpdateTime;
+            float updateTime = ((float)theTimePeriod.Ticks) / Constants.TimeScale;
+            // Process any player input and raises the input events - ai will use this mechanism to pass commands to their vessels
+            mEventManager.ProcessInput();
+            // Perform the physics update
+            mPhysics.Update(updateTime, mBuffer);
+            // tell buffer that the update has finished to set the next drawing frame
+            mBuffer.UpdateFinished();
+            mLastUpdateTime = Current;
+            //  }
         }
 
         public void Draw(float timeSpan)

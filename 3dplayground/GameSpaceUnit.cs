@@ -1,8 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using Microsoft.Xna.Framework;
+using System.Linq;
 
 using _3dplayground.Physics;
 using _3dplayground.Graphics.D3;
@@ -22,6 +21,10 @@ namespace _3dplayground
     /// </summary>
    public  class GameSpaceUnit
     {
+
+       // Justification for increasing the 'density' of space:
+       // It has been found that the speed of light in a vacuum is related to the amount of mass nearby.
+
        protected string mName;    
 
         DateTime mLastUpdateTime;
@@ -32,16 +35,11 @@ namespace _3dplayground
         protected Dictionary<int, IEmitPointField> mPointFieldEmitters = new Dictionary<int,IEmitPointField>();
         protected Dictionary<int, IPhysicsObject> mPhysicsObjects = new Dictionary<int,IPhysicsObject>();
 
-        protected Dictionary<int, I3DDrawable> mDrawableObjects = new Dictionary<int,I3DDrawable>();
-
+        protected Dictionary<int, I3DDrawable> mDrawableObjects = new Dictionary<int,I3DDrawable>();  
         protected Dictionary<int, GameSpaceUnit> mGameSpaceUnits = new Dictionary<int,GameSpaceUnit>();
 
-
-        protected List<DisplacementStructure> mUpdateStructures = new List<DisplacementStructure>();  
-
-       // protected Dictionary<int, DrawingBufferItem> mDrawingItems;
-
-        
+        protected Dictionary<int, DisplacementStructure> mUpdateStructures = new Dictionary<int, DisplacementStructure>();
+     
 
 
 
@@ -177,7 +175,7 @@ namespace _3dplayground
             //the displacement structures have now been updated to reflect their collision evalutated state
       
         
-            foreach (DisplacementStructure d in mUpdateStructures)
+            foreach (DisplacementStructure d in mUpdateStructures.Values )
             {
                 // for each object that needs to be updated, execute its update args.
                 d.IPhysicsObject.ExecuteDisplacementStructure(d);
@@ -217,29 +215,35 @@ namespace _3dplayground
         protected void PerformCollisionCalculation(float UpdatePeriod)
         {
             //no collisions atm. 
+
+            //ToDo: This is where I want to hook up the collision detection logic for now.
+
+            // I have an idea how I think this should be done, but am curious to see how you approach it.
+            // the one thing that I stipulate is this, please pass the displacement structures in as a reference
+            // and do all the iterating in the collision copmonent. I was tempted to put it here ;)
+
+            mCollisionComponent.PerformCollisionResolution();
+
         }
 
 
 
         protected void AddDisplacementStructure(DisplacementStructure theStructure)
         {
-            int theIndex = mUpdateStructures.IndexOf(theStructure);
-            if (theIndex > -1)
+            if (mUpdateStructures.ContainsKey(theStructure.IPhysicsObject.ID))
             {
-                //ToDo: Implement +=
-                mUpdateStructures[theIndex]= mUpdateStructures[theIndex] + theStructure;
+                mUpdateStructures[theStructure.IPhysicsObject.ID] = mUpdateStructures[theStructure.IPhysicsObject.ID] + theStructure;
             }
             else
             {
-                mUpdateStructures.Add(theStructure);
+                mUpdateStructures.Add(theStructure.IPhysicsObject.ID, theStructure);
             }
-
         }
 
         protected DisplacementStructure GetNext()
-        {
-            DisplacementStructure retVal = mUpdateStructures[0];
-            mUpdateStructures.RemoveAt(0);
+        { 
+            DisplacementStructure retVal = mUpdateStructures.Values.First();
+            mUpdateStructures.Remove(retVal.IPhysicsObject.ID);
             return retVal;
         }          
 

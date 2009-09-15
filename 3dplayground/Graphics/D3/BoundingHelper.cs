@@ -19,7 +19,7 @@ namespace _3dplayground.Graphics.D3
                                                
         public static  BoundingBox  CalculateBox(Model theModel)
         {
-            //ps i ripped this code off :D
+            //ps i ripped this code off :D      - but the comments are mine.
             BoundingBox retVal;
             //the 2 vecotors that go int the bounding box constructor
             Vector3 Max = new Vector3(float.MinValue, float.MinValue, float.MinValue);

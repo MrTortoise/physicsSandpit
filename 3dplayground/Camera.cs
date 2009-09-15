@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 
@@ -17,7 +15,7 @@ namespace _3dplayground
 
     /// <summary>
     /// This class respresents the camera will will define the view into the object space and the methods available to the camera.
-    /// Provides access to a frustrum for visibility detection.
+    /// Provides access to a frustrum for visibility detection.    
     /// </summary>
    public  class Camera
     {   
@@ -36,6 +34,7 @@ namespace _3dplayground
         Vector3 mCameraUpVector=Vector3.UnitZ ;
 
         IAmInSpace mTarget;
+        CameraMode mCameraMode = CameraMode.detached;
 
         public Camera()
         {
@@ -44,10 +43,21 @@ namespace _3dplayground
             GenerateFrustrum();
         }
 
+       /// <summary>
+       /// Gets / Sets wether the camera is attached to an object.
+       /// </summary>
+        public CameraMode CameraMode
+        {
+            get { return mCameraMode; }
+            set { mCameraMode = value; }
+        }
+
         public void SetTarget(IAmInSpace theTarget)
         {
             mTarget = theTarget;
         }
+
+
 
         public void Compile()
         {

@@ -32,8 +32,7 @@ namespace _3dplayground.Physics
         {
             New_pos_and_vel disp;
             disp = mFieldPhysics.dothe_phys(theTime , this);
-            mGravityDisplacement = new DisplacementStructure(this, mPosition, disp.position, mVelocity, disp.velocity);
-           
+            mGravityDisplacement = new DisplacementStructure(this, mPosition, disp.position, mVelocity, disp.velocity);          
 
 
         }
