@@ -5,7 +5,6 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
 
 using _3dplayground.EventManagement;
-using _3dplayground.Physics;
 using _3dplayground.Maths;
 using _3dplayground.Graphics.D3;
 using _3dplayground.Ships;
