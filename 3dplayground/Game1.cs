@@ -14,7 +14,8 @@ using Microsoft.Xna.Framework.Storage;
 using _3dplayground.Graphics.D3;
 using _3dplayground.Physics;
 using _3dplayground.EventManagement;
-using _3dplayground.Maths;  
+using _3dplayground.Maths;
+using _3dplayground.Ships;  
 
 namespace _3dplayground
 {
@@ -32,6 +33,7 @@ namespace _3dplayground
 
         private Camera mCamera = new Camera();
         EventManager mEventManager = EventManager.GetInstance();
+        private Player mPlayer;
 
         public Game1()
         {
@@ -114,18 +116,28 @@ namespace _3dplayground
                 
              
             mCamera.AspectRatio=graphics.GraphicsDevice.Viewport.Width / (float)graphics.GraphicsDevice.Viewport.Height;
-            mCamera.FarClippingPlane=1000.0f;
+            mCamera.FarClippingPlane=10000.0f;
             mCamera.FieldOfView=MathHelper.ToRadians(30f);
             mCamera.NearClippingPlane = 1.0f;
             mCamera.Position = new Vector3(500, 500, 100);
             mCamera.Target = new Vector3(0, 0, 100);
             mCamera.UpVector = Vector3.UnitZ  ;
             mCamera.CameraMode = CameraMode.Attached;
-            mCamera.AttachToObject(mMoon5);
+           
+            BasicModel shipModel = new BasicModel("theShip","Ship");
+            shipModel.LoadContent(Content);
+            BasicEngine shipEngine = new BasicEngine("basicEngine",1000.0f,0.001f,1000.0f,10000000.0f,10);
+            Ship theShip = new Ship("testShip", mObjects, 1000, new DVector3(500, 500, 000), DVector3.Zero, new Quaternion(new Vector3(-1,-1,0),1),Quaternion.Identity,
+                DVector3.UnitZ, shipModel, mFPC, shipEngine);
+            mObjects.AddGameObject(theShip);
+
+            mPlayer = new Player(mCamera);
+            mPlayer.SetShip(theShip);
+            mPlayer.SubscribeToInputEvents();
 
             mCamera.Compile();
 
-            mEngine = new GameEngine(mObjects, mCamera);
+            mEngine = new GameEngine(mObjects, mPlayer);
 
                      
         
@@ -168,7 +180,7 @@ namespace _3dplayground
         protected override void Draw(GameTime gameTime)
         {
             GraphicsDevice.Clear(Color.Black );
-            mEngine.Draw(gameTime.ElapsedRealTime.Ticks /Constants.TimeScale );            
+            mEngine.Draw(gameTime.ElapsedRealTime.Ticks /Config.TimeScale );            
 
             base.Draw(gameTime);
 

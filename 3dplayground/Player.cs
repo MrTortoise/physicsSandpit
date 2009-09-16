@@ -14,66 +14,108 @@ using _3dplayground.Ships;
 
 namespace _3dplayground
 {
-    class Player  
+    class Player : IAcceptInput
     {
 
-        protected EventManager mEventManager;
+      
         protected Camera mCamera;
         protected IAmShip mShip;
 
 
         public Player(Camera thecamera)
         {
-            mCamera=thecamera;
-
-            mEventManager = EventManager.GetInstance();
-
-            mEventManager.KeyPressed += new EventHandler<InputEventArgs>(EventManager_KeyPressed);
-            mEventManager.KeyReleased += new EventHandler<InputEventArgs>(EventManager_KeyReleased);
-            mEventManager.MouseButtonPressed += new EventHandler<InputEventArgs>(EventManager_MouseButtonPressed);
-            mEventManager.MouseButtonReleased += new EventHandler<InputEventArgs>(EventManager_MouseButtonReleased);
-            mEventManager.MousePositionChanged += new EventHandler<InputEventArgs>(EventManager_MousePositionChanged);
-            
+            mCamera=thecamera;             
         }
 
-
-
-        protected void EventManager_KeyPressed(Object s, InputEventArgs a)
+        public IAmShip Ship
         {
-            foreach (Keys k in a.NewDepressedKeys)
+            get { return mShip; }
+        }
+
+        public Camera Camera
+        { get { return mCamera; } }
+
+        public void SetShip(IAmShip theShip)
+        {
+            mShip = theShip;
+            mCamera.CameraMode = CameraMode.Attached;
+            mCamera.AttachToObject(mShip);            
+        }
+
+        #region IAcceptInput Members
+
+        public void SubscribeToInputEvents()
+        {
+            EventManager e = EventManager.GetInstance();
+
+            e.KeyPressed += new EventHandler<InputEventArgs>(OnKeyPressed);
+            e.KeyReleased += new EventHandler<InputEventArgs>(OnKeyReleased);
+           // e.MouseButtonPressed += new EventHandler<InputEventArgs>(OnMouseButtonPressed);
+           // e.MouseButtonReleased += new EventHandler<InputEventArgs>(OnMouseButtonReleased);
+            e.MousePositionChanged += new EventHandler<InputEventArgs>(OnMousePositionChanged);
+          //  e.MouseWheelScrolled += new EventHandler<InputEventArgs>(OnMouseWheelScrolled);
+        }
+
+        public void UnSubscribeFromInputEvents()
+        {
+            EventManager e = EventManager.GetInstance();
+
+            e.KeyReleased -= OnKeyReleased;
+            e.KeyPressed -= OnKeyPressed;
+          //  e.MouseButtonPressed -= OnMouseButtonPressed;
+          //  e.MouseButtonReleased -= OnMouseButtonReleased;
+            e.MousePositionChanged -= OnMousePositionChanged;
+          //  e.MouseWheelScrolled -= OnMouseWheelScrolled;
+        }
+
+        public void OnMouseButtonPressed(object s, InputEventArgs args)
+        {
+           
+        }
+        public void OnMouseButtonReleased(object s, InputEventArgs args)
+        {
+           
+        }
+        public void OnMouseWheelScrolled(object s, InputEventArgs args)
+        {
+           
+        }
+
+        public void OnMousePositionChanged(object s, InputEventArgs args)
+        {
+            //deal with rotation later
+        }
+
+        public void OnKeyPressed(object s, InputEventArgs args)
+        {
+            foreach (Keys k in args.NewPressedKeys)
             {
-                switch (k)
+                if (k == Config.Accelerate)
                 {
-                    case Keys.W:
-                        {
-
-                            break;
-                        }
+                    mShip.Accelerate();
                 }
-                        
-
+                else if (k == Config.Decelerate)
+                {
+                    mShip.Decelerate();
+                }
             }
-
         }
 
-        protected void EventManager_KeyReleased(Object s, InputEventArgs a)
+        public void OnKeyReleased(object s, InputEventArgs args)
         {
-
+            foreach (Keys k in args.NewDepressedKeys )
+            {
+                if (k == Config.Accelerate)
+                {
+                    mShip.TurnEngineOff();
+                }
+                else if (k == Config.Decelerate)
+                {
+                    mShip.TurnEngineOff();
+                }
+            }
         }
 
-        protected void EventManager_MouseButtonReleased(Object s, InputEventArgs a)
-        {
-
-        }
-
-        protected void EventManager_MouseButtonPressed(Object s, InputEventArgs a)
-        {
-
-        }
-
-        protected void EventManager_MousePositionChanged(Object s, InputEventArgs a)
-        {
-
-        }
+        #endregion
     }
 }

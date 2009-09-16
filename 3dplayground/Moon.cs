@@ -46,7 +46,7 @@ namespace _3dplayground
 
                                                           
 
-        public void ExecuteGravityDisplacement(float   theTime)
+        public void CalculateGravityDisplacement(float   theTime)
         {
             
             New_pos_and_vel disp;

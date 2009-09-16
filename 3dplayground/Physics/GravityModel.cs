@@ -28,7 +28,11 @@ namespace _3dplayground.Physics
             get { return mGravityDisplacement; }
         }  
 
-        public void ExecuteGravityDisplacement(float   theTime)
+        /// <summary>
+        /// This method is run prior to the objects update to calculate the gravity. 
+        /// </summary>
+        /// <param name="theTime"></param>
+        public void CalculateGravityDisplacement(float   theTime)
         {
             New_pos_and_vel disp;
             disp = mFieldPhysics.dothe_phys(theTime , this);

@@ -10,8 +10,9 @@ namespace _3dplayground.Ships
 
         void SetEngine(IAmShipEngine theEngine);
 
+        void Accelerate();
+        void Decelerate();
         void TurnEngineOff();
-        void TurnEngineOn();
 
         /// <summary>
         /// Sets the direction the ship will start to rotationally accelerate towards.

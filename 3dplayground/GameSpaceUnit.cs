@@ -199,7 +199,7 @@ namespace _3dplayground
         {
             foreach (IGetEffectedByGravity i in mFieldObjects.Values )
             {
-                i.ExecuteGravityDisplacement(UpdatePeriod);
+                i.CalculateGravityDisplacement(UpdatePeriod);
                 
             }
         } 

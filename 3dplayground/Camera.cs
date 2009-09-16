@@ -55,10 +55,13 @@ namespace _3dplayground
         public void AttachToObject(IAmInSpace theTarget)
         {
             mAttachedTo = theTarget;
-        }
+        }   
 
 
-
+       /// <summary>
+       /// Will compile the matricies for drawing. To be used if the object it is attached 
+       /// to moves or the cameras position itself changes.
+       /// </summary>
         public void Compile()
         {
             GenerateProjection();
@@ -202,6 +205,7 @@ namespace _3dplayground
             }
             else
             {
+               
                 mView = Matrix.CreateLookAt(mCameraPosition, mCameraTarget, mCameraUpVector);
             }
         }

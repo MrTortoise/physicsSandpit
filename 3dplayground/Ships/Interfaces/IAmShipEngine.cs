@@ -18,6 +18,12 @@ namespace _3dplayground.Ships
         { get; set; }
 
         /// <summary>
+        /// If not accelerating then decelerating.
+        /// </summary>
+        bool IsAccelerating
+        { get; set; }
+
+        /// <summary>
         /// The current fuel level of the engines
         /// </summary>
         float FuelLevel

@@ -31,7 +31,20 @@ namespace _3dplayground.Ships
 
             double acceleration = mEngine.GetAcceleration(GetShipsMassForEngine(), UpdateTime);
            //ToDo: implement updatedetail for the ship
+            mRotation.Normalize();
+            double xVel = mRotation.X * acceleration * UpdateTime;
+            double yVel = mRotation.Y * acceleration * UpdateTime;
+            double zVel = mRotation.Z * acceleration * UpdateTime;
 
+            double xPos = xVel * UpdateTime / 2;
+            double yPos = xVel * UpdateTime / 2;
+            double zPos = zVel * UpdateTime / 2;
+
+            DVector3 dVel = new DVector3(xVel, yVel, zVel);
+            DVector3 dPos = new DVector3(xPos, yPos, zPos);
+            // add these displacements to the total displacement
+            mTotalDisplacement.DeltaPosition += dPos;
+            mTotalDisplacement.DeltaVelocity += dVel;                                                                           
         }
 
 
@@ -43,14 +56,20 @@ namespace _3dplayground.Ships
 
         }
 
-        public void TurnEngineOff()
-        {
-            mEngine.IsActive = false;
-        }
-
-        public void TurnEngineOn()
+        public void Accelerate()
         {
             mEngine.IsActive = true;
+            mEngine.IsAccelerating = true;
+        }
+
+        public void Decelerate()
+        {
+            mEngine.IsActive = true;
+            mEngine.IsAccelerating = false;
+        }
+        public void TurnEngineOff()
+        {
+            mEngine.IsActive = false;   
         }
 
         public void SetRotationUnitVector(DVector3 theRotation, float magnitude)

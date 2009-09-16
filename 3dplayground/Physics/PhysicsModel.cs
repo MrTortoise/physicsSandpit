@@ -6,6 +6,9 @@ using _3dplayground.Maths;
 
 namespace _3dplayground.Physics
 {
+    /// <summary>
+    /// This is an abstract class that is the basic implementation of a Physical body with a model.
+    /// </summary>
     abstract class  PhysicsModel : PhysicalBody  
     {
 

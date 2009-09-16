@@ -96,9 +96,10 @@
   <ItemGroup>
     <Compile Include="Camera.cs" />
     <Compile Include="Components\FPS.cs" />
-    <Compile Include="Constants.cs" />
+    <Compile Include="Core\Config.cs" />
     <Compile Include="Core\GlobalIDGenerator.cs" />
     <Compile Include="EventManagement\Inputsettings.cs" />
+    <Compile Include="EventManagement\Interfaces\IAcceptInput.cs" />
     <Compile Include="EventManagement\MouseButtons.cs" />
     <Compile Include="EventManagement\MouseButtonState.cs" />
     <Compile Include="EventManagement\MousePosition.cs" />

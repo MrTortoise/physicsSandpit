@@ -8,6 +8,7 @@ using Microsoft.Xna.Framework.Content;
 using _3dplayground.EventManagement;
 using _3dplayground.Graphics;
 using _3dplayground.Physics;
+using _3dplayground.Ships;
 
 
 namespace _3dplayground
@@ -36,19 +37,22 @@ namespace _3dplayground
         private bool mIsRunning = true;
         private DateTime mLastUpdateTime = DateTime.Now ;
 
-        public GameEngine(GameSpaceUnit GameSpace,Camera theCamera)
+        private Player mPlayer;
+      
+
+        public GameEngine(GameSpaceUnit GameSpace,Player thePlayer)
         {
             mSpace = GameSpace;
             mPhysics = new GameSpacePhysics(mSpace);
             mGraphics = new GameGraphicsManager(mSpace);
-            mCamera = theCamera;
+            mCamera = thePlayer.Camera;
+            mPlayer = thePlayer;
+            thePlayer.SubscribeToInputEvents(); 
         }
 
         public void StartUpdate()
         {
-            mLastUpdateTime = DateTime.Now;
-
-
+            mLastUpdateTime = DateTime.Now;  
         }
 
         public void StopUpdate()
@@ -64,7 +68,7 @@ namespace _3dplayground
             // {
             Current = DateTime.Now;
             theTimePeriod = Current - mLastUpdateTime;
-            float updateTime = ((float)theTimePeriod.Ticks) / Constants.TimeScale;
+            float updateTime = ((float)theTimePeriod.Ticks) / Config.TimeScale;
             // Process any player input and raises the input events - ai will use this mechanism to pass commands to their vessels
             mEventManager.ProcessInput();
             // Perform the physics update
