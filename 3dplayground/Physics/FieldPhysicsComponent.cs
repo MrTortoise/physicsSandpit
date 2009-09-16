@@ -47,7 +47,7 @@ namespace _3dplayground.Physics
 
                 foreach (IEmitPointField j in space.PointFieldEmitters.Values)
                 {
-                    if (i.Name != j.Name) { force = force + j.PointFieldAcceleration(i.Position + K1pos * hstep); }
+                    if (i.Name != j.Name) { force = force + j.PointFieldAcceleration(i.Position + K2pos*hstep); }
                 }
 
                 DVector3 K2vel = force;
@@ -58,7 +58,7 @@ namespace _3dplayground.Physics
 
                 foreach (IEmitPointField j in space.PointFieldEmitters.Values)
                 {
-                    if (i.Name != j.Name) { force = force + j.PointFieldAcceleration(i.Position + K2pos * hstep); }
+                    if (i.Name != j.Name) { force = force + j.PointFieldAcceleration(i.Position + K3pos*hstep); }
                 }
                 DVector3 K3vel = force;
 
@@ -66,20 +66,17 @@ namespace _3dplayground.Physics
                 force = DVector3.Zero;
                 foreach (IEmitPointField j in space.PointFieldEmitters.Values)
                 {
-                    if (i.Name != j.Name) {  force = force + j.PointFieldAcceleration(i.Position + K3pos); }
+                    if (i.Name != j.Name) {  force = force + j.PointFieldAcceleration(i.Position + k4pos*step); }
                 }
                 DVector3 k4vel = force;
 
 
              New_pos_and_vel meow;
             
-            meow.position = (step / 6f) * (K1pos + K2pos * 2f + K3pos * 2f + k4pos);
-            meow.velocity =  (step / 6f) * (K1vel + K2vel * 2f + K3vel * 2f + k4vel);
-
-            //test
-            meow.velocity = i.Velocity;
-           meow.position = i.Velocity * step ;
-            //test fin
+            meow.position = (step / 6f) * (K1pos + K2pos * 2f + K3pos * 2f + k4pos) ;
+            meow.velocity =  (step / 6f) * (K1vel + K2vel * 2f + K3vel * 2f + k4vel) ;
+       
+            
             return (meow);
         }
 

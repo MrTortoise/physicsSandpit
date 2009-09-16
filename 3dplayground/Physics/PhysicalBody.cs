@@ -236,7 +236,7 @@ namespace _3dplayground.Physics
           DVector3 deltaPosition = mVelocity * UpdateTime; 
 
                 mTotalDisplacement.Position = mPosition;
-                mTotalDisplacement.DeltaPosition += deltaPosition;
+               // mTotalDisplacement.DeltaPosition += deltaPosition;
                 mTotalDisplacement.Velocity = mVelocity;
                 mTotalDisplacement.DeltaVelocity = DVector3.Zero;
         }
