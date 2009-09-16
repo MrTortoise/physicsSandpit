@@ -37,9 +37,30 @@ namespace _3dplayground.EventManagement
 		
 		#endregion
 
-		#region Constructor
+        #region Events
+        /// <summary>
+        /// It is up to the reciever of this event to manage held buttons
+        /// </summary>
+        public EventHandler<InputEventArgs> MouseButtonPressed;
+        /// <summary>
+        /// It is up to the reciever of this event to manage held buttons
+        /// </summary>
+        public EventHandler<InputEventArgs> MouseButtonReleased;
+        public EventHandler<InputEventArgs> MouseWheelScrolled;
+        public EventHandler<InputEventArgs> MousePositionChanged; 
+        /// <summary>
+        /// It is up to the reciever of this event to manage held buttons
+        /// </summary>
+        public EventHandler<InputEventArgs> KeyPressed;
+        /// <summary>
+        /// It is up to the reciever of this event to manage held buttons
+        /// </summary>
+        public EventHandler<InputEventArgs> KeyReleased;
+        #endregion
 
-		protected  EventManager()
+        #region Constructor
+
+        protected  EventManager()
 		{
 
 
@@ -260,27 +281,7 @@ namespace _3dplayground.EventManagement
 
 		#region Events
 
-		/// <summary>
-		/// It is up to the reciever of this event to manage held buttons
-		/// </summary>
-		public EventHandler<InputEventArgs> MouseButtonPressed;
-		//public EventHandler<FocusMessageArgs> AttemptedFocusEvent;
-		/// <summary>
-		/// It is up to the reciever of this event to manage held buttons
-		/// </summary>
-		public EventHandler<InputEventArgs> MouseButtonReleased;
 
-		public EventHandler<InputEventArgs> MouseWheelScrolled;
-		public EventHandler<InputEventArgs> MousePositionChanged;
-
-		/// <summary>
-		/// It is up to the reciever of this event to manage held buttons
-		/// </summary>
-		public EventHandler<InputEventArgs> KeyPressed;
-		/// <summary>
-		/// It is up to the reciever of this event to manage held buttons
-		/// </summary>
-		public EventHandler<InputEventArgs> KeyReleased;
 
 		
 
