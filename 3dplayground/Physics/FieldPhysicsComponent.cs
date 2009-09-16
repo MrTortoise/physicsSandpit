@@ -78,7 +78,7 @@ namespace _3dplayground.Physics
 
             //test
             meow.velocity = i.Velocity;
-            meow.position = i.Velocity * step + i.Position;
+           meow.position = i.Velocity * step ;
             //test fin
             return (meow);
         }
