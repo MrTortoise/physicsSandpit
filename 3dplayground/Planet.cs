@@ -35,19 +35,21 @@ namespace _3dplayground
            // displacementVector =mPosition - thePosition;
            // double distance = displacementVector.Length();
                 
-            double tmpR = 0;  
+            double tmpR = 0;
+            double R = 0;
 
                     tmpR = Math.Pow((mPosition.X - thePosition.X), 2) + Math.Pow((mPosition.Y - thePosition.Y), 2) + Math.Pow((mPosition.Z - thePosition.Z), 2);
-                    tmpR = mMass  * Config.G  / Math.Pow(tmpR, 1.5);
+                    
+                     tmpR = this.Mass * Config.G  / Math.Pow(tmpR, 1.5);
 
             // I have no ideas which will work out faster - math.pow for x^2 is half as fast - but god knows how vector3.Length() will work.
             // http://mindstudies.psy.soton.ac.uk/dmitri/blog/index.php/archives/175
 
            /// tmpR= mMass  * Constants.G  /( distance*distance );
 
-                   sumforce.X = sumforce.X + (mPosition.X - thePosition.X) * (float)tmpR; //sigh vector3 uses floats - teh suq
-                   sumforce.Y = sumforce.Y + (mPosition.Y - thePosition.Y) * (float)tmpR;
-                   sumforce.Z = sumforce.Z + (mPosition.Z - thePosition.Z) * (float)tmpR;
+                   sumforce.X = (mPosition.X - thePosition.X) * (float)tmpR; //sigh vector3 uses floats - teh suq
+                   sumforce.Y =  (mPosition.Y - thePosition.Y) * (float)tmpR;
+                   sumforce.Z =  (mPosition.Z - thePosition.Z) * (float)tmpR;
 
                    // sumforce.X  =  displacementVector.X  * tmpR;
                    // sumforce.Y = displacementVector.Y * tmpR;
