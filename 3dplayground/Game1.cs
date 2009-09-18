@@ -128,8 +128,8 @@ namespace _3dplayground
             BasicModel shipModel = new BasicModel("theShip", "Ship_06", Vector3.Zero, 0, 0, MathHelper.Pi, new Vector3(1f, 1f, 1f));
             shipModel.LoadContent(Content);
             BasicEngine shipEngine = new BasicEngine("basicEngine",1000.0f,0.001f,1000.0f,10000000.0f,10);
-            Ship theShip = new Ship("testShip", mObjects, 1000, new DVector3(500, 500, 10), DVector3.Zero, new Quaternion(new Vector3(0,0,0),1),Quaternion.Identity,
-                DVector3.UnitZ,new Vector3(0, -30, -50), shipModel, mFPC, shipEngine);
+            Ship theShip = new Ship("testShip", mObjects, 1000, new DVector3(500, 500, 500), DVector3.Zero, new Quaternion(new Vector3(0,0,0),1),Quaternion.Identity,
+                DVector3.UnitZ,new Vector3(0, 30, 50), shipModel, mFPC, shipEngine);
             mObjects.AddGameObject(theShip);
 
             mPlayer = new Player(mCamera);
