@@ -41,7 +41,8 @@ namespace _3dplayground
             Content.RootDirectory = "Content";
 
             graphics.PreferredBackBufferWidth = 1280;
-            graphics.PreferredBackBufferHeight = 1024;          
+            graphics.PreferredBackBufferHeight = 1024;
+            
             mObjects = new GameSpaceUnit();
             Components.Add(new CommonObjects.Components.FPS(this));
         
@@ -74,15 +75,15 @@ namespace _3dplayground
             
 
             BasicModel  theSphere;
-            theSphere = new BasicModel("BasicSphere","sphere");
+            theSphere = new BasicModel("BasicSphere","sphere",Vector3.Zero,0,0,0,Vector3.One );
             theSphere.LoadContent(Content);
 
             Planet mPlanet;
-            mPlanet = new Planet(theSphere, mObjects, "planet1", 1000000000, DVector3.Zero, DVector3.Zero, Quaternion.Identity, Quaternion.Identity);
+            mPlanet = new Planet(theSphere, mObjects, "planet1", 1000000000, DVector3.Zero, DVector3.Zero, Quaternion.Identity, Quaternion.Identity, new Vector3(0, 5, 5));
 
             mObjects.AddGameObject(mPlanet);
 
-           // mPlanet = new Planet(theSphere, mObjects, "planet2", 1000000000, new DVector3(0, 100, 0), DVector3.Zero, Quaternion.Identity, Quaternion.Identity);
+          //  mPlanet = new Planet(theSphere, mObjects, "planet2", 1000000000, new DVector3(0, 100, 0), DVector3.Zero, Quaternion.Identity, Quaternion.Identity);
 
         //    mObjects.AddGameObject(mPlanet);
     //mPlanet = new Planet(theSphere, mObjects, "planet3", 1000000000, new DVector3(0, 0, 100), DVector3.Zero, Quaternion.Identity, Quaternion.Identity);
@@ -93,24 +94,24 @@ namespace _3dplayground
             IFieldPhysics  mFPC;
             mFPC=new FieldPhysicsComponent();
 
-           Moon mMoon;
-            mMoon = new Moon(theSphere, mFPC, mObjects, "Moon1", 100000, new DVector3(100, 0, 0), new DVector3(0, 0, 20), Quaternion.Identity, Quaternion.Identity,DVector3.UnitZ );
+            Moon mMoon;
+            mMoon = new Moon(theSphere, mFPC, mObjects, "Moon1", 100000, new DVector3(100, 0, 0), new DVector3(0, 0, 20), Quaternion.Identity, Quaternion.Identity,DVector3.UnitZ,new Vector3(0,5,5) );
             mObjects.AddGameObject(mMoon);
            
             Moon mMoon2;
-            mMoon2 = new Moon(theSphere, mFPC, mObjects, "Moon2", 100000, new DVector3(100, 100, 0), new DVector3(0, 20, 0), Quaternion.Identity, Quaternion.Identity, DVector3.UnitZ);
+            mMoon2 = new Moon(theSphere, mFPC, mObjects, "Moon2", 100000, new DVector3(100, 100, 0), new DVector3(0, 20, 0), Quaternion.Identity, Quaternion.Identity, DVector3.UnitZ, new Vector3(0, 5, 5));
             mObjects.AddGameObject(mMoon2);
 
             Moon mMoon3;
-            mMoon3 = new Moon(theSphere, mFPC, mObjects, "Moon3", 100000, new DVector3(200, 0, 100), new DVector3(0, 0, 20), Quaternion.Identity, Quaternion.Identity, DVector3.UnitZ);
+            mMoon3 = new Moon(theSphere, mFPC, mObjects, "Moon3", 100000, new DVector3(200, 0, 100), new DVector3(0, 0, 20), Quaternion.Identity, Quaternion.Identity, DVector3.UnitZ, new Vector3(0, 5, 5));
             mObjects.AddGameObject(mMoon3);
 
             Moon mMoon4;
-            mMoon4 = new Moon(theSphere, mFPC, mObjects, "Moon4", 100000, new DVector3(100, 100, 100), new DVector3(20, 0, 0), Quaternion.Identity, Quaternion.Identity, DVector3.UnitZ);
+            mMoon4 = new Moon(theSphere, mFPC, mObjects, "Moon4", 100000, new DVector3(100, 100, 100), new DVector3(20, 0, 0), Quaternion.Identity, Quaternion.Identity, DVector3.UnitZ, new Vector3(0, 5, 5));
             mObjects.AddGameObject(mMoon4);
 
             Moon mMoon5;
-            mMoon5 = new Moon(theSphere, mFPC, mObjects, "Moon5", 100000, new DVector3(200, 100, 0), new DVector3(0, 20, 0), Quaternion.Identity, Quaternion.Identity, DVector3.UnitZ);
+            mMoon5 = new Moon(theSphere, mFPC, mObjects, "Moon5", 100000, new DVector3(200, 100, 0), new DVector3(0, 20, 0), Quaternion.Identity, Quaternion.Identity, DVector3.UnitZ, new Vector3(0, 5, 5));
             mObjects.AddGameObject(mMoon5);
                 
              
@@ -122,12 +123,13 @@ namespace _3dplayground
             mCamera.Target = new Vector3(0, 0, 100);
             mCamera.UpVector = Vector3.UnitZ  ;
             mCamera.CameraMode = CameraMode.Attached;
-           
-            BasicModel shipModel = new BasicModel("theShip","Ship");
+           // mCamera.Offset = new Vector3(0, -3, -5);
+
+            BasicModel shipModel = new BasicModel("theShip", "Ship_06", Vector3.Zero, 0, 0, MathHelper.Pi, new Vector3(1f, 1f, 1f));
             shipModel.LoadContent(Content);
             BasicEngine shipEngine = new BasicEngine("basicEngine",1000.0f,0.001f,1000.0f,10000000.0f,10);
-            Ship theShip = new Ship("testShip", mObjects, 1000, new DVector3(500, 500, 000), DVector3.Zero, new Quaternion(new Vector3(-1,-1,0),1),Quaternion.Identity,
-                DVector3.UnitZ, shipModel, mFPC, shipEngine);
+            Ship theShip = new Ship("testShip", mObjects, 1000, new DVector3(500, 500, 10), DVector3.Zero, new Quaternion(new Vector3(0,0,0),1),Quaternion.Identity,
+                DVector3.UnitZ,new Vector3(0, -30, -50), shipModel, mFPC, shipEngine);
             mObjects.AddGameObject(theShip);
 
             mPlayer = new Player(mCamera);
@@ -136,7 +138,7 @@ namespace _3dplayground
 
             mCamera.Compile();
 
-            mEngine = new GameEngine(mObjects, mPlayer);
+            mEngine = new GameEngine(mObjects, mPlayer,graphics );
 
                      
         

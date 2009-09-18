@@ -14,9 +14,9 @@ namespace _3dplayground.Ships
 
 
         public Ship(string theName, GameSpaceUnit theSpace, int theMass, DVector3 thePosition,
-            DVector3 theVelocity, Quaternion theRotation, Quaternion theAngularVelocity,DVector3 theUpVector, IModel theModel, IFieldPhysics theFieldPhysics,
-            IAmShipEngine theEngine)
-            : base(theName, theSpace, theMass, thePosition, theVelocity, theRotation, theAngularVelocity,theUpVector, theModel, theFieldPhysics)
+            DVector3 theVelocity, Quaternion theRotation, Quaternion theAngularVelocity, DVector3 theUpVector, Vector3 theCameraOffset, 
+            IModel theModel, IFieldPhysics theFieldPhysics, IAmShipEngine theEngine)
+            : base(theName, theSpace, theMass, thePosition, theVelocity, theRotation, theAngularVelocity,theUpVector,theCameraOffset, theModel, theFieldPhysics)
         {
             mEngine = theEngine;
 
@@ -72,10 +72,19 @@ namespace _3dplayground.Ships
             mEngine.IsActive = false;   
         }
 
-        public void SetRotationUnitVector(DVector3 theRotation, float magnitude)
+
+        public void RotateLaterally(float value)
         {
-            throw new NotImplementedException();
+            
+            mRotation.X = mRotation.X + value;
+            
         }
+
+        public void RotateLongitudionally(float value)
+        {
+            mRotation.Y = mRotation.Y + value;
+        }
+
 
         #endregion
 
@@ -84,5 +93,7 @@ namespace _3dplayground.Ships
             return mMass;
 
         }
+
+
     }
 }

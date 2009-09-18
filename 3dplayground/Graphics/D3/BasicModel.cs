@@ -25,10 +25,23 @@ namespace _3dplayground.Graphics.D3
        protected BoundingBox mLargeBoundingBox;
        protected BoundingSphere mBoundingSphere;
 
-       public BasicModel(string theName, string ContentName)
+       protected Matrix mTransformation;
+
+       /// <summary>
+       /// Constructs the basic model and sets its basic proprties. 
+       /// The translation is applied to the model, then the rotation and then the scaling.
+       /// </summary>
+       /// <param name="theName"></param>
+       /// <param name="ContentName"></param>
+       /// <param name="Translation"></param>
+       /// <param name="Rotation"></param>
+       /// <param name="Scale"></param>
+       public BasicModel(string theName, string ContentName,Vector3 Translation, float xRotation, float yRotation, float zRotation, Vector3 Scale)
        {
            mName = theName;
            mContentName = ContentName;
+           Matrix temp = Matrix.CreateTranslation(Translation) * Matrix.CreateRotationX(xRotation) * Matrix.CreateRotationY(yRotation) * Matrix.CreateRotationZ(zRotation) * Matrix.CreateScale(Scale);
+           mTransformation = temp;
        }
 
 
@@ -150,7 +163,8 @@ namespace _3dplayground.Graphics.D3
                     effect.EnableDefaultLighting();
                     effect.View = theCamera.View;
                     effect.Projection = theCamera.Projection;
-                    effect.World = transforms[mesh.ParentBone.Index] * Matrix.CreateTranslation(thePosition);
+                    effect.World = transforms[mesh.ParentBone.Index] * mTransformation *Matrix.CreateFromQuaternion(theRotation) * Matrix.CreateTranslation(thePosition);
+                    
                 }
                 mesh.Draw();
             }

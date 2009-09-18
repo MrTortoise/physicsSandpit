@@ -31,14 +31,14 @@ namespace _3dplayground
         public static float TimeScale 
         {get{return mTimeScale;} }
 
-        private static float mHorizMouseSens = 1;
+        private static float mHorizMouseSens = 0.0001f;
         /// <summary>
         /// This is the in game horizontal mouse sensitivity.
         /// </summary>
         public static float MouseSensHoriz
         { get { return mHorizMouseSens; } }
 
-        private static float mVertMouseSense = 1;         
+        private static float mVertMouseSense = 0.0001f;         
         /// <summary>
         /// This is the in game Vertical Mouse Sensitivity
         /// </summary>

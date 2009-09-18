@@ -29,9 +29,11 @@ namespace _3dplayground
         Matrix mView;
         BoundingFrustum mFrustrum;
 
+        // these values are used when the camera is attached 
+        // - when the camera is detached it should pull this data from the object it was attacvhed to
         Vector3 mCameraPosition = Vector3.Zero;
         Vector3 mCameraTarget=Vector3.Zero;
-        Vector3 mCameraUpVector=Vector3.UnitZ ;
+        Vector3 mCameraUpVector=Vector3.UnitZ ;        
 
         IAmInSpace mAttachedTo;
         CameraMode mCameraMode = CameraMode.detached;
@@ -69,8 +71,10 @@ namespace _3dplayground
             GenerateFrustrum();
         }
 
+
+
         #region Projection
-       /// <summary>
+        /// <summary>
        /// Gets or setrs the near clipping plane of the frustrum and projection matricies
        /// </summary>
         public float NearClippingPlane
@@ -148,7 +152,19 @@ namespace _3dplayground
        /// </summary>
         public Vector3 Position
         {
-            get { return mCameraPosition; }
+            get
+            {
+                Vector3 retVal;
+                if (mCameraMode == CameraMode.detached)
+                {
+                    retVal = mCameraPosition;
+                }
+                else
+                {
+                    retVal = (mAttachedTo.Position.ToVector3() + mAttachedTo.CameraOffset);
+                }
+                return retVal;
+            }
             set
             {
                 if (mCameraPosition != value)
@@ -162,7 +178,21 @@ namespace _3dplayground
        /// </summary>
         public Vector3 Target
         {
-            get { return mCameraTarget; }
+            get
+            {
+                Vector3 retVal;
+                if (mCameraMode == CameraMode.detached)
+                {
+
+                    retVal = mCameraTarget;
+                }
+                else
+                {
+                    retVal = mAttachedTo.Position.ToVector3();
+
+                }
+                return retVal;
+            }
             set
             {
                 if (mCameraTarget != value)
@@ -176,7 +206,19 @@ namespace _3dplayground
        /// </summary>
         public Vector3 UpVector
         {
-            get { return mCameraUpVector; }
+            get
+            {
+                Vector3 retVal;
+                if (mCameraMode == CameraMode.Attached)
+                {
+                    retVal = mAttachedTo.UpVector.ToVector3();
+                }
+                else
+                {
+                    retVal = mCameraUpVector;
+                }
+                return retVal;
+            }
             set
             {
                 if (mCameraUpVector != value)
@@ -199,9 +241,15 @@ namespace _3dplayground
         {
             if (mCameraMode == CameraMode.Attached)
             {
-                mView = Matrix.CreateLookAt(mAttachedTo.Position.ToVector3() ,
-                    new Vector3(mAttachedTo.Rotation.X,mAttachedTo.Rotation.Y,mAttachedTo.Rotation.Z), 
-                    mAttachedTo.UpVector.ToVector3() );
+                Vector3 camPos = mAttachedTo.CameraOffset;
+                camPos = Vector3.Transform(camPos,Matrix.CreateFromQuaternion(mAttachedTo.Rotation));
+                camPos += mAttachedTo.Position.ToVector3();
+
+                Vector3 camUp = mAttachedTo.UpVector.ToVector3();
+
+                mView = Matrix.CreateLookAt(camPos ,mAttachedTo.Position.ToVector3(),camUp);
+                    //new Vector3(mAttachedTo.Rotation.X,mAttachedTo.Rotation.Y,mAttachedTo.Rotation.Z), 
+                    //mAttachedTo.UpVector.ToVector3() );
             }
             else
             {

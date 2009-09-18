@@ -22,6 +22,7 @@ namespace _3dplayground.Physics
 
         protected  string mName;
         protected int mID = GlobalIDGenerator.GetNextID();
+        protected Vector3 mCameraOffset;
 
         #region UpdateFields
         public event EventHandler<DisplacementArgs> RequestMove;
@@ -58,7 +59,7 @@ namespace _3dplayground.Physics
 
         public PhysicalBody(string theName, GameSpaceUnit theSpace, int theMass, 
             DVector3 thePosition, DVector3 theVelocity, 
-            Quaternion theRotation, Quaternion theAngularVelocity, DVector3 theUpVector)
+            Quaternion theRotation, Quaternion theAngularVelocity, DVector3 theUpVector, Vector3 theCameraOffset)
         {
             mName = theName;
             mPosition = thePosition;
@@ -69,6 +70,7 @@ namespace _3dplayground.Physics
             mVelocity = theVelocity;
 
             mUpVector = theUpVector;
+            mCameraOffset = theCameraOffset;
            
             mAngularVelocity = theAngularVelocity;
             mSpace = theSpace;
@@ -89,6 +91,12 @@ namespace _3dplayground.Physics
         public string Name
         {
             get { return mName; }
+        }
+
+        public Vector3  CameraOffset
+        {
+            get { return mCameraOffset; }
+            set { mCameraOffset = value; }
         }
 
         #region Update
@@ -176,7 +184,9 @@ namespace _3dplayground.Physics
 
         #endregion        
 
-        #endregion    
+        #endregion 
+   
+
 
         #region ICanMove Members
 
@@ -233,10 +243,15 @@ namespace _3dplayground.Physics
         /// <param name="UpdateTime"></param>
         protected virtual void UpdateDetail(float  UpdateTime)
         {
+            // This object cannot be effected by gravity. This method simply uses the velocty of the object 
+            // to figure out its next position. In inheriting classes this functionality will be replaced ... eg with gravity or ships thrust.
+            // Most of the inheritng classes will not call this base method because most will be effected by gravity and so have their own implementation
+            
           DVector3 deltaPosition = mVelocity * UpdateTime; 
 
                 mTotalDisplacement.Position = mPosition;
-               // mTotalDisplacement.DeltaPosition += deltaPosition;
+                mTotalDisplacement.DeltaPosition += deltaPosition;      // this line needs to be in as it is where any 
+                                                                        // additional forces get factored into movement
                 mTotalDisplacement.Velocity = mVelocity;
                 mTotalDisplacement.DeltaVelocity = DVector3.Zero;
         }
@@ -274,6 +289,8 @@ namespace _3dplayground.Physics
         }
 
         #endregion
+
+
 
 
     }

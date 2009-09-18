@@ -18,11 +18,10 @@ namespace _3dplayground
     /// This class will also be running the update thread.
     /// </summary>
     sealed  class GameEngine                                           
-    { 
-       
+    {
+        private GraphicsDeviceManager mGDM;
 
-        private Dictionary<int, IHasName> mObjects = new Dictionary<int, IHasName>();
-
+        private Dictionary<int, IHasName> mObjects = new Dictionary<int, IHasName>(); 
         private GameSpaceUnit mSpace = new GameSpaceUnit();
 
         private DrawingBufferManager mBuffer = DrawingBufferManager.GetInstance();
@@ -40,11 +39,12 @@ namespace _3dplayground
         private Player mPlayer;
       
 
-        public GameEngine(GameSpaceUnit GameSpace,Player thePlayer)
+        public GameEngine(GameSpaceUnit GameSpace,Player thePlayer, GraphicsDeviceManager GDM)
         {
+            mGDM = GDM;
             mSpace = GameSpace;
             mPhysics = new GameSpacePhysics(mSpace);
-            mGraphics = new GameGraphicsManager(mSpace);
+            mGraphics = new GameGraphicsManager(thePlayer,mGDM);
             mCamera = thePlayer.Camera;
             mPlayer = thePlayer;
             thePlayer.SubscribeToInputEvents(); 
@@ -72,11 +72,14 @@ namespace _3dplayground
             // Process any player input and raises the input events - ai will use this mechanism to pass commands to their vessels
             mEventManager.ProcessInput();
             // Perform the physics update
+
             mPhysics.Update(updateTime, mBuffer);
+
             // tell buffer that the update has finished to set the next drawing frame
             mBuffer.UpdateFinished();
             mLastUpdateTime = Current;
             //  }
+          
         }
 
         public void Draw(float timeSpan)

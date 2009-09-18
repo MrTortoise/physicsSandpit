@@ -25,6 +25,9 @@ namespace _3dplayground
         DVector3 UpVector
         { get; }
 
+        Vector3 CameraOffset
+        { get; set; }
+
 
 
     }

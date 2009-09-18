@@ -14,12 +14,8 @@ namespace _3dplayground.Ships
         void Decelerate();
         void TurnEngineOff();
 
-        /// <summary>
-        /// Sets the direction the ship will start to rotationally accelerate towards.
-        /// </summary>
-        /// <param name="theRotation"></param>
-        /// <param name="magnitude">A value between 0 and 1 inclusive</param>                                          
-        void SetRotationUnitVector(DVector3 theRotation,float magnitude);
+        void RotateLaterally(float value);
+        void RotateLongitudionally(float value);
 
         
 

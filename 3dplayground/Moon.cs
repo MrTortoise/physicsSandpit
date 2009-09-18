@@ -20,8 +20,8 @@ namespace _3dplayground
         protected DisplacementStructure mGravityDisplacement;
 
         public Moon(IModel theModel, IFieldPhysics theFPC, GameSpaceUnit theSpace, string theName, int theMass,
-            DVector3 thePosition, DVector3 theVelocity, Quaternion theRotation, Quaternion theAngularVelocity, DVector3 theUpVector)
-            :base(theName,theSpace, theMass,thePosition,theVelocity,theRotation,theAngularVelocity,theUpVector )
+            DVector3 thePosition, DVector3 theVelocity, Quaternion theRotation, Quaternion theAngularVelocity, DVector3 theUpVector, Vector3 theCameraOffset)
+            :base(theName,theSpace, theMass,thePosition,theVelocity,theRotation,theAngularVelocity,theUpVector,theCameraOffset  )
         {            
             mFieldPhysics = theFPC;
             mModel = theModel;

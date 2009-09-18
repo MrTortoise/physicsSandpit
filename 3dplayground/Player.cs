@@ -14,11 +14,9 @@ using _3dplayground.Ships;
 namespace _3dplayground
 {
     class Player : IAcceptInput
-    {
-
-      
+    {       
         protected Camera mCamera;
-        protected IAmShip mShip;
+        protected IAmShip mShip;          
 
 
         public Player(Camera thecamera)
@@ -83,6 +81,16 @@ namespace _3dplayground
         public void OnMousePositionChanged(object s, InputEventArgs args)
         {
             //deal with rotation later
+
+            Vector2 mousePos = args.CurrentMousePosition - args.OldMousePosition;
+
+            mousePos.X = mousePos.X * Config.MouseSensHoriz;
+            mousePos.Y = mousePos.Y * Config.MouseSensVert;
+
+            mShip.RotateLaterally(mousePos.X);
+            mShip.RotateLongitudionally(mousePos.Y);
+
+
         }
 
         public void OnKeyPressed(object s, InputEventArgs args)
@@ -97,6 +105,7 @@ namespace _3dplayground
                 {
                     mShip.Decelerate();
                 }
+                
             }
         }
 

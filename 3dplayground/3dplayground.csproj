@@ -106,6 +106,7 @@
     <Compile Include="GameEngine.cs" />
     <Compile Include="GameGraphicsManager.cs" />
     <Compile Include="Graphics\D3\D3DrawableArgs.cs" />
+    <Compile Include="Graphics\D3\Grid.cs" />
     <Compile Include="Graphics\DrawingBufferManager.cs" />
     <Compile Include="Graphics\DrawingBufferItem.cs" />
     <Compile Include="Graphics\Interfaces\IGameDrawable.cs" />
