@@ -203,13 +203,18 @@ namespace _3dplayground.Physics
         }
 
         /// <summary>
-        /// Once a move request has been adjusted it is executed on the object
+        /// Once a move request has been adjusted it is executed on the object.
+        /// The objects displacement structures are then reset.
         /// </summary>
         /// <param name="theStructure">the displacement structure to apply to this object</param>
         public virtual void ExecuteDisplacementStructure(DisplacementStructure theStructure)
         {
             mPosition += theStructure.DeltaPosition;
             mVelocity += theStructure.DeltaVelocity;
+            mRotation += theStructure.DeltaRotation;
+
+            ResetDisplacementStructures();
+
         }
 
         public void RaiseRequestMove(DisplacementArgs theArgs)

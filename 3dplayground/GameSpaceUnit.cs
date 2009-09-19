@@ -142,7 +142,7 @@ namespace _3dplayground
             AddDisplacementStructure(e.Displacement);
         }
 
-        #region Update Stuff
+        #region Update Stuff     
 
        /// <summary>
        /// Performs the upate on the GameSoaceUnit. This updates all objects recursivley and publishes their changes in 

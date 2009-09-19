@@ -37,9 +37,8 @@ namespace _3dplayground.Physics
         {
             New_pos_and_vel disp;
             disp = mFieldPhysics.dothe_phys(theTime , this);
-            mGravityDisplacement = new DisplacementStructure(this, mPosition, disp.position, mVelocity, disp.velocity,mRotation ,Quaternion.Identity );          
-
-
+            mGravityDisplacement.DeltaPosition+=disp.position;
+            mGravityDisplacement.DeltaVelocity+=disp.velocity;
         }
 
         #endregion
@@ -51,6 +50,15 @@ namespace _3dplayground.Physics
             mTotalDisplacement.DeltaPosition = mGravityDisplacement.DeltaPosition;
             mTotalDisplacement.DeltaVelocity = mGravityDisplacement.DeltaVelocity;
 
+        }
+
+        public override void ResetDisplacementStructures()
+        {
+            base.ResetDisplacementStructures();
+
+            mGravityDisplacement.DeltaPosition = DVector3.Zero;
+            mGravityDisplacement.DeltaRotation = Quaternion.Identity;
+            mGravityDisplacement.DeltaVelocity = DVector3.Zero;
         }
 
 

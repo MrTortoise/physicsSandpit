@@ -11,12 +11,14 @@ namespace _3dplayground.Ships
     class Ship  : GravityEffectedModel,IAmShip  
     {
         protected IAmShipEngine mEngine;
+        private DisplacementStructure mInputDisp;
 
 
         public Ship(string theName, GameSpaceUnit theSpace, int theMass, DVector3 thePosition,
             DVector3 theVelocity, Quaternion theRotation, Quaternion theAngularVelocity, Vector3 theUpVector, Vector3 theCameraOffset, 
             IModel theModel, IFieldPhysics theFieldPhysics, IAmShipEngine theEngine)
-            : base(theName, theSpace, theMass, thePosition, theVelocity, theRotation, theAngularVelocity,theUpVector,theCameraOffset, theModel, theFieldPhysics)
+            : base(theName, theSpace, theMass, thePosition, theVelocity, theRotation, theAngularVelocity,
+                theUpVector,theCameraOffset, theModel, theFieldPhysics)
         {
             mEngine = theEngine;
 
@@ -44,7 +46,20 @@ namespace _3dplayground.Ships
             DVector3 dPos = new DVector3(xPos, yPos, zPos);
             // add these displacements to the total displacement
             mTotalDisplacement.DeltaPosition += dPos;
-            mTotalDisplacement.DeltaVelocity += dVel;                                                                           
+            mTotalDisplacement.DeltaVelocity += dVel;
+
+            mTotalDisplacement.DeltaPosition += mInputDisp.DeltaPosition;
+            mTotalDisplacement.DeltaRotation += mInputDisp.DeltaRotation;
+            mTotalDisplacement.DeltaVelocity += mInputDisp.DeltaVelocity;                          
+        }
+
+        public override void ResetDisplacementStructures()
+        {
+            base.ResetDisplacementStructures();
+
+            mInputDisp.DeltaPosition = DVector3.Zero;
+            mInputDisp.DeltaRotation = Quaternion.Identity;
+            mInputDisp.DeltaVelocity = DVector3.Zero;
         }
 
 
@@ -75,15 +90,17 @@ namespace _3dplayground.Ships
 
         public void RotateLaterally(float value)
         {
-            Quaternion temp =  Quaternion.CreateFromAxisAngle(Vector3.Right, value); 
-            mTotalDisplacement.DeltaRotation+= temp;
+            Quaternion temp =  Quaternion.CreateFromAxisAngle(Vector3.Up , value);
+            mInputDisp.DeltaRotation += temp;
             mUpVector += new Vector3(temp.X, temp.Y, temp.Z);
             
         }
 
         public void RotateLongitudionally(float value)
         {
-            mTotalDisplacement.DeltaRotation += Quaternion.CreateFromAxisAngle(Vector3.Up, value);
+            Quaternion temp = Quaternion.CreateFromAxisAngle(Vector3.Right, value);
+            mInputDisp.DeltaRotation += temp;
+            mUpVector += new Vector3(temp.X, temp.Y, temp.Z);
         }
 
 
