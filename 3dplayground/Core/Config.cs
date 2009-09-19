@@ -6,6 +6,7 @@ using System.Xml.Linq;
 using System.Text;
 
 using Microsoft.Xna.Framework.Input;
+using Microsoft.Xna.Framework;
 
 namespace _3dplayground
 {
@@ -31,14 +32,14 @@ namespace _3dplayground
         public static float TimeScale 
         {get{return mTimeScale;} }
 
-        private static float mHorizMouseSens = 0.0001f;
+        private static float mHorizMouseSens =0.1f;
         /// <summary>
         /// This is the in game horizontal mouse sensitivity.
         /// </summary>
         public static float MouseSensHoriz
         { get { return mHorizMouseSens; } }
 
-        private static float mVertMouseSense = 0.0001f;         
+        private static float mVertMouseSense = 0.1f;         
         /// <summary>
         /// This is the in game Vertical Mouse Sensitivity
         /// </summary>

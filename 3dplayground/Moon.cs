@@ -20,7 +20,7 @@ namespace _3dplayground
         protected DisplacementStructure mGravityDisplacement;
 
         public Moon(IModel theModel, IFieldPhysics theFPC, GameSpaceUnit theSpace, string theName, int theMass,
-            DVector3 thePosition, DVector3 theVelocity, Quaternion theRotation, Quaternion theAngularVelocity, DVector3 theUpVector, Vector3 theCameraOffset)
+            DVector3 thePosition, DVector3 theVelocity, Quaternion theRotation, Quaternion theAngularVelocity, Vector3 theUpVector, Vector3 theCameraOffset)
             :base(theName,theSpace, theMass,thePosition,theVelocity,theRotation,theAngularVelocity,theUpVector,theCameraOffset  )
         {            
             mFieldPhysics = theFPC;
@@ -51,7 +51,7 @@ namespace _3dplayground
             
             New_pos_and_vel disp;
             disp = mFieldPhysics.dothe_phys(theTime, this);
-            mGravityDisplacement = new DisplacementStructure(this,mPosition, disp.position,mVelocity, disp.velocity);           
+            mGravityDisplacement = new DisplacementStructure(this,mPosition, disp.position,mVelocity, disp.velocity,mRotation,Quaternion.Identity );           
            
         }
 

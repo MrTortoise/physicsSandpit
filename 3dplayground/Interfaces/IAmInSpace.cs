@@ -22,7 +22,7 @@ namespace _3dplayground
         GameSpaceUnit Space
         { get; }
 
-        DVector3 UpVector
+        Vector3  UpVector
         { get; }
 
         Vector3 CameraOffset

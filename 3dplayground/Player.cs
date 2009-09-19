@@ -84,10 +84,10 @@ namespace _3dplayground
 
             Vector2 mousePos = args.CurrentMousePosition - args.OldMousePosition;
 
-            mousePos.X = mousePos.X * Config.MouseSensHoriz;
-            mousePos.Y = mousePos.Y * Config.MouseSensVert;
+            mousePos.X = MathHelper.ToRadians(mousePos.X * Config.MouseSensHoriz);
+            mousePos.Y = MathHelper.ToRadians( mousePos.Y * Config.MouseSensVert);
 
-            mShip.RotateLaterally(mousePos.X);
+            mShip.RotateLaterally( mousePos.X);
             mShip.RotateLongitudionally(mousePos.Y);
 
 

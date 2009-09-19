@@ -15,7 +15,7 @@ namespace _3dplayground
         public Planet(IModel theModel, GameSpaceUnit theSpace, string theName, int theMass,
             DVector3 thePosition, DVector3 theVelocity,
             Quaternion theRotation, Quaternion theAngularVelocity, Vector3 theCameraOffset)
-            :base(theName,theSpace, theMass,thePosition,theVelocity,theRotation,theAngularVelocity,DVector3.UnitZ,theCameraOffset  )
+            :base(theName,theSpace, theMass,thePosition,theVelocity,theRotation,theAngularVelocity,Vector3.Up ,theCameraOffset  )
         {
             mModel = theModel;
 

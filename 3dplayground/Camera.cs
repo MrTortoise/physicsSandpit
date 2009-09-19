@@ -211,7 +211,7 @@ namespace _3dplayground
                 Vector3 retVal;
                 if (mCameraMode == CameraMode.Attached)
                 {
-                    retVal = mAttachedTo.UpVector.ToVector3();
+                    retVal = mAttachedTo.UpVector;
                 }
                 else
                 {
@@ -245,7 +245,7 @@ namespace _3dplayground
                 camPos = Vector3.Transform(camPos,Matrix.CreateFromQuaternion(mAttachedTo.Rotation));
                 camPos += mAttachedTo.Position.ToVector3();
 
-                Vector3 camUp = mAttachedTo.UpVector.ToVector3();
+                Vector3 camUp = mAttachedTo.UpVector;
 
                 mView = Matrix.CreateLookAt(camPos ,mAttachedTo.Position.ToVector3(),camUp);
                     //new Vector3(mAttachedTo.Rotation.X,mAttachedTo.Rotation.Y,mAttachedTo.Rotation.Z), 

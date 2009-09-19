@@ -37,7 +37,8 @@ namespace _3dplayground
 
             DisplacementStructure retVal = new DisplacementStructure(s1.mIamInSpace,
                 s1.Position, s2.DeltaPosition + s1.DeltaPosition,
-                s1.Velocity, s2.DeltaVelocity  + s1.DeltaVelocity);
+                s1.Velocity, s2.DeltaVelocity  + s1.DeltaVelocity,
+                s1.Rotation, s1.DeltaRotation + s2.DeltaRotation);
      
 
             return retVal;
@@ -57,7 +58,7 @@ namespace _3dplayground
         /// <returns></returns>
         public static DisplacementStructure ZeroDeltas(IPhysicsObject source)
         {
-            return new DisplacementStructure(source, source.Position, source.Velocity  );
+            return new DisplacementStructure(source, source.Position, source.Velocity,source.Rotation   );
         }
 
         #endregion
@@ -71,22 +72,28 @@ namespace _3dplayground
         DVector3 mVelocity;
         DVector3 mDeltaVelocity;
 
+        Quaternion mRotation;
+        Quaternion mDeltaRotation;
+
 
         #endregion
         #region Constructor
                                     
         public DisplacementStructure(IPhysicsObject  theObject,
             DVector3 TheOrigionalPosition, DVector3 TheDeltaPosition,
-            DVector3 TheOrigionalVelocity, DVector3 TheDeltaVelocity)
+            DVector3 TheOrigionalVelocity, DVector3 TheDeltaVelocity,
+            Quaternion theOrigionalRotation, Quaternion theDeltaRoation)
         {
             mIamInSpace = theObject;
 
             mPosition = TheOrigionalPosition;
-            mVelocity = TheOrigionalVelocity;
-
+            mVelocity = TheOrigionalVelocity;                          
 
             mDeltaPosition = TheDeltaPosition;
             mDeltaVelocity = TheDeltaVelocity;
+
+            mRotation = theOrigionalRotation;
+            mDeltaRotation = theDeltaRoation;
         }
 
         /// <summary>
@@ -95,16 +102,19 @@ namespace _3dplayground
         /// <param name="theObject"></param>
         /// <param name="thePosition"></param>
         /// <param name="theVelocity"></param>
-        public DisplacementStructure(IPhysicsObject theObject, DVector3 thePosition, DVector3 theVelocity)
+        /// <param name="theRotation"></param>
+        public DisplacementStructure(IPhysicsObject theObject, DVector3 thePosition, DVector3 theVelocity, Quaternion theRotation)
         {
             mIamInSpace = theObject;
+
             mPosition = thePosition;
             mVelocity = theVelocity;
-     
+            mRotation = theRotation;
 
       
             mDeltaPosition = DVector3.Zero;
             mDeltaVelocity = DVector3.Zero;
+            mDeltaRotation = Quaternion.Identity;
         }
         #endregion
 
@@ -142,7 +152,25 @@ namespace _3dplayground
         public DVector3 DeltaVelocity
         { get { return mDeltaVelocity; }
             set { mDeltaVelocity = value; }
-        }        
+        }
+
+        /// <summary>
+        /// Gets / Sets the rotation quaterion
+        /// </summary>
+        public Quaternion Rotation
+        {
+            get { return mRotation; }
+            set { mRotation = value; }
+        }
+
+        /// <summary>
+        /// Gets / Sets the Change in Rotation to apply
+        /// </summary>
+        public Quaternion DeltaRotation
+        {
+            get { return mDeltaRotation; }
+            set {  mDeltaRotation=value ; }
+        }
 
          /// <summary>
         /// Gets the name of the object.
@@ -170,11 +198,17 @@ namespace _3dplayground
                     {
                         if (other.mDeltaVelocity == mDeltaVelocity)
                         {
-                            if (other.Name == mIamInSpace.Name)
+                            if (other.mRotation == mRotation)
                             {
-                                retVal = true;
+                                if (other.mDeltaRotation == mDeltaRotation)
+                                {
+                                    if (other.Name == mIamInSpace.Name)
+                                    {
+                                        retVal = true;
+                                    }
+                                }
                             }
-                        } 
+                        }
                     }
                 }
             }
@@ -185,7 +219,7 @@ namespace _3dplayground
         public bool HasNoDeltas()
         {
             bool retVal = true ;
-            if ((mDeltaPosition != DVector3.Zero) || (mDeltaVelocity != DVector3.Zero))
+            if ((mDeltaPosition != DVector3.Zero) || (mDeltaVelocity != DVector3.Zero) || (mDeltaRotation!=Quaternion.Identity))
             {
                 retVal = false;
             }

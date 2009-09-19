@@ -14,7 +14,7 @@ namespace _3dplayground.Ships
 
 
         public Ship(string theName, GameSpaceUnit theSpace, int theMass, DVector3 thePosition,
-            DVector3 theVelocity, Quaternion theRotation, Quaternion theAngularVelocity, DVector3 theUpVector, Vector3 theCameraOffset, 
+            DVector3 theVelocity, Quaternion theRotation, Quaternion theAngularVelocity, Vector3 theUpVector, Vector3 theCameraOffset, 
             IModel theModel, IFieldPhysics theFieldPhysics, IAmShipEngine theEngine)
             : base(theName, theSpace, theMass, thePosition, theVelocity, theRotation, theAngularVelocity,theUpVector,theCameraOffset, theModel, theFieldPhysics)
         {
@@ -75,14 +75,15 @@ namespace _3dplayground.Ships
 
         public void RotateLaterally(float value)
         {
-            
-            mRotation.X = mRotation.X + value;
+            Quaternion temp =  Quaternion.CreateFromAxisAngle(Vector3.Right, value); 
+            mTotalDisplacement.DeltaRotation+= temp;
+            mUpVector += new Vector3(temp.X, temp.Y, temp.Z);
             
         }
 
         public void RotateLongitudionally(float value)
         {
-            mRotation.Y = mRotation.Y + value;
+            mTotalDisplacement.DeltaRotation += Quaternion.CreateFromAxisAngle(Vector3.Up, value);
         }
 
 
